@@ -1,4 +1,5 @@
 const GeoTraceroute = require('./GeoTraceroute');
+let geoTracer = new GeoTraceroute();
 
 let app = require('express')();
 let http = require('http').Server(app);
@@ -10,7 +11,9 @@ app.get('/traceroute', (req, res) => {
 	}
 });
 
-let geoTracer = new GeoTraceroute();
+http.listen(3001, () => {
+	console.log('Server listening on http://localhost:3001');
+});
 
 geoTracer.on('trace-started', destination => console.log(`Trace started to ${destination}`));
 geoTracer.on('ordered-hop', hop => {
@@ -31,10 +34,6 @@ geoTracer.on('trace-finished', hops => {
 
 geoTracer.on('error', err => { 
 	throw err;
-});
-
-http.listen(3001, () => {
-	console.log('Server listening on http://localhost:3001');
 });
 
 
