@@ -90,7 +90,7 @@ class GeoTraceroute {
 	}
 
 	on(event, callback) {
-		if (typeof event !== undefined &&
+		if (typeof event !== 'undefined' &&
 			this._events.indexOf(event) !== -1) {
 			this._emitter.addListener(event, callback);
 		} else {

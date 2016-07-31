@@ -1,6 +1,6 @@
 console.log('content_script: ran');
 var req = new XMLHttpRequest();
-req.open("GET", "http://localhost:3001/?location="+window.location.host, true);
+req.open("GET", "http://localhost:3001/traceroute?location="+window.location.host, true);
 req.addEventListener("load", function() {
 	// for confirming that the server got the message
 	// ...not working for some reason.

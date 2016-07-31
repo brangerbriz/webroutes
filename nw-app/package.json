@@ -20,6 +20,7 @@
   "dependencies": {
     "nw": "0.15.4-sdk",
     "nodejs-traceroute" : "1.0.0",
-    "node-freegeoip": "0.0.1"
+    "node-freegeoip": "0.0.1",
+    "express": "^4.10.2"
   }
 }
