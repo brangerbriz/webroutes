@@ -1,0 +1,16 @@
+{
+  "title": "WebRoutes Addon",
+  "name": "webroutes-addon",
+  "version": "0.0.1",
+  "description": "an addon for the webroutes installation",
+  "main": "index.js",
+  "author": "Nick Briz",
+  "engines": {
+    "firefox": ">=38.0a1",
+    "fennec": ">=38.0a1"
+  },
+  "license": "GPL-3.0",
+  "keywords": [
+    "jetpack"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "jpm-sdk",
+  "version": "1.0.0",
+  "description": "local copy of jpm for addon dev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brangerbriz/webroutes.git"
+  },
+  "author": "Nick Briz",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/brangerbriz/webroutes/issues"
+  },
+  "homepage": "https://github.com/brangerbriz/webroutes#readme",
+  "dependencies": {
+    "jpm": "^1.1.3"
+  }
+}
