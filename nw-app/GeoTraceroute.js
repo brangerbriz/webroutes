@@ -77,7 +77,7 @@ class GeoTraceroute {
 
 	    	this._tracer.on('close', (code) => {
 		        if (code != 0) 
-		        	this._emitter.emit('error', new Error(`Traceroute process returned error code ${code}`));
+		        	this._emitter.emit('error', `Traceroute process returned error code ${code}`);
 		        this._tracerouteInProgress = false;
 		    });
 		    
