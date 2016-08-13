@@ -1,5 +1,4 @@
 
-var self 	= require("sdk/self");
 var buttons = require('sdk/ui/button/action');
 var tabs 	= require("sdk/tabs");
 var wrkrs 	= require("sdk/page-worker");
@@ -60,6 +59,20 @@ wrkr.port.on("trace complete", function(hops){
 	// remove loader elements from current tab once trace is complete
 	tabs.activeTab.attach({ 
 		contentScript: 'document.getElementById("traceroute-blinds").parentNode.removeChild(document.getElementById("traceroute-blinds"))' 
+	});
+});
+
+// when receive "woops" error from worker
+wrkr.port.on("woops", function(errz){
+	// spit out the error...
+	tabs.activeTab.attach({ 
+		contentScript:
+		'if(document.getElementById(\"traceroute-info\") !== null ){'
+		+'document.getElementById(\"traceroute-info\").innerHTML=\'<br\>\<div style=\"color:red\"\> SOMETHING WENT WRONG :( \<\/div\>\';'
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \"socket.io \>\> connect_error \>\> <br\>";'		
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.type+'\" + "\<br\>";'
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.description+'\" + "\<br\>";'
+		+"}"
 	});
 });
 
