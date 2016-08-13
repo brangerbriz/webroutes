@@ -50,7 +50,10 @@ var wrkr = wrkrs.Page({
 wrkr.port.on("trace hop", function(hop){
 	// update loader w/ hop info 
 	tabs.activeTab.attach({ 
-		contentScript: 'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+'<br>"' 
+		contentScript: 
+		'if(document.getElementById(\"traceroute-info\") !== null ){'
+		+'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 
+		+"}"
 	});
 });
 
@@ -58,7 +61,10 @@ wrkr.port.on("trace hop", function(hop){
 wrkr.port.on("trace complete", function(hops){
 	// remove loader elements from current tab once trace is complete
 	tabs.activeTab.attach({ 
-		contentScript: 'document.getElementById("traceroute-blinds").parentNode.removeChild(document.getElementById("traceroute-blinds"))' 
+		contentScript: 
+		'if(document.getElementById("traceroute-blinds") !== null ){'
+		+'document.getElementById("traceroute-blinds").parentNode.removeChild(document.getElementById("traceroute-blinds"))' 
+		+"}"
 	});
 });
 
@@ -79,14 +85,7 @@ wrkr.port.on("woops", function(errz){
 // when receive "trace error" from worker
 wrkr.port.on("trace error", function(errz){
 	// spit out the error...
-	tabs.activeTab.attach({ 
-		contentScript:
-		'if(document.getElementById(\"traceroute-info\") !== null ){'
-		+'document.getElementById(\"traceroute-info\").innerHTML=\'\<br\>\<div style=\"color:red\"\> SOMETHING WENT WRONG :( \<\/div\>\';'
-		+'document.getElementById(\"traceroute-info\").innerHTML+= \" trace error \>\> \<br\>";'		
-		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.message+'\" + "\<br\>";'
-		+"}"
-	});
+	tabs.activeTab.attach({ contentScript: 'alert("trace error!!! "+"'+errz+'")' });
 });
 
 

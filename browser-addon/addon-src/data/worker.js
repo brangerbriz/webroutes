@@ -11,6 +11,7 @@ socket.on('connect_error', function(err){
 });
 
 socket.on('trace error', function(err){
+	console.log(err);
 	self.port.emit("trace error", err );
 });
 
