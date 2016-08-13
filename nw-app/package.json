@@ -2,10 +2,11 @@
   "name": "nw-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/nw/bin/nw app.js"
+    "start": "node_modules/nw/bin/nw app.js",
+    "debug" : "./node_modules/nw/bin/nw ."
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,18 @@
     "url": "https://github.com/brangerbriz/webroutes/issues"
   },
   "homepage": "https://github.com/brangerbriz/webroutes#readme",
+  "window": {
+    "width": 800,
+    "height": 800,
+    "frame": true,
+    "icon": "./icon-96.png",
+    "show_in_taskbar": false
+  },
   "dependencies": {
     "express": "^4.10.2",
     "node-freegeoip": "0.0.1",
     "nodejs-traceroute": "1.0.0",
-    "nw": "0.15.4-sdk",
+    "nw": "0.16.1-sdk",
     "socket.io": "^1.4.8"
   }
 }

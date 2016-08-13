@@ -41,7 +41,7 @@ app.get('/traceroute', (req, res) => {
 		
 		geoTracer.on('error', err => { 	
 			console.log('[nw-app] Trace error')
-			socket.emit('trace error', err);		
+			io.emit('trace error', err);		
 		});
 
 		geoTracer.trace(req.query.location);
