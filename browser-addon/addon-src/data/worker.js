@@ -6,6 +6,15 @@ function traceHttpReq( host ){
 
 var socket = io.connect("http://localhost:3001");
 
+socket.on('connect_error', function(err){
+	self.port.emit("woops", err );
+});
+
+socket.on('trace error', function(err){
+	// err.message
+	// self.port.emit("woops", err );
+});
+
 socket.on('connect', function(){
 
 	// received 'trace complete' message from server

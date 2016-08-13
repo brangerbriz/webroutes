@@ -1,44 +1,46 @@
 
 // inject loader cover .....................
 
-var blinds = document.createElement('div');
-	blinds.id = "traceroute-blinds";
-	blinds.style.width = "100%";
-	blinds.style.height = "100%";
-	blinds.style.position = "fixed";
-	blinds.style.left = "0px";
-	blinds.style.top = "0px";
-	blinds.style.zIndex = "999999999999999999999999";
-	blinds.style.background = "rgba(0,0,0,0.75)";
+var tracerouteblinds = document.createElement('div');
+	tracerouteblinds.id = "traceroute-blinds";
+	tracerouteblinds.style.width = "100%";
+	tracerouteblinds.style.height = "100%";
+	tracerouteblinds.style.position = "fixed";
+	tracerouteblinds.style.left = "0px";
+	tracerouteblinds.style.top = "0px";
+	tracerouteblinds.style.zIndex = "999999999999999999999999";
+	tracerouteblinds.style.background = "rgba(0,0,0,0.75)";
 
-var modal = document.createElement('div');
-	modal.style.width = "25%";
-	modal.style.padding = "20px";
-	modal.style.position = "relative";
-	modal.style.background = "#fff";
-	modal.style.fontFamily = "monospace";
+var traceroutemodal = document.createElement('div');
+	traceroutemodal.id = "traceroute-modal";
+	traceroutemodal.style.width = "25%";
+	traceroutemodal.style.padding = "20px";
+	traceroutemodal.style.position = "relative";
+	traceroutemodal.style.background = "#fff";
+	traceroutemodal.style.fontFamily = "monospace";
 
-var status = document.createElement('div');
-	status.innerHTML = 'mapping route to <span style="color:red">'+window.location.host+'</span>';
-var info = document.createElement('div');
-	info.id = "traceroute-info";
+var traceroutestatus = document.createElement('div');
+	traceroutestatus.id = "traceroute-status";
+	traceroutestatus.innerHTML = 'mapping route to <span style="color:red">'+window.location.host+'</span>';
+var tracerouteinfo = document.createElement('div');
+	tracerouteinfo.id = "traceroute-info";
 	
 
-modal.appendChild( status );
-modal.appendChild( info );
-blinds.appendChild( modal );
-document.body.appendChild(blinds);
+traceroutemodal.appendChild( traceroutestatus );
+traceroutemodal.appendChild( tracerouteinfo );
+tracerouteblinds.appendChild( traceroutemodal );
+document.body.appendChild(tracerouteblinds);
 
 
 
 // loading animation ........................
 
-var color = 'red';
-var loop = setInterval( loading, 250 );
+var traceroutecolor = 'red';
+var tracerouteloop = setInterval( tracerouteloading, 250 );
 
-function loading(){
-	color = (color=="red") ? 'black' : 'red'; 
-	status.innerHTML = 'mapping route to <span style="color:'+color+'">'+window.location.host+'</span>';
-	modal.style.top = window.innerHeight/2 - modal.offsetHeight/2 + "px";
-	modal.style.left = window.innerWidth/2 - modal.offsetWidth/2 + "px";	
+function tracerouteloading(){
+	traceroutecolor = (traceroutecolor=="red") ? 'black' : 'red'; 
+	traceroutestatus.innerHTML = 'mapping route to <span style="color:'+traceroutecolor+'">'+window.location.host+'</span>';
+	traceroutemodal.style.top = window.innerHeight/2 - traceroutemodal.offsetHeight/2 + "px";
+	traceroutemodal.style.left = window.innerWidth/2 - traceroutemodal.offsetWidth/2 + "px";	
 }
