@@ -38,6 +38,11 @@ app.get('/traceroute', (req, res) => {
 			console.log('[nw-app] Trace canceled')
 			io.emit('trace canceled')
 		});
+		
+		geoTracer.on('error', err => { 	
+			console.log('[nw-app] Trace error')
+			socket.emit('trace error', err);		
+		});
 
 		geoTracer.trace(req.query.location);
 	}
