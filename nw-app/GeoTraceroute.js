@@ -92,6 +92,7 @@ class GeoTraceroute {
 
 	cancel() {
 		this._emitter.emit('trace-canceled');
+		this._emitter.removeAllListeners();
 	}
 
 	on(event, callback) {
