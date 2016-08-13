@@ -68,10 +68,23 @@ wrkr.port.on("woops", function(errz){
 	tabs.activeTab.attach({ 
 		contentScript:
 		'if(document.getElementById(\"traceroute-info\") !== null ){'
-		+'document.getElementById(\"traceroute-info\").innerHTML=\'<br\>\<div style=\"color:red\"\> SOMETHING WENT WRONG :( \<\/div\>\';'
-		+'document.getElementById(\"traceroute-info\").innerHTML+= \"socket.io \>\> connect_error \>\> <br\>";'		
+		+'document.getElementById(\"traceroute-info\").innerHTML=\'\<br\>\<div style=\"color:red\"\> SOMETHING WENT WRONG :( \<\/div\>\';'
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \"socket.io \>\> connect_error \>\> \<br\>";'		
 		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.type+'\" + "\<br\>";'
 		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.description+'\" + "\<br\>";'
+		+"}"
+	});
+});
+
+// when receive "trace error" from worker
+wrkr.port.on("trace error", function(errz){
+	// spit out the error...
+	tabs.activeTab.attach({ 
+		contentScript:
+		'if(document.getElementById(\"traceroute-info\") !== null ){'
+		+'document.getElementById(\"traceroute-info\").innerHTML=\'\<br\>\<div style=\"color:red\"\> SOMETHING WENT WRONG :( \<\/div\>\';'
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \" trace error \>\> \<br\>";'		
+		+'document.getElementById(\"traceroute-info\").innerHTML+= \"'+errz.message+'\" + "\<br\>";'
 		+"}"
 	});
 });
