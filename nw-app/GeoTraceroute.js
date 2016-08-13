@@ -16,6 +16,7 @@ class GeoTraceroute {
 						'ordered-hop', 
 						'trace-finished', 
 						'trace-started', 
+						'trace-canceled',
 						'error'];
 
 		this._orderedHopCounter = 0;
@@ -76,7 +77,7 @@ class GeoTraceroute {
 
 	    	this._tracer.on('close', (code) => {
 		        if (code != 0) 
-		        	this._emitter.emit('error', `Traceroute process returned error code ${code}`);
+		        	this._emitter.emit('error', new Error(`Traceroute process returned error code ${code}`));
 		        this._tracerouteInProgress = false;
 		    });
 		    
@@ -87,6 +88,10 @@ class GeoTraceroute {
 	    	return false;
 	        this._emitter.emit('error', ex);
 	    }
+	}
+
+	cancel() {
+		this._emitter.emit('trace-canceled');
 	}
 
 	on(event, callback) {
