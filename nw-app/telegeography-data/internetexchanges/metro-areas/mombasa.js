@@ -1,0 +1,1 @@
+{"buildings":[{"latitude":"-4.043477","address":["\u003Caddress not available\u003E ","Mombasa, Kenya"],"longitude":"39.668206","offset":"background:url('images/markers.png') no-repeat -1166px 0;","id":20653}],"name":"Mombasa","id":"mombasa"}

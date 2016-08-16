@@ -1,0 +1,1 @@
+{"buildings":[{"latitude":"45.561050","address":["Via Quintino Sella 12","Biella, Italy"],"longitude":"8.048543","offset":"background:url('images/markers.png') no-repeat -1166px 0;","id":19621}],"name":"Biella","id":"biella"}

@@ -1,0 +1,1 @@
+{"buildings":[{"latitude":"-31.636664","address":["\u003Caddress not available\u003E","Santa Fe, Argentina"],"longitude":"-60.711999","offset":"background:url('images/markers.png') no-repeat -1166px 0;","id":20163}],"name":"Santa Fe","id":"santa-fe"}

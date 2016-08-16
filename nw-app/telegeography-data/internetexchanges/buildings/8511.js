@@ -1,0 +1,1 @@
+{"exchanges":[{"info":[{"onclick":null,"link":null,"value":"1 215 745 4944"},{"onclick":null,"link":"mailto:peering@phlix.net","value":"peering@phlix.net"}],"slug":"phlix-philadelphia-united-states","name":"PHLIX"}],"address":["401 North Broad Street","Philadelphia, United States, 19130"],"id":8511}
