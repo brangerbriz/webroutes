@@ -1,9 +1,15 @@
 const GeoTraceroute = require('./GeoTraceroute');
 let geoTracer = null;
 
-let app = require('express')();
+let express = require('express');
+let app = express();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+let EventEmitter = require('events');
+let emitter = new EventEmitter();
+
+app.use('/map', express.static('maps'));
+app.use('/site', express.static('public'));
 
 app.get('/traceroute', (req, res) => {
 	if(typeof req.query.location !== 'undefined'){
@@ -11,7 +17,7 @@ app.get('/traceroute', (req, res) => {
 		if (geoTracer) geoTracer.cancel();
 		geoTracer = new GeoTraceroute();
 
-		geoTracer.on('trace-started', destination => console.log(`[nw-app] Trace started to ${destination}`));
+		geoTracer.on('trace-started', destination => console.log(`[WebRoutes] Trace started to ${req.query.location}`));
 		geoTracer.on('ordered-hop', hop => {
 			let str;
 			if (hop.geo) {
@@ -21,27 +27,34 @@ app.get('/traceroute', (req, res) => {
 				str = `hop #${hop.hop}: ${hop.ip}`
 			}
 			
-			console.log(`[nw-app] ${str}`);
+			console.log(`[WebRoutes] ${str}`);			
 
 			// let addon worker know of hop
 			io.emit('trace hop', hop ); 
+			// let index.html know
+			emitter.emit("trace hop", hop );
 		});
 
 		geoTracer.on('trace-finished', hops => {
-			console.log('[nw-app] Trace complete');
+			console.log('[WebRoutes] Trace complete');
 			// let addon worker know of trace completion
 			io.emit('trace complete', hops );
+			// let index.html know
+			emitter.emit('trace complete', hops );
+
 			geoTracer = null;
 		});
 
 		geoTracer.on('trace-canceled', () => {
-			console.log('[nw-app] Trace canceled')
+			console.log('[WebRoutes] Trace canceled')
 			io.emit('trace canceled')
+			emitter.emit('trace canceled');
 		});
 		
 		geoTracer.on('error', err => { 	
-			console.log('[nw-app] Trace error')
-			io.emit('trace error', err);		
+			console.log('[WebRoutes] Trace error')
+			io.emit('trace error', err);	
+			emitter.emit('trace error', err);	
 		});
 
 		geoTracer.trace(req.query.location);
@@ -49,10 +62,10 @@ app.get('/traceroute', (req, res) => {
 });
 
 io.on('connection', function(socket){
-	console.log('[nw-app] A client connected.');
+	console.log('[WebRoutes] A client connected.');
 	socket.on('disconnect', function(){
-		console.log('[nw-app] A client disconnected.');
+		console.log('[WebRoutes] A client disconnected.');
 	});
 });
 
-http.listen(3001, () => console.log('[nw-app] Server listening on http://localhost:3001'));
+http.listen(3001, () => console.log('[WebRoutes] Server listening on http://localhost:3001'));

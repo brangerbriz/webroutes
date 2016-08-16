@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node_modules/nw/bin/nw app.js",
-    "debug" : "./node_modules/nw/bin/nw ."
+    "debug": "./node_modules/nw/bin/nw ."
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/brangerbriz/webroutes#readme",
   "window": {
-    "width": 800,
-    "height": 800,
+    "width": 1000,
+    "height": 600,
     "frame": true,
     "icon": "./icon-96.png",
     "show_in_taskbar": false
@@ -31,5 +31,8 @@
     "nodejs-traceroute": "1.0.0",
     "nw": "0.16.1-sdk",
     "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "turf": "^3.0.14"
   }
 }

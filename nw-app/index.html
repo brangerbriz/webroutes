@@ -7,24 +7,95 @@
 		<style>
 			html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 			body{margin:0}
-			#map{ position: absolute; top:0; left:0; height:100%; }
+			#map{ position: absolute; top:0; left:0; height:100%; width:100%; }
 		</style>
 	</head>
 	<body>
 
 	 	<div id="map"></div>
-
-		<script src="libs/leaflet/leaflet.js"></script>
-		<script src="libs/turf.min.js"></script>			
-		<script>
 		
+		<script src="app.js"></script>
+		<script src="libs/leaflet/leaflet.js"></script>
+		<script src="libs/turf.min.js"></script>	
+		<script>
+
+
 			// NODE WEBKIT STUFFS
 			var nw			= require('nw.gui');
 			var win 		= nw.Window.get();
 			win.showDevTools();
 
-			// map stuff
-			var map = L.map('map',{maxZoom:17, minZoom:12}).setView([25.790130,-80.137371], 12); // miami 
+
+
+
+			// CREATE MAP -----------------------------------------------------------
+			var map = L.map('map',{ maxZoom:6, minZoom:2 }).setView([0,0], 2);
+ 			// L.tileLayer('http://localhost:3001/map/{z}/{x}/{y}.png').addTo(map);
+ 			L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+ 			// map.setMaxBounds(new L.LatLngBounds([25.558712, -80.427557], [26.022771, -79.993822]));
+ 			
+ 			// var polyline = L.polyline(points, {color: color}).addTo(map);
+        	// map.fitBounds(polyline.getBounds()); 
+
+        	// var circle = L.circle([0,0], 500, styles.location).addTo(map);	
+
+ 			var styles = {
+ 				cable: {
+					"color": "#ffffff",
+					"weight": 1,
+					"opacity": 0.5
+				},
+				location: {
+					"color": 'red',
+					"fillColor": '#fff',
+					"fillOpacity": 1.0
+				},
+				trace: {
+					"color": 'red',
+				}
+ 			}
+
+			// -------------------------- DRAW CABLES 
+			var req = new XMLHttpRequest();
+			req.open("GET", 'maps/cable-data.json', true);
+			// req.open("GET", 'telegeography-data/new-cable-data.json', true);
+			req.addEventListener("load", function() {
+				var data = JSON.parse( req.responseText ); 
+				L.geoJson(data,{ style:styles.cable }).addTo(map);
+			});
+			req.send(null);
+
+
+ 			// -------------------------- DRAW TRACEROUTE
+ 			
+ 			var trace_points = [];
+ 			var geo, traceLines;
+
+ 			emitter.on("trace hop", function(hop){
+ 				// console.log(hop.geo.latitude, hop.geo.longitude);
+ 				geo = [ hop.geo.latitude, hop.geo.longitude ];
+ 				if( geo[0]!==0 && geo[1]!==0 ){
+	 				trace_points.push( geo )
+	 				L.circle(geo, 500, styles.location).addTo(map);
+	 				if( trace_points.length > 1 ){
+	 	 				traceLines = L.polyline(trace_points, styles.trace).addTo(map);
+	        			map.fitBounds(traceLines.getBounds()); 				
+	 				} 					
+ 				}
+ 			});
+
+
+			// NOTES:::::
+			/*
+				https://github.com/brannondorsey/ProbeKit/blob/master/public/habitat/map-iframe.html
+				http://leafletjs.com/examples/quick-start.html
+				
+				https://github.com/telegeography/www.submarinecablemap.com
+				http://www.internetexchangemap.com/
+				http://submarinecablemap.com/
+				
+				http://jsfiddle.net/mihaibirsan/Wzvre/
+			*/	
 
 		</script>
 
