@@ -51,9 +51,7 @@ wrkr.port.on("trace hop", function(hop){
 	// update loader w/ hop info 
 	tabs.activeTab.attach({ 
 		contentScript: 
-		'if(document.getElementById(\"traceroute-info\") !== null ){'
-		+'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 
-		+"}"
+		'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 
 	});
 });
 
@@ -62,9 +60,7 @@ wrkr.port.on("trace complete", function(hops){
 	// remove loader elements from current tab once trace is complete
 	tabs.activeTab.attach({ 
 		contentScript: 
-		'if(document.getElementById("traceroute-blinds") !== null ){'
-		+'document.getElementById("traceroute-blinds").parentNode.removeChild(document.getElementById("traceroute-blinds"))' 
-		+"}"
+		'document.getElementById("traceroute-blinds").parentNode.removeChild(document.getElementById("traceroute-blinds"))' 
 	});
 });
 
