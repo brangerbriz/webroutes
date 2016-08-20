@@ -49,6 +49,7 @@ var wrkr = wrkrs.Page({
 // when receive "new hop" from worker
 wrkr.port.on("trace hop", function(hop){
 	// update loader w/ hop info 
+	console.log(hop);
 	tabs.activeTab.attach({ 
 		contentScript: 
 		'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 

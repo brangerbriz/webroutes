@@ -5,8 +5,8 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/nw/bin/nw app.js",
-    "debug": "./node_modules/nw/bin/nw ."
+    "start": "./node_modules/nw/bin/nw .",
+    "addon": " cd ../browser-addon/addon-src/ ; ../jpm-sdk/node_modules/jpm/bin/jpm run"
   },
   "repository": {
     "type": "git",

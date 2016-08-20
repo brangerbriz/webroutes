@@ -9,6 +9,10 @@
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
   },
+  "scripts": {
+    "start": "../jpm-sdk/node_modules/jpm/bin/jpm run",
+    "debug": "../jpm-sdk/node_modules/jpm/bin/jpm run --debug"
+  },  
   "license": "GPL-3.0",
   "keywords": [
     "jetpack"

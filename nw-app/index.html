@@ -23,15 +23,15 @@
 			// NODE WEBKIT STUFFS
 			var nw			= require('nw.gui');
 			var win 		= nw.Window.get();
-			win.showDevTools();
+			// win.showDevTools();
 
 
 
 
 			// CREATE MAP -----------------------------------------------------------
 			var map = L.map('map',{ maxZoom:6, minZoom:2 }).setView([0,0], 2);
- 			// L.tileLayer('http://localhost:3001/map/{z}/{x}/{y}.png').addTo(map);
- 			L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+ 			L.tileLayer('http://localhost:3001/map/{z}/{x}/{y}.png').addTo(map);
+ 			// L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
  			// map.setMaxBounds(new L.LatLngBounds([25.558712, -80.427557], [26.022771, -79.993822]));
  			
  			// var polyline = L.polyline(points, {color: color}).addTo(map);
@@ -41,17 +41,19 @@
 
  			var styles = {
  				cable: {
-					"color": "#ffffff",
+					"color": "#fff",
 					"weight": 1,
 					"opacity": 0.5
 				},
 				location: {
 					"color": 'red',
 					"fillColor": '#fff',
-					"fillOpacity": 1.0
+					"fillOpacity": 0.5,
+					"opacity":1.0
 				},
 				trace: {
-					"color": 'red',
+					"color": '#fff',
+					"opacity":1.0
 				}
  			}
 
