@@ -21,8 +21,9 @@ app.get('/traceroute', (req, res) => {
 		geoTracer.on('ordered-hop', hop => {
 			let str;
 			if (hop.geo) {
-				str = `hop #${hop.hop}: ${hop.geo.ip} [${hop.geo.latitude}, ${hop.geo.longitude}]`;
-				str += ` ${hop.geo.city} ${hop.geo.region_name} ${hop.geo.country_name}`;
+				str = `hop #${hop.hop}: ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
+				str += ` ${hop.geo.city + ','} ${hop.geo.regionName + ','} ${hop.geo.country}`
+				str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org} MOBILE: ${hop.geo.mobile}`;
 			} else {
 				str = `hop #${hop.hop}: ${hop.ip}`
 			}
@@ -49,6 +50,12 @@ app.get('/traceroute', (req, res) => {
 			console.log('[WebRoutes] Trace canceled')
 			io.emit('trace canceled')
 			emitter.emit('trace canceled');
+		});
+
+		geoTracer.on('trace-timeout', () => {
+			console.log('[WebRoutes] Trace Timeout')
+			io.emit('trace timeout')
+			emitter.emit('trace timeout');
 		});
 		
 		geoTracer.on('error', err => { 	

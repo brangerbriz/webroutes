@@ -1,5 +1,6 @@
 const Traceroute = require('nodejs-traceroute');
-const FreeGeoIp = require('node-freegeoip');
+//const FreeGeoIp = require('node-freegeoip');
+const GeoIpLookup = require('./GeoIpLookup');
 const EventEmitter = require('events');
 
 class GeoTraceroute {
@@ -17,6 +18,7 @@ class GeoTraceroute {
 						'trace-finished', 
 						'trace-started', 
 						'trace-canceled',
+						'trace-timeout',
 						'error'];
 
 		this._orderedHopCounter = 0;
@@ -39,13 +41,16 @@ class GeoTraceroute {
 		    });
 
 	    	this._tracer.on('hop', (hop) => {
+		        
 		        if (hop.ip != "*")
 		        {
 		            this._numHopsExpected++;
-		            FreeGeoIp.getLocation(hop.ip, (err, location) => {
+		            
+		            //FreeGeoIp.getLocation(hop.ip, (err, location) => {
+		            GeoIpLookup.getLocation(hop.ip, (err, location) => {
 		                this._numHopsProcessed++;
 		                if (!err) {
-		                	hop.geo = location;
+		                	hop.geo = location.status == 'success' ? location : null;
 		                	this._emitter.emit('hop', hop);
 		                	if (hop.hop == this._orderedHopCounter + 1) {
 		                		this._emitter.emit('ordered-hop', hop);
@@ -72,6 +77,8 @@ class GeoTraceroute {
 	            	}
 
 	            	this._fireCachedHops();
+
+	            	if (hop.hop == 30) this._emitter.emit('trace-timeout');
 		        }
 		    });
 
@@ -105,7 +112,8 @@ class GeoTraceroute {
 	}
 
 	_onGeoLookup(err, hop) {
-	    if (!this._tracerouteInProgress && this._numHopsProcessed == this._numHopsExpected) {
+	    if (!this._tracerouteInProgress && 
+	    	this._numHopsProcessed == this._numHopsExpected) {
 	        this._emitter.emit('trace-finished', this._hops);
 	        this._lookupInProgress = false;
 	        this._hops = [];
