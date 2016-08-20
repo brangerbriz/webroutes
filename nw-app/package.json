@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "express": "^4.10.2",
-    "node-freegeoip": "0.0.1",
+    "external-ip": "^0.2.4",
     "nodejs-traceroute": "1.0.0",
     "nw": "0.16.1-sdk",
     "request": "^2.74.0",

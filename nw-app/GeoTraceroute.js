@@ -14,7 +14,8 @@ class GeoTraceroute {
 		this._hops = [];
 
 		this._events = ['hop', 
-						'ordered-hop', 
+						'ordered-hop',
+						'my-ip',
 						'trace-finished', 
 						'trace-started', 
 						'trace-canceled',
@@ -38,6 +39,15 @@ class GeoTraceroute {
 		        this._lookupInProgress = true;
 		        this._tracerouteInProgress = true;
 		        this._emitter.emit('trace-started', destination);
+		        GeoIpLookup.getMyLocation((err, location) => {
+		        	if (!err) {
+		        		this._emitter.emit('my-ip', {
+			        		hop: 0,
+			        		ip: location.query,
+			        		geo: location.status == 'success' ? location : null,
+		        		});
+		        	} else console.error(err);
+		        });
 		    });
 
 	    	this._tracer.on('hop', (hop) => {
