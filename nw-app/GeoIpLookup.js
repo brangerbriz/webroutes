@@ -17,7 +17,7 @@ class GeoIpLookup {
 		}, function (error, response, body) {
 
 			if (error) callback(error, null)
-		    if (response.statusCode === 200) {
+		    if (response && response.statusCode === 200) {
 		        callback(null, body)
 		    } else callback(response, null)
 		});
