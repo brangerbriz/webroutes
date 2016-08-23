@@ -104,7 +104,8 @@
 			// ------------------------------------------------------------------------------------
 			// ------------------------------------------------------------------------------------
 
-			var tracer = {				
+			var tracer = {			
+				running: false,			// trace route animation is running	
 				myip: false,			// true once "my ip" has been received				
 				holds:[],				// hold hops until "my ip" is received
 				hops: [],				// hop data collection ( starting with "my ip" )
@@ -113,6 +114,7 @@
 				queued: 0,				// how many of the hops have already been drawn
 				complete: false,		// true when trace complete fired
 				animInProgress: false,	// true when an animation is in progress
+				timers: [],				// collect setTimeouts in order to clear them in abort
 				// Internet infrastructure .....................................
 				cables: null,// drawn path
 				cableGeoJson:null,
@@ -297,20 +299,27 @@
 					this.drawNode( hop, "pulse" );
 					NFO.update('this is your request, originating in '+ 
 						`${hop.city+", "}${hop.region+", "}${hop.country}` );
-					setTimeout(function(){
+					var t = setTimeout(function(){
 						self.fadeOut(  map._panes.tilePane );
 						NFO.update('this is the Internet');
 					},4000);
-					setTimeout(function(hop){
+					this.timers.push( t );
+					
+					var t = setTimeout(function(hop){
 						map.setView( [hop.geo.lat, hop.geo.lon], 6 );
 					},7000,hop);
-					setTimeout(function(){
+					this.timers.push( t );
+
+					var t = setTimeout(function(){
 						self.fadeIn(  map._panes.tilePane );
 					},9000);
-					setTimeout(function(){
+					this.timers.push( t );
+
+					var t = setTimeout(function(){
 						self.animInProgress = false;
 						self.queued++;
 					},10000);					
+					this.timers.push( t );
 				},
 				animateHop: function( start, hop ){
 					var self = this;					
@@ -323,10 +332,11 @@
 						`Internet service provided by ${hop.isp}`;					
 					NFO.update(txt);
 					map.panTo([hop.geo.lat, hop.geo.lon],{duration:2});
-					setTimeout(function(){
+					var t = setTimeout(function(){
 						self.animInProgress = false;
 						self.queued++;
 					},4000);
+					this.timers.push( t );
 
 				},
 				animateEnd: function(){
@@ -349,23 +359,29 @@
 							arr.push( [this.hops[i].geo.lat,this.hops[i].geo.lon] );
 					}
 					var fullpath = L.polyline( arr );
-					setTimeout(function(){
+					var t = setTimeout(function(){
 						map.fitBounds(fullpath.getBounds());
 						var txt = `this is the route the website took to get from ${start.city+", "}${start.region+", "}${start.country} to ${hop.city+", "}${hop.region+", "}${hop.country}`;
 						NFO.update(txt);
 					},4000);	
-					setTimeout(function(){
+					this.timers.push( t );
+
+					var t = setTimeout(function(){
 						self.fadeIn( map._panes.tilePane );
 					},8000);	
-					setTimeout(function(){
-						self.reset();
-						map.setView([0,0],2);
-					},10000);					
+					this.timers.push( t );
+
+					var t = setTimeout(function(){
+						self.reset();						
+					},10000);		
+					this.timers.push( t );			
 				},				
 				// ---------------------------------
 				// --------------------------------------------------------- core -------------
 				// ---------------------------------------------------------------
 				addNode: function( geo, kind ){
+					this.running = true;
+
 					var hop = {
 						kind: kind,
 						city: geo.city,
@@ -398,9 +414,15 @@
 					var toRemove = [];
 					for (var i = this.hops.length-1; i >= 0; i--) {
 						if( this.hops[i].kind=="*" ) toRemove.push( i );
-						else break;
+						// else break;
 					}
 					for (var j = 0; j < toRemove.length; j++) this.hops.splice(toRemove[j],1);
+				},
+				abort: function(){
+					for (var i = 0; i < this.timers.length; i++) {
+						clearTimeout( this.timers[i] );
+					}
+					this.reset();
 				},
 				reset: function(){
 					// reset properties
@@ -421,7 +443,13 @@
 					}
 					for (var j = 0; j < toRemove.length; j++) parent.removeChild( toRemove[j] );	
 					// reset nfo copy
-					NFO.reset();				
+					NFO.reset();
+					// make sure map is faded in
+					map._panes.tilePane.style.opacity = 1;
+					// re position map
+					map.setView([0,0],3);	
+					// every this reset...
+					this.running = false;	
 				},
 				update: function(){
 					// pulse nodes
@@ -454,7 +482,7 @@
 				minZoom:3, 
 				zoomControl:false, 
 				attributionControl: false
-			}).setView([0,0], 2);
+			}).setView([0,0], 3);
 
 			var ourmap = L.tileLayer('http://localhost:3001/map/{z}/{x}/{y}.png').addTo(map);
 			// var ourmap = L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
@@ -464,6 +492,7 @@
 				requestAnimationFrame( animLoop );
 				tracer.update();
 			} animLoop();
+
 
 			map.on('zoomend',function(){
 				tracer.redrawInternet();
@@ -491,37 +520,41 @@
 
  			// -------------------------- DRAW TRACEROUTE EVENTS
  			
- 			emitter.on("my ip", function(hop){
- 				console.log('fired!',hop);
- 				tracer.addNode( hop.geo, "start" );
+ 			emitter.on("trace started", function(){
+				// if new trace starts but old one still animating	
+ 				if( tracer.running ) tracer.abort();
  			});
 
  			emitter.on("trace hop", function(hop){ 	
  				if( hop.ip=="*") console.log('got one!',hop);
  				if( hop.geo ) 			tracer.addNode( hop.geo, "hop" ); 				
- 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" );
- 				
+ 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" ); 				
+ 			});
+
+ 			emitter.on("my ip", function(hop){
+ 				console.log('fired!',hop);
+ 				tracer.addNode( hop.geo, "start" );
  			});
 
  			emitter.on("trace complete", function(hop){ 
  				tracer.complete = true;
  			});
 
- 			emitter.on("trace started", function(){
- 				console.log('trace started');
- 			});
-
- 			emitter.on("trace cancelled", function(){
- 				console.log('trace cancelled');
- 			});
- 			
  			emitter.on("trace timeout", function(){ 
  				tracer.handleTimeout();
  				tracer.complete = true;
  			});
+
+
+ 			emitter.on("trace cancelled", function(){
+ 				console.log('trace cancelled');
+ 				tracer.abort();
+ 			});
+ 			
  			
  			emitter.on("trace error", function(){ 
  				console.log('trace error');
+ 				tracer.abort();
  			});
 
 
@@ -572,10 +605,6 @@
 				TODO ::::::
 				look into why some pan's don't pan still && lines to nowhere 
 				( re-render CSS paths on zoom event )
-				&& handle all other events
-				if start a new trace during old one... figure out how to cancel it all... >_<
-				...answer: use trace started && add to reset a clearAll timers
-				( which means u've got to collect timers )
 
 			*/	
 
