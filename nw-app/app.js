@@ -17,7 +17,11 @@ app.get('/traceroute', (req, res) => {
 		if (geoTracer) geoTracer.cancel();
 		geoTracer = new GeoTraceroute();
 
-		geoTracer.on('trace-started', destination => console.log(`[WebRoutes] Trace started to ${req.query.location}`));
+		geoTracer.on('trace-started', destination => {
+			console.log(`[WebRoutes] Trace started to ${req.query.location}`);
+			emitter.emit('trace started');
+		});
+		
 		geoTracer.on('my-ip', hop => {
 			if (hop.geo && hop.geo.status == 'success') {
 				let str = `My IP is ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
