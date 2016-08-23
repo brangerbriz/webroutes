@@ -317,8 +317,11 @@
 					this.animInProgress = true;
 					this.drawPath( start, hop );
 					this.drawNode( hop );
-					NFO.update(`hop #${this.queued} to ${hop.city+", "}${hop.region+", "}${hop.country} <br>`+
-						`Internet service provided by ${hop.isp}`);
+					var txt;
+					if( hop.kind=="*" ) txt = `hop #${this.queued} missing information`;
+					else txt = `hop #${this.queued} to ${hop.city+", "}${hop.region+", "}${hop.country} <br>`+
+						`Internet service provided by ${hop.isp}`;					
+					NFO.update(txt);
 					map.panTo([hop.geo.lat, hop.geo.lon],{duration:2});
 					setTimeout(function(){
 						self.animInProgress = false;
@@ -342,7 +345,8 @@
 					self.fadeOut(  map._panes.tilePane );
 					var arr = [];
 					for (var i = 0; i < this.hops.length; i++){ 
-						arr.push( [this.hops[i].geo.lat,this.hops[i].geo.lon] );
+						if( this.hops[i].kind !=="*")
+							arr.push( [this.hops[i].geo.lat,this.hops[i].geo.lon] );
 					}
 					var fullpath = L.polyline( arr );
 					setTimeout(function(){
@@ -372,6 +376,11 @@
 						geo: { lat: geo.lat, lon: geo.lon }
 					};		
 
+					if( kind=="*" ) {
+						if(this.myip) hop.geo = this.hops[this.hops.length-1].geo;
+						else hop.geo = this.holds[this.holds.length-1].geo;
+					}
+
 					// queue logix
 					if( (kind=="hop"||kind=="*") && !this.myip ){
 						this.holds.push( hop );
@@ -384,6 +393,14 @@
 							this.hops.push( this.holds[i] );
 						}
 					}		
+				},
+				handleTimeout: function(){
+					var toRemove = [];
+					for (var i = this.hops.length-1; i >= 0; i--) {
+						if( this.hops[i].kind=="*" ) toRemove.push( i );
+						else break;
+					}
+					for (var j = 0; j < toRemove.length; j++) this.hops.splice(toRemove[j],1);
 				},
 				reset: function(){
 					// reset properties
@@ -424,7 +441,6 @@
 						this.complete = false;
 						this.animateEnd();
 					}
-
 				}
 			}
 
@@ -480,13 +496,11 @@
  				tracer.addNode( hop.geo, "start" );
  			});
 
- 			emitter.on("trace hop", function(hop){ 				
- 				if( hop.geo ){
- 					if( hop.ip == "*" )
- 						tracer.addNode( hop.geo, "*" );
- 					else
- 						tracer.addNode( hop.geo, "hop" );
- 				}
+ 			emitter.on("trace hop", function(hop){ 	
+ 				if( hop.ip=="*") console.log('got one!',hop);
+ 				if( hop.geo ) 			tracer.addNode( hop.geo, "hop" ); 				
+ 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" );
+ 				
  			});
 
  			emitter.on("trace complete", function(hop){ 
@@ -502,7 +516,8 @@
  			});
  			
  			emitter.on("trace timeout", function(){ 
- 				console.log('trace timeout');
+ 				tracer.handleTimeout();
+ 				tracer.complete = true;
  			});
  			
  			emitter.on("trace error", function(){ 
@@ -528,34 +543,6 @@
 			    iconSize: [38, 95],
 			    iconAnchor: [22, 94]
 			});
-
-			// var req1 = new XMLHttpRequest();
-			// req1.open("GET", 'maps/buildings.geojson', true);
-			// req1.addEventListener("load", function() {
-			// 	var data = JSON.parse( req1.responseText ); 
-			// 	for (var i = 0; i < data.features.length; i++) {
-			// 		var geo = [ 
-			// 			data.features[i].geometry.coordinates[1],
-			// 			data.features[i].geometry.coordinates[0]
-			// 		];
-			// 		L.circleMarker( geo, {color:'#f00',fillColor:"#f00",opacity:0.5,fillOpacity:0.5} ).addTo(map);
-			// 	}
-			// });
-			// req1.send(null);
-
-			// var req2 = new XMLHttpRequest();
-			// req2.open("GET", 'maps/landingpoints.json', true);
-			// req2.addEventListener("load", function() {
-			// 	var data = JSON.parse( req2.responseText ); 
-			// 	for (var i = 0; i < data.features.length; i++) {
-			// 		var geo = [ 
-			// 			data.features[i].geometry.coordinates[1],
-			// 			data.features[i].geometry.coordinates[0]
-			// 		];
-			// 		L.circleMarker( geo, {color:'#00f',fillColor:"#00f",opacity:0.5,fillOpacity:0.5} ).addTo(map);
-			// 	}	
-			// });
-			// req2.send(null);
 
 
 			document.body.addEventListener('keydown',function(e){
@@ -583,8 +570,12 @@
 				http://jsfiddle.net/mihaibirsan/Wzvre/
 
 				TODO ::::::
-				look into why some pan's don't pan still && lines to nowhere ( re-render CSS paths on zoom event )
-				figure out how to handle timeouts / * 
+				look into why some pan's don't pan still && lines to nowhere 
+				( re-render CSS paths on zoom event )
+				&& handle all other events
+				if start a new trace during old one... figure out how to cancel it all... >_<
+				...answer: use trace started && add to reset a clearAll timers
+				( which means u've got to collect timers )
 
 			*/	
 
