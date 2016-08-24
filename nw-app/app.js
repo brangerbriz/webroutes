@@ -30,6 +30,7 @@ app.get('/traceroute', (req, res) => {
 		geoTracer.on('trace-started', destination => {
 			console.log(`[WebRoutes] Trace started to ${req.query.location}`)
 			lastHop = null;
+			emitter.emit('trace started');
 		});
 
 		geoTracer.on('my-ip', hop => {
