@@ -1,5 +1,14 @@
 const GeoTraceroute = require('./GeoTraceroute');
+const InfrastructureAugmenter  = require('./InfrastructureAugmenter');
+
 let geoTracer = null;
+let infraAug = new InfrastructureAugmenter(function(err) {
+	if (!err) console.log('[WebRoutes] InfrastructureAugmenter loaded.');
+	else {
+		console.log('[WebRoutes] Error loading InfrastructureAugmenter.');
+		throw err;
+	}
+});
 
 let express = require('express');
 let app = express();
@@ -7,6 +16,7 @@ let http = require('http').Server(app);
 let io = require('socket.io')(http);
 let EventEmitter = require('events');
 let emitter = new EventEmitter();
+let lastHop = null;
 
 app.use('/map', express.static('maps'));
 app.use('/site', express.static('public'));
@@ -17,7 +27,11 @@ app.get('/traceroute', (req, res) => {
 		if (geoTracer) geoTracer.cancel();
 		geoTracer = new GeoTraceroute();
 
-		geoTracer.on('trace-started', destination => console.log(`[WebRoutes] Trace started to ${req.query.location}`));
+		geoTracer.on('trace-started', destination => {
+			console.log(`[WebRoutes] Trace started to ${req.query.location}`)
+			lastHop = null;
+		});
+
 		geoTracer.on('my-ip', hop => {
 			if (hop.geo && hop.geo.status == 'success') {
 				let str = `My IP is ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
@@ -32,30 +46,37 @@ app.get('/traceroute', (req, res) => {
 		});
 
 		geoTracer.on('ordered-hop', hop => {
-			let str;
-			if (hop.geo) {
-				str = `hop #${hop.hop}: ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
-				str += ` ${hop.geo.city + ','} ${hop.geo.regionName + ','} ${hop.geo.country}`;
-				str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org} MOBILE: ${hop.geo.mobile}`;
-			} else {
-				str = `hop #${hop.hop}: ${hop.ip}`
+			
+			
+			if (lastHop != null) {
+
+				printHop(lastHop);
+				infraAug.addInfrastructureData(lastHop, hop);
+
+				// let addon worker know of hop
+				io.emit('trace hop', lastHop ); 
+				// let index.html know
+				emitter.emit("trace hop", lastHop );
 			}
 			
-			console.log(`[WebRoutes] ${str}`);			
-
-			// let addon worker know of hop
-			io.emit('trace hop', hop ); 
-			// let index.html know
-			emitter.emit("trace hop", hop );
+			lastHop = hop;
 		});
 
 		geoTracer.on('trace-finished', hops => {
+			
+			infraAug.addInfrastructureData(lastHop, null);
+			printHop(lastHop);
+			io.emit('trace hop', lastHop ); 
+			emitter.emit("trace hop", lastHop );
+
+			lastHop = null;
+
 			console.log('[WebRoutes] Trace complete');
 			// let addon worker know of trace completion
 			io.emit('trace complete', hops );
 			// let index.html know
 			emitter.emit('trace complete', hops );
-
+			hops.forEach(({ip}) => console.log(ip + ','))
 			geoTracer = null;
 		});
 
@@ -89,3 +110,16 @@ io.on('connection', function(socket){
 });
 
 http.listen(3001, () => console.log('[WebRoutes] Server listening on http://localhost:3001'));
+
+function printHop(hop) {
+	let str;
+	if (hop.geo) {
+		str = `hop #${hop.hop}: ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
+		str += ` ${hop.geo.city + ','} ${hop.geo.regionName + ','} ${hop.geo.country}`;
+		str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org} MOBILE: ${hop.geo.mobile}`;
+	} else {
+		str = `hop #${hop.hop}: ${hop.ip}`
+	}
+
+	console.log(`[WebRoutes] ${str}`);			
+}
