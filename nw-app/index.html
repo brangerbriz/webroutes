@@ -103,6 +103,7 @@
 			// TRACER OBJECT ( handles trace route logic/drawing ) --------------------------------
 			// ------------------------------------------------------------------------------------
 			// ------------------------------------------------------------------------------------
+			// --------------------------- assumes L (leaflet) && turf are globally around
 
 			var tracer = {			
 				running: false,			// trace route animation is running	
@@ -184,6 +185,90 @@
 						}
 					})();
 				},
+				geoPoint: function( lat, lon ){
+					// returns a geojson feature point
+					var geometry = {
+						"type": "Point",
+						"coordinates": [ lon, lat ]
+					}
+					return turf.feature(geometry); 
+				},
+				getRightCableIndex: function( landing, cableFeature ){
+					var cableShapes = cableFeature.geometry.geometries;
+					var closests = [];
+					// loop through all the diff sub-cables
+					for (var i = 0; i < cableShapes.length; i++) {
+						// loop through all coordinates in sub-cable
+						var dist = 9999999999999999;
+						for (var j = 0; j < cableShapes[i].coordinates.length; j++) {
+							var coord = this.geoPoint(
+								cableShapes[i].coordinates[j][1],
+								cableShapes[i].coordinates[j][0]);
+							var newDist = turf.distance( coord, landing );
+							if( newDist < dist ) dist = newDist;
+						}
+						closests.push( dist );
+					}
+					var closest = Math.min( ...closests ); // get smallest number
+					var idx = closests.indexOf( closest ); // get index of that guy in the array
+					closests.splice( idx, 1 ); // remove that guy from the array
+					if( closests.indexOf(closest) > -1 ){
+						// if there's another guy in there w/the same distance
+						// then that coord is a landing point shared by two sub-cables
+						// this test is inconclusive, gonna have to do the same on the other end
+						return false;
+					} else {
+						return idx;
+					}
+				},
+				orderCableCoords: function( coords, landing ){
+					var newOrder = [];
+					// var coords = cableFeature.geometry.coordinates;
+					var first = this.geoPoint(coords[0][1], coords[0][0]);
+					var last = this.geoPoint(coords[coords.length-1][1], coords[coords.length-1][0]);		
+					var deltaA = turf.distance( first, landing );
+					var deltaZ = turf.distance( last, landing );
+					if( deltaA < deltaZ ){
+						for (var i = 0; i < coords.length; i++) 							
+							newOrder.push( [coords[i][1], coords[i][0]] );
+					} else {
+						for (var i = coords.length-1; i>=0; i--)
+							newOrder.push( [coords[i][1], coords[i][0]] );							
+					}
+					return newOrder;
+				},
+				getCableCoordsArray: function( s ){
+					var newOrder = [];
+					var cableFeature = s.infrastructure.cable;
+					var landingPoints = s.infrastructure.landings;
+
+					var land1 = this.geoPoint( // first landing point as geoJson feature
+						landingPoints[0].geometry.coordinates[1],
+						landingPoints[0].geometry.coordinates[0]
+					);
+					var land2 = this.geoPoint( // second landing point as geoJson feature
+						landingPoints[1].geometry.coordinates[1],
+						landingPoints[1].geometry.coordinates[0]
+					);
+					if( cableFeature.geometry.type == "GeometryCollection" ){
+						// get index of the sub-cable ( cableFeature.geometry.geometries )
+						// is the one that connects to the first landing point
+						var cableIdx = this.getRightCableIndex( land1, cableFeature );
+						// if test was inconclusive, try w/other landing point
+						if( !cableIdx ) cableIdx = this.getRightCableIndex( land2, cableFeature );
+						// winner: cableFeature.geometry.geometries[cableIdx].coordinates
+						
+						// pass coordinates array && landing point to determine proper order
+						// ie. from landing point to other end...
+						newOrder = this.orderCableCoords( cableFeature.geometry.geometries[cableIdx].coordinates, land1 );
+					} else {
+						// pass coordinates array && landing point to determine proper order
+						// ie. from landing point to other end...
+						newOrder = this.orderCableCoords( cableFeature.geometry.coordinates, land1 );
+					}
+
+					return newOrder;
+				},				
 				// ---------------------------------
 				// --------------------------------------------------------- draw leaflet -----
 				// ---------------------------------------------------------------
@@ -203,6 +288,35 @@
 						map.panInsideBounds(this.cables.getBounds());
 					}				
 				},	
+				drawCablePath: function( s, e ){
+					var pts = [];
+					// add starting point
+					pts.push( [s.geo.lat,s.geo.lon] );
+					// add first landing point
+					pts.push([
+						s.infrastructure.landings[0].geometry.coordinates[1],
+						s.infrastructure.landings[0].geometry.coordinates[0]
+					]);
+					// add cable points array ( from infrastructure data in s hop )
+					var newOrder = this.getCableCoordsArray( s );
+					for (var i = 0; i < newOrder.length; i++) pts.push( newOrder[i] );
+					// add second landing point
+					pts.push([
+						s.infrastructure.landings[1].geometry.coordinates[1],
+						s.infrastructure.landings[1].geometry.coordinates[0]
+					]);
+					// add last point
+					pts.push( [e.geo.lat,e.geo.lon] );
+
+					// draw it...
+					var style = this.styles.path;
+						style["color"] = "#00ff00";
+					// L.polyline(pts, this.styles.path).addTo(map);
+					L.polyline(pts, style).addTo(map);
+
+					//TODO: animate path................................
+
+				},
 				drawExchanges: function( data ){
 					if(!this.exchangesGeoJson) this.exchangesGeoJson = data;
 					// draw exchanges
@@ -324,6 +438,8 @@
 				animateHop: function( start, hop ){
 					var self = this;					
 					this.animInProgress = true;
+					// TODO: check if start has .infrastructure data
+					// if so, send down another path
 					this.drawPath( start, hop );
 					this.drawNode( hop );
 					var txt;
@@ -380,6 +496,7 @@
 				// --------------------------------------------------------- core -------------
 				// ---------------------------------------------------------------
 				addNode: function( geo, kind ){
+					// TODO: need to add infrustructure parameter...
 					this.running = true;
 
 					var hop = {
@@ -517,6 +634,7 @@
 				tracer.drawExchanges( data );
 			});
 			req1.send(null);
+
 
  			// -------------------------- DRAW TRACEROUTE EVENTS
  			
