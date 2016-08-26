@@ -8,7 +8,7 @@ class GeoIpLookup {
 	static getLocation(ip, callback=defaultCb) {
 		
 		let fields = 'country,countryCode,region,regionName,';
-		fields += 'city,zip,lat,lon,timezone,isp,org,as,';
+		fields += 'city,zip,lat,lon,timezone,isp,org,as,reverse,';
 		fields += 'mobile,proxy,query,status,message';
 		
 		request({

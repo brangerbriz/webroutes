@@ -78,7 +78,7 @@ class InfrastructureAugmenter {
 
 			this.buildingsGeo.features.forEach(feature => {
 				let dist = turf.distance(hopGeoJSON, feature, 'kilometers');
-				if (dist <= radius) nearby.push({ dist, coords: feature.geometry.coordinates });
+				if (dist <= radius) nearby.push({ dist, feature });
 			});
 
 			if (nearby.length > 0) {
@@ -137,6 +137,8 @@ class InfrastructureAugmenter {
 						hop.infrastructure.landings.push(c.start);
 						hop.infrastructure.landings.push(c.end);
 						hop.infrastructure.cable = c.cable;
+						
+						console.log(hop)
 
 						console.log(`${c.cable.properties.name} START: ${c.distStart} END: ${c.distEnd} SUM: ${c.distSum}`);
 

@@ -16,7 +16,6 @@ socket.on('trace error', function(err){
 });
 
 socket.on('connect', function(){
-
 	// received 'trace complete' message from server
 	socket.on('trace complete', function(hops){
 		// let addon (index.js) know that trace was complete		
@@ -27,6 +26,10 @@ socket.on('connect', function(){
 	socket.on('trace hop', function(hop){
 		// let addon (index.js) know that there was a new hop
 		self.port.emit("trace hop", hop );
+	});
+
+	socket.on('browser hop', function(hop) {
+		self.port.emit('browser hop', hop)
 	});
 
 });

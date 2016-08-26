@@ -28,6 +28,7 @@
   "dependencies": {
     "express": "^4.10.2",
     "external-ip": "^0.2.4",
+    "geojson-tools": "^0.2.2",
     "nodejs-traceroute": "1.0.0",
     "nw": "0.16.1-sdk",
     "request": "^2.74.0",
@@ -37,5 +38,6 @@
   },
   "devDependencies": {
     "turf": "^3.0.14"
-  }
+  },
+  "chromium-args": "--mixed-context"
 }

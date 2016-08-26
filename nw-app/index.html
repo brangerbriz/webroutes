@@ -409,6 +409,7 @@
 				// ---------------------------------------------------------------
 				animateStart: function( hop ){
 					var self = this;
+					//emitter.emit('browser hop', hop);//<<<<<<<<<<<<<<<<< w/timeout
 					this.animInProgress = true;
 					this.drawNode( hop, "pulse" );
 					NFO.update('this is your request, originating in '+ 
@@ -448,6 +449,7 @@
 						`Internet service provided by ${hop.isp}`;					
 					NFO.update(txt);
 					map.panTo([hop.geo.lat, hop.geo.lon],{duration:2});
+					//emitter.emit('browser hop', hop);//<<<<<<<<<<<<<<<<< w/timeout
 					var t = setTimeout(function(){
 						self.animInProgress = false;
 						self.queued++;
@@ -461,6 +463,7 @@
 					var start = this.hops[0];
 					var hop = this.hops[this.hops.length-1];
 					this.drawNode( hop, "pulse" );
+					//emitter.emit('browser hop', hop);//<<<<<<<<<<<<<<<<< w/timeout
 					var txt = (hop.isp==hop.org) ? 
 						`website files located in ${hop.city+", "}${hop.region+", "}${hop.country} <br>`+
 						`hosted by ${hop.org}` :
@@ -496,7 +499,7 @@
 				// --------------------------------------------------------- core -------------
 				// ---------------------------------------------------------------
 				addNode: function( geo, kind ){
-					// TODO: need to add infrustructure parameter...
+					// TODO: need to add infrastructure parameter...
 					this.running = true;
 
 					var hop = {
@@ -506,7 +509,8 @@
 						country: geo.countryCode,
 						isp: geo.isp,
 						org: geo.org,
-						geo: { lat: geo.lat, lon: geo.lon }
+						geo: { lat: geo.lat, lon: geo.lon },
+						infrastructure: null
 					};		
 
 					if( kind=="*" ) {
@@ -643,14 +647,30 @@
  				if( tracer.running ) tracer.abort();
  			});
 
+ 			var pair = [];
+
  			emitter.on("trace hop", function(hop){ 	
+ 				io.emit("browser hop", hop);
  				if( hop.ip=="*") console.log('got one!',hop);
  				if( hop.geo ) 			tracer.addNode( hop.geo, "hop" ); 				
- 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" ); 				
+ 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" );
+	 			
+ 				// if( pair.length==1 ){
+ 				// 	pair[1] = hop;
+ 				// 	tracer.drawCablePath(pair[0],pair[1]);
+ 				// 	console.log('pair');
+ 				// 	console.log(pair);
+ 				// 	pair = [];
+
+ 				// } else if ( hop.infrastructure.cable ) {
+ 				// 	pair[0] = hop; 
+ 				// }	
+
+ 				
  			});
 
  			emitter.on("my ip", function(hop){
- 				console.log('fired!',hop);
+ 				io.emit("browser hop", hop);
  				tracer.addNode( hop.geo, "start" );
  			});
 

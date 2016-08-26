@@ -8,39 +8,57 @@ var tracerouteblinds = document.createElement('div');
 	tracerouteblinds.style.position = "fixed";
 	tracerouteblinds.style.left = "0px";
 	tracerouteblinds.style.top = "0px";
-	tracerouteblinds.style.zIndex = "999999999999999999999999";
-	tracerouteblinds.style.background = "rgba(0,0,0,0.75)";
+	tracerouteblinds.style.zIndex = "1000000000000000000";
+	tracerouteblinds.style.background = "#000";
 
-var traceroutemodal = document.createElement('div');
-	traceroutemodal.id = "traceroute-modal";
-	traceroutemodal.style.width = "25%";
-	traceroutemodal.style.padding = "20px";
-	traceroutemodal.style.position = "relative";
-	traceroutemodal.style.background = "#fff";
-	traceroutemodal.style.fontFamily = "monospace";
+// var traceroutemodal = document.createElement('div');
+// 	traceroutemodal.id = "traceroute-modal";
+// 	traceroutemodal.style.width = "100%";
+// 	traceroutemodal.style.padding = "20px";
+// 	traceroutemodal.style.position = "relative";
+// 	traceroutemodal.style.background = "#fff";
+// 	traceroutemodal.style.fontFamily = "monospace";
 
-var traceroutestatus = document.createElement('div');
-	traceroutestatus.id = "traceroute-status";
-	traceroutestatus.innerHTML = 'mapping route to <span style="color:red">'+window.location.host+'</span>';
-var tracerouteinfo = document.createElement('div');
+// var traceroutestatus = document.createElement('div');
+// 	traceroutestatus.id = "traceroute-status";
+// 	traceroutestatus.innerHTML = 'mapping route to <span style="color:red">'+window.location.host+'</span>';
+
+var tracerouteinfo = document.createElement('pre');
 	tracerouteinfo.id = "traceroute-info";
+	tracerouteinfo.style.position = "absolute";
+	tracerouteinfo.style.zIndex = "1000000000000000001";
+	tracerouteinfo.style.left = "100px";
+	tracerouteinfo.style.top = "20px";
+	tracerouteinfo.style.color = "#fff";
+
+
+	// traceroutemodal.style.overflow = "auto"
 	
 
-traceroutemodal.appendChild( traceroutestatus );
-traceroutemodal.appendChild( tracerouteinfo );
-tracerouteblinds.appendChild( traceroutemodal );
+// traceroutemodal.appendChild( traceroutestatus );
+// traceroutemodal.appendChild( tracerouteinfo );
+// tracerouteblinds.appendChild( traceroutemodal );
+
 document.body.appendChild(tracerouteblinds);
+document.body.appendChild(tracerouteinfo);
+
+window.addEventListener('scroll',function(e){
+	var cap = tracerouteinfo.offsetHeight - innerHeight;
+	if( e.pageY >= cap){
+		document.documentElement.scrollTop = cap;
+	}
+});
 
 
 
 // loading animation ........................
 
-var traceroutecolor = 'red';
-var tracerouteloop = setInterval( tracerouteloading, 250 );
+// var traceroutecolor = 'red';
+// var tracerouteloop = setInterval( tracerouteloading, 250 );
 
-function tracerouteloading(){
-	traceroutecolor = (traceroutecolor=="red") ? 'black' : 'red'; 
-	traceroutestatus.innerHTML = 'mapping route to <span style="color:'+traceroutecolor+'">'+window.location.host+'</span>';
-	traceroutemodal.style.top = window.innerHeight/2 - traceroutemodal.offsetHeight/2 + "px";
-	traceroutemodal.style.left = window.innerWidth/2 - traceroutemodal.offsetWidth/2 + "px";	
-}
+// function tracerouteloading(){
+// 	traceroutecolor = (traceroutecolor=="red") ? 'black' : 'red'; 
+// 	traceroutestatus.innerHTML = 'mapping route to <span style="color:'+traceroutecolor+'">'+window.location.host+'</span>';
+// 	traceroutemodal.style.top = window.innerHeight/2 - traceroutemodal.offsetHeight/2 + "px";
+// 	traceroutemodal.style.left = window.innerWidth/2 - traceroutemodal.offsetWidth/2 + "px";	
+// }

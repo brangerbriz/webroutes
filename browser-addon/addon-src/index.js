@@ -1,4 +1,4 @@
-
+var pageMod = require("sdk/page-mod");
 var buttons = require('sdk/ui/button/action');
 var tabs 	= require("sdk/tabs");
 var wrkrs 	= require("sdk/page-worker");
@@ -49,11 +49,19 @@ var wrkr = wrkrs.Page({
 // when receive "new hop" from worker
 wrkr.port.on("trace hop", function(hop){
 	// update loader w/ hop info 
-	console.log(hop);
+	//console.log(hop);
+	// tabs.activeTab.attach({ 
+	// 	contentScript: 
+	// 	'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 
+	// });
+});
+
+wrkr.port.on('browser hop', function(hop) {
+	console.log('sending:')
+	console.log(hop)
 	tabs.activeTab.attach({ 
-		contentScript: 
-		'document.getElementById("traceroute-info").innerHTML += "'+hop.hop+' : '+hop.ip+' <br>"' 
-	});
+		contentScriptFile: 'browser-hop.js',
+		contentScript:`onHopReceived(${JSON.stringify(hop)})` });
 });
 
 // when receive "trace complete" from worker
@@ -74,7 +82,7 @@ wrkr.port.on("trace error", function(errz){
 // when receive "woops" error from worker
 wrkr.port.on("woops", function(errz){
 	// spit out the error...
-	tabs.activeTab.attach({ contentScript: 'alert("socket connect_error: "+"'+errz.type +" : "+ errz.description+'")' });
+	// tabs.activeTab.attach({ contentScript: 'alert("socket connect_error: "+"'+errz.type +" : "+ errz.description+'")' });
 });
 
 
@@ -86,10 +94,12 @@ tabs.on("ready", function (t) {
 	if( t.url.indexOf('http')==0 ){
 		// create host string from current tab url
 		var host = getLocation( t.url ).host;
+		
 		// inject loader into current page
-		tabs.activeTab.attach({ contentScriptFile: './loader.js' });
+		tabs.activeTab.attach({contentScriptFile: './loader.js'});
+		pageMod.PageMod({include: '*', contentStyleFile: './loader.css'});
+		
 		// let worker know about new host so it can pass it along to the server
 		wrkr.port.emit("new host", host );
 	}
 });
-
