@@ -1,0 +1,15 @@
+{
+  "name": "traixroute-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "test-ip-prefixes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ip": "^1.1.3",
+    "nodejs-traceroute": "^1.0.0"
+  }
+}
