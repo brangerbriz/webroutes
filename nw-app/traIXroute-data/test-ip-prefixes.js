@@ -72,7 +72,7 @@ function traceroute(url) {
         	for (let i = 0; i < ixpPrefixes.length; i++) {
         		let prefix = ixpPrefixes[i].prefix;
         		if (prefix && ip.cidrSubnet(prefix).contains(hop.ip)) {
-        			log(`Found ${ixpPrefixes[i].short} in ixpPrefixes`)
+        			log(`Found ${ixpPrefixes[i].short} in ixpPrefixes for ${hop.ip}`)
         		}        		
         	}
 
@@ -80,7 +80,7 @@ function traceroute(url) {
         	for (let i = 0; i < ipxFx.length; i++) {
         		let prefix = ipxFx[i].prefix;
         		if (prefix && ip.cidrSubnet(prefix).contains(hop.ip)) {
-        			log(`Found ${ipxFx[i].short} in ixpFx`)
+        			log(`Found ${ipxFx[i].ixlan_id} in ixpFx for ${hop.ip}`)
         		}  
         	}
 
@@ -88,11 +88,11 @@ function traceroute(url) {
         	for (let i = 0; i < ixpSubnets.length; i++) {
         		let subnet = ixpSubnets[i].subnet;
         		if (subnet && ip.cidrSubnet(subnet).contains(hop.ip)) {
-        			log(`Found ${ixpSubnets[i].short} in ixpSubnets`)
+        			log(`Found ${ixpSubnets[i].short} in ixpSubnets for ${hop.ip}`)
         		}        		
         	}
 
-        	console.log(hop.ip)
+        	// console.log(hop.ip)
 
         } else if (hop.hop == 30) {
         	timeoutCount++;
