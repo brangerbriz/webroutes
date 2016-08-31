@@ -42,7 +42,7 @@ let ipxFx = JSON.parse(buffer).data;
 buffer = fs.readFileSync('data/ixp_subnets.csv', 'utf8');
 let ixpSubnets = ixpSubnets2Arr(buffer);
 
-urls = loadAlexaAsArr(1500);
+urls = loadAlexaAsArr(1000);
 
 let timeoutCount = 0;
 let closeCount = 0;
