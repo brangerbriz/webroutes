@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-promise');
 const turf = require('turf');
 const _ = require('underscore');
 const complexify = require('geojson-tools').complexify;
@@ -14,33 +14,43 @@ class InfrastructureAugmenter {
 		this.cablesGeo = null;
 		this.cablesGeoById = null;
 		this.oceanGeo = null;
+		this.netixlan = null;
+		this.netixlanById = null;
 		this.loaded = false;
 		
-		fs.readFile('telegeography-data/aggregated-data.json', 'utf8', (err, data) => {
-			if (err) { callback(err); return; }
-			this.aggregatedData = JSON.parse(data);
-			fs.readFile('telegeography-data/internetexchanges/buildings.geojson', 'utf8', (err, data) => {
-				if (err) { callback(err); return; }
-				this.buildingsGeo = JSON.parse(data);
-				fs.readFile('maps/landingpoints.json', 'utf8', (err, data) => {
-					if (err) { callback(err); return; }
-					this.landingsGeo = JSON.parse(data);
-					fs.readFile('maps/ocean.json', 'utf8', (err, data) => {
-						if (err) { callback(err); return; }
-						this.oceanGeo = JSON.parse(data);
-							fs.readFile('maps/cable-data.json', 'utf8', (err, data) => {
-							if (err) { callback(err); return; }
-							this.cablesGeo = JSON.parse(data);
-							this.loaded = true;
-							this.landingsGeoById = this._generateGeoById(this.landingsGeo, 'id');
-							this.cablesGeoById = this._generateGeoById(this.cablesGeo, 'cable_id');
-							//console.log(this.cablesGeoById[Object.keys(this.cablesGeoById)[0]])
-							callback(null);
-						});
-					});
-				});
-			});
-		});
+		const p1 = fs.readFile('telegeography-data/aggregated-data.json', 'utf8');
+		p1.then(data => this.aggregatedData = JSON.parse(data));
+
+		const p2 = fs.readFile('telegeography-data/internetexchanges/buildings.geojson', 'utf8');
+		p2.then(data => this.buildingsGeo = JSON.parse(data));
+
+		const p3 = fs.readFile('maps/landingpoints.json', 'utf8');
+		p3.then(data => this.landingsGeo = JSON.parse(data));
+
+		const p4 = fs.readFile('maps/ocean.json', 'utf8');
+		p4.then(data => this.oceanGeo = JSON.parse(data));
+
+		const p5 = fs.readFile('maps/cable-data.json', 'utf8');
+		p5.then(data => this.cablesGeo = JSON.parse(data));
+
+		const p6 = fs.readFile('traIXroute-data/data/netixlan.json', 'utf8')
+		p6.then(data => this.netixlan = JSON.parse(data))
+
+		Promise.all([p1, p2, p3, p4, p5, p6])
+			.then(() => {
+				this.loaded = true;
+				this.landingsGeoById = this._generateGeoById(this.landingsGeo, 'id');
+				this.cablesGeoById = this._generateGeoById(this.cablesGeo, 'cable_id');
+				
+				this.netixlanById = new Map()
+				this.netixlan.data.forEach(ix => {
+					this.netixlanById.set(ix.asn, ix)
+				})
+
+				callback(null);
+			}).catch(err => {
+				callback(err)
+			})
 	}
 
 	_generateGeoById(geoObj, propName) {
