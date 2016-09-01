@@ -72,7 +72,7 @@ function traceroute(url) {
         	for (let i = 0; i < ixpPrefixes.length; i++) {
         		let prefix = ixpPrefixes[i].prefix;
         		if (prefix && ip.cidrSubnet(prefix).contains(hop.ip)) {
-        			log(`Found ${ixpPrefixes[i].short} in ixpPrefixes for ${hop.ip}`)
+        			log(`Found ${ixpPrefixes[i].short || ixpPrefixes[i].name} in ixpPrefixes for ${hop.ip}`)
         		}        		
         	}
 
