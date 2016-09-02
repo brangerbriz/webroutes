@@ -76,8 +76,7 @@ function traceroute(url) {
         	// Check ixp_prefixes.txt
         	for (let i = 0; i < ixpPrefixes.length; i++) {
         		let prefix = ixpPrefixes[i].prefix;
-        		if (prefix && prefix !== "+" &&
-        			ip.cidrSubnet(prefix).contains(hop.ip)) {
+        		if (prefix && ip.cidrSubnet(prefix).contains(hop.ip)) {
         			log(`Found ${ixpPrefixes[i].short || ixpPrefixes[i].name} in ixpPrefixes for ${hop.ip}`)
         		}        		
         	}
@@ -106,10 +105,6 @@ function traceroute(url) {
         		// ipAsnMatchCount++;
         	}
 
-        	if (lastHop && hop.asn != lastHop.asn &&
-        		hop.asn != '*' && lastHop.asn != '*')
-        		console.log(`AS change detected for ${hop.ip}. ${hop.asn} -> ${lastHop.asn}`)
-
         	if (lastHop && 
         		hop.asn != lastHop.asn &&
         		netixlanByAsn.has(parseInt(hop.asn)) &&
@@ -126,7 +121,7 @@ function traceroute(url) {
         		})
 
         		overlap.forEach((ix) => 
-        			console.log(`Found ASN change with common IXP membership at ${ix.name} for ${hop.ip}`))
+        			console.log(`Found ASN change with common IXP membership at ${ix.name}`))
 
         		ipAsnMatchCount++;
 
