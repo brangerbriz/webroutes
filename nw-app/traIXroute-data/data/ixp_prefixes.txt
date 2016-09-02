@@ -1,621 +1,625 @@
-0	176.126.38.0/24	GR-IX	GR-IX
-1	193.218.0.0/24		 NetIX
-2	206.223.125.128/25	Twin Ports Internet Exchange	TP-IX
-3	210.184.127.0/24	iAdvantage Internet Exchange	iAIX
-4	193.189.82.0/23	 KleyReX Internet Exchange	 KleyRex
-5	198.32.179.192/27	 Arusha Internet Exchange Point	 AIXP
-6	210.173.178.0/25	Internet Multifeed JPNAP Osaka	JPNAP Osaka
-7	218.100.85.0/24	 Zero Point Internet Exchange	 ZPIX
-8	198.32.184.0/24	 MAE-West	 MAE-West
-9	198.32.226.0/24	 Dallas/Fort Worth Metropolitan Access Point	 DFW-MAP
-10	195.60.84.128/25	 Meridian Gate Internet Exchange	 MerieX
-11	196.223.15.0/24	Johannesburg Internet Exchange	JINX
-12	218.100.21.0/24	 Palmerston North Internet Exchange	 PNIX
-13	91.212.235.0/24		OM-NIX
-14	103.231.152.0/22	BroadBand Internet eXchange Hong Kong / Singapore	BBIX Hong Kong / Singapore
-15	198.9.201.0/24		
-16	194.68.135.0/24	 Netnod Gothenburg	 Netnod Gothenburg
-17	206.126.235.0/26		 OmahaIX
-18	198.32.133.0/24	Equinix Internet Exchange Seattle	Equinix Seattle
-19	198.32.139.0/24		MAE Central
-20	206.53.137.0/24	 Richmond Virginia Internet Exchange	 RVA-IX
-21	218.100.0.0/24	 PIPE Networks Brisbane	
-22	194.30.187.0/24		
-23	193.138.31.0/24	 Stuttgarter Internet Exchange	
-24	103.26.70.0/24	Megaport MegaIX Brisbane	MegaIX Brisbane
-25	200.219.143.0/24	PTT Porto Alegre	IX.br (PTT.br) Porto Alegre
-26	103.48.48.0/23	Megaport MegaIX Hong Kong	MegaIX Hong Kong
-27	91.212.9.0/24	EPIX	EPIX.Warszawa-KIX
-28	200.192.109.0/24	IX.br (PTT.br) Campina Grande	IX.br (PTT.br) Campina Grande
-29	193.106.112.0/24		W-IX
-30	200.115.81.0/24	CABASE NAP La Plata	CABASE-LPL
-31	194.68.123.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
-32	178.18.230.0/24	Peering, LTD	DATAIX
-33	196.223.4.128/26	 Côte d'Ivoire Internet Exchange Point	 CI-IXP
-34	192.38.7.0/24	 Danish Internet Exchange	 DIX
-35	185.1.23.0/24	CODIX	CODIX
-36	206.81.80.0/23		
-37	193.17.78.0/24	Internet eXchange Moldova	MD-IX
-38	218.100.25.0/24	 Southland Internet Exchange	 SIX
-39	85.31.223.0/24	 Marseille Internet Exchange	 Marseille Internet Exchange
-40	218.100.19.0/24	 PIPE Networks Canberra	
-41	198.32.120.0/24	 Terremark IST-IX	 IST-IX
-42	187.16.196.0/24	PTT Natal	IX.br (PTT.br) Natal
-43	185.1.54.0/24		
-44	103.16.102.0/23	 Singapore Internet Exchange	 SGIX
-45	91.220.194.0/24	Slovenian Internet Exchange	SIX SI
-46	206.72.210.0/23		
-47	194.42.48.0/25	Equinix Zurich, formerly TIX	Equinix Zurich
-48	195.130.89.0/24	 Greek Internet Exchange	 GR-IX
-49	198.32.40.0/24	 NWnet Gigapop	 NWnet Gigapop
-50	198.32.212.0/24		
-51	200.192.110.0/24	PTT Brasilia	IX.br (PTT.br) Brasília
-52	206.53.143.0/24		 Mass-IX
-53	187.16.216.0/21	PTT Sao Paulo	IX.br (PTT.br) São Paulo
-54	206.53.140.0/24	YEGIX Internet Exchange Community Ltd.	YEGIX
-55	193.110.227.32/27	FICIX Espoo / FICIX1	FICIX Espoo
-56	103.247.139.0/24	 AMS-IX Hong Kong	 ASM-IX HK
-57	206.41.108.0/24	FL-IX - The South Florida Internet Exchange	FL-IX
-58	80.97.248.0/23	Balcan-IX	Balcan-IX
-59	209.124.52.0/23	Detroit Internet Exchange	DET-IX
-60	198.32.16.0/24	 ISI DMZ/Gigapop	 ISI DMZ/Gigapop
-61	200.192.108.0/24	PTT Campinas	IX.br (PTT.br) Campinas
-62	218.100.54.0/25		
-63	196.223.0.0/24	 Mauritius Internet Exchange	 MIXP
-64	187.16.216.0/22	 Ponto de Troca de Tráfego Metro São Paulo	 PTTMetro São Paulo
-65	192.38.7.249/32	Danish Internet Exchange	DIX
-66	206.51.43.0/24		
-67	119.110.117.0/24	 Matrix Cable System Internet Exchange	 MCIX
-68	202.0.91.0/24	 Manila Internet Exchange	
-69	80.81.203.0/24	Deutscher Commercial Internet Exchange Hamburg	DE-CIX Hamburg
-70	198.32.148.0/24	 Metropolitan Area Ethernet-Paris	 MAE-Paris
-71	218.100.10.0/24	 Vietnam National Internet Exchange	 VNIX
-72	193.201.28.0/25	Nautilus Mediterranean Exchange Point	NaMeX
-73	198.32.99.0/24	 Equinix-Miami	 Equinix-Miami
-74	206.51.41.0/24	 Coresite - Any 2 Northern California	
-75	206.41.106.0/24	AMS-IX Bay Area	AMS-IX BA
-76	195.182.218.0/23	 Polish Internet Exchange	 PLIX
-77	194.246.39.224/27	 Neutral Internet Exchange	 NL-ix
-78	193.156.120.0/24	Norwegian Internet Exchange (location 2)	NIX2
-79	200.185.100.0/24	 Optiglobe Internet Exchange - Latin America	 OptIX-LA
-80	37.249.232.0/26	 France-IX Marseille	 France-IX Marseille
-81	185.1.31.0/24	Tirol-IX Internet Exchange	Tirol-IX
-82	206.41.110.0/24	 United IX Chicago	 ChIX
-83	103.25.229.0/24	 Vanuatu Internet Exchange	 VIX
-84	193.252.127.0/24		PARIX
-85	187.16.199.0/24	PTT Sao Jose do Rio Preto	IX.br (PTT.br) São José do Rio Preto
-86	195.66.246.0/23	 IXScotland powered by LINX	 IXScotland
-87	196.223.44.0/24	 Liberia Internet Exchange Point	 LIXP
-88	193.232.140.0/24		
-89	206.123.0.0/24	 Greater Toronto International Internet Exchange	 GTIIX
-90	193.108.98.0/24	 Nederlands-Duitse Internet Exchange	 NDIX
-91	195.234.168.0/24	 Cairo Regional Internet Exchange	 CR-IX
-92	200.115.83.0/24	CABASE NAP Posadas	CABASE-POS
-93	200.0.17.0/24		
-94	206.130.61.0/24	 Buffalo Niagara International Internet Exchange	 BNIIX
-95	195.149.232.0/23		 TPIX
-96	218.100.48.0/26	National Internet eXchange of India	NIXI Delhi
-97	176.126.38.0/24	GReek Internet eXchange	GR-IX
-98	200.219.146.0/24	PTT Fortaleza	IX.br (PTT.br) Fortaleza
-99	194.146.118.0/24	 European Commercial Internet Exchange Düsseldorf	 ECIX DUS
-100	206.53.169.0/24	Megaport MegaIX Bay Area	MegaIX Bay Area
-101	194.9.117.0/24	 European Commercial Internet Exchange Berlin	
-102	196.223.25.0/25	Uganda Internet Exchange Point	UIXP
-103	196.60.2.0/24	 Mombasa Internet Exchange Point	 MSA-IX
-104	194.153.153.0/25	 Uganda Internet Exchange	 UIXP
-105	185.91.96.0/22	Beirut Internet Exchange	Beirut IX
-106	198.32.220.0/24	 OhioEP	 OhioEP
-107	200.192.111.0/24	PTT Goiania	IX.br (PTT.br) Goiânia
-108	196.60.0.0/24	 Mwanza Internet Exchange Point	 Mwanza IXP
-109	198.32.210.0/24	 NAP Panamericano S.A.	 PanAmNAP
-110	181.188.0.240/28	 Trinidad and Tobago Internet Exchange	 TTIX
-111	193.42.155.0/24	 European Commercial Internet Exchange Hamburg	 ECIX HAM
-112	194.57.253.128/27		 REUNIX
-113	206.130.15.0/24	 Halifax Internet Exchange	 Halifax IXP
-114	185.1.45.0/24	Chisinau Internet Exchange	KIVIX
-115	198.32.176.0/24		 Equinix- Palo Alto
-116	37.49.232.0/24	FranceIX Marseille	France-IX Marseille
-117	193.37.144.0/24	 Alpes Adria Internet Exchange	 AAIX
-118	206.81.82.0/23	Seattle Internet Exchange (9000 MTU)	SIX Seattle (Jumbo)
-119	103.27.170.0/32	Mumbai Convergence Hub : India's Largest Peering Internet Exchange Hub	Mumbai CH
-120	202.40.160.0/23	 Hong Kong Internet Exchange	 HKIX
-121	198.32.194.0/24	 Pittsburgh Exchange Point	 PITX
-122	185.1.18.0/24	Dortmund Internet eXchange	DO-IX
-123	198.32.247.0/24	 PARIX	 PARIX
-124	209.124.52.0/24	 DET-IX	 DET-IX
-125	103.28.74.0/23	 Indonesian Internet Exchange	 IIX
-126	193.110.226.0/24		
-127	202.7.0.0/23	 Wellington Internet Exchange	
-128	198.32.119.0/24		
-129	193.105.214.0/24	 Grazer Internet Exchange	 GraX
-130	192.121.80.0/24	Stockholm Internet eXchange	STHIX (Stockholm IX)
-131	193.110.227.96/27	FICIX Oulu / FICIX3	FICIX Oulu
-132	187.16.197.0/24	PTT Caxias do Sul	IX.br (PTT.br) Caxias do Sul
-133	200.0.20.0/24		 AMS-IX Caribbean
-134	206.223.117.0/24	 Equinix IBX Secaucus	 Equinix IBX Secaucus
-135	185.1.61.0/24	Baden-Württemberg Internet Exchange - Karlsruhe	BW-IX Karlsruhe
-136	218.100.6.0/24	BroadBand Internet eXchange Tokyo	BBIX Tokyo
-137	192.145.251.0/24	 Korea Internet Neutral Exchange KINX	 KINX
-138	198.32.231.0/25	Nepal Internet Exchange	npIX
-139	193.242.98.0/24	Catalunya Neutral Internet Exchange	CATNIX
-140	198.32.140.0/24	 MAE-Chicago	 MAE-Chicago
-141	206.53.170.0/24	Megaport MegaIX Ashburn	MegaIX Ashburn
-142	193.189.129.0/22	 Enlightened Internet Exchange	 ENLIX
-143	218.100.78.0/24	Victorian Internet Exchange (VIC-IX)	IX Australia VIC
-144	187.16.198.0/24	PTT Manaus	IX.br (PTT.br) Manaus
-145	185.1.15.0/24	SMARTHUB Internet Exchange	SH-IX
-146	200.61.194.0/24	 Cubecorp	 OptIX-LA
-147	213.228.3.0/24	 Free-IX	 Free-IX
-148	195.85.203.0/24	 Free Belgian Internet Exchange	 FreeBIX
-149	200.219.145.0/24	PTT Salvador	IX.br (PTT.br) Salvador
-150	198.32.150.0/24	 MAE-Houston	 MAE-Houston
-151	196.223.22.0/24	 Cape Town Internet Exchange	 CINX
-152	200.219.139.0/24	PTT Belo Horizonte	IX.br (PTT.br) Belo Horizonte
-153	198.32.238.0/24	The Big Apple Peering Exchange	BigApe
-154	200.136.37.0/24	 An Academic Network at Sao Paulo	 ANSP
-155	206.53.202.0/24		DE-CIX Dallas
-156	196.49.0.0/24	Cote d'Ivoire Internet Exchange Point	CIVIX
-157	200.46.153.8/30	 Intered Panamá	 Intered Panamá
-158	103.2.116.0/24	Queensland Internet Exchange (QLD-IX)	IX Australia QLD
-159	194.42.48.0/24	 Equinix Zurich	 Equinix Zurich
-160	218.100.12.0/24	 PIPE Networks Hobart	
-161	202.128.12.0/26	 Guam Internet Exchange	 GU-IX
-162	185.1.69.0/24		INEX Cork
-163	119.27.63.0/24	 Equinix Hong Kong	 Equinix Hong Kong
-164	198.32.110.0/24	 Equinix-SD(former Paix)	 Equinix-SD
-165	212.47.215.0/24	 Tallinn Internet Exchange (TIX)	 TIX
-166	196.223.38.0/24	The Djibouti Internet Exchange	DjIX
-167	198.32.118.0/24	Equinix Internet Exchange New York	Equinix New York
-168	91.206.134.0/24	 Internet Exchange of Saudi Arabia	 IXSA Riyadh
-169	62.208.162.0/24	 Internet Exchange Hamburg	 INXS-HH
-170	198.32.175.0/24	Equinix Internet Exchange Palo Alto	Equinix Palo Alto
-171	198.32.228.0/24	 Houston Network Access Point	 Compaq-NAP
-172	206.223.118.0/24		
-173	200.136.34.0/24	 NAP do Brasil	
-174	196.223.21.0/24	 Kenya Internet Exchange Point	 KIXP
-175	195.69.117.0/24		
-176	218.100.26.0/24	 Three Cities Internet Exchange	 3CIX
-177	196.223.23.0/24	Cape Town Internet Exchange	CINX
-178	206.51.40.0/24	 Coresite - Any 2 NorthEast	
-179	206.123.30.0/24	 Greater Chicago International Internet Exchange	 GCIIX
-180	69.51.84.128/25	 Northwest Internet Exchange	 NWIX Missoula
-181	195.191.170.0/23	Stowarzyszenie na Rzecz Rozwoju Spoleczenstwa Informacyjnego e-Poludnie	EPIX.Katowice
-182	206.53.168.0/24	Megaport MegaIX Chicago	MegaIX Chicago
-183	198.32.111.0/24	 Equinix-Boston	 Equinix-Boston
-184	198.32.98.0/24	CyrusOne Internet Exchange	CyrusOne IX Phoenix
-185	196.223.7.0/24		 MEIX
-186	198.32.240.0/24	 South Australian Internet Exchange	 SAIX SE
-187	198.32.250.0/24	 DC	 NeutralNAP
-188	195.60.82.64/26	 eXchange West	 eXchange West
-189	198.32.156.0/24	 Edmonton Internet Exchange	 EIX
-190	185.1.71.128/25	Liverpool Internet Exchange	IX Liverpool
-191	206.53.175.0/24	Interconnection eXchange Denver	IX-Denver
-192	93.156.93.0/24	Trondheim Internet eXchange	TRDIX
-193	178.18.232.0/24	Peering, LTD	DATAIX
-194	80.97.248.0/24	 Balcan-IX	 Balcan-IX
-195	196.223.41.0/24	 Madagascar Global Internet Exchange	 MGIX
-196	193.178.185.0/24	 Berlin Commercial Internet Exchange	 BCIX
-197	195.35.65.0/24	 Ukrainian Internet Exchange	 UA-IX
-198	193.136.250.0/24	 Gigabit Portugese Internet Exchange	 GIGA-PIX
-199	218.100.13.0/24	 PIPE Networks Melbourne	
-200	196.10.140.0/24	 NAPAfrica Cape Town	
-201	195.246.227.0/24	 Santa Monica Internet Local Exchange	
-202	200.0.16.0/24	 NAP de Cuba	 NAP de Cuba
-203	103.247.139.0/25	Amsterdam Internet Exchange Hong Kong	AMS-IX Hong Kong
-204	193.232.87.0/24		
-205	193.251.216.0/24		PARIX
-206	193.219.13.64/26	Lietuvos Interneto paslaugų tiekėjų apsikeitimo mazgu	LIPTAM
-207	187.16.192.0/24	PTT Sao Jose dos Campos	IX.br (PTT.br) São José dos Campos
-208	37.49.236.0/23	 France-IX	 France-IX
-209	185.1.8.0/24		 UAE-IX
-210	198.32.154.0/24	 NIX	 NIX
-211	206.51.30.0/24	New York International Internet eXchange	NYIIX
-212	84.22.159.0/24	Krasnoyarsk Internet Exchange	Sibir-IX
-213	91.206.52.0/23		 SwissIX
-214	193.110.224.0/24		
-215	185.1.13.0/24		RED-IX
-216	209.33.201.176/28	 Southern Utah Peering Regional Network	 SUPrnet
-217	200.219.138.0/24	PTT Rio de Janeiro	IX.br (PTT.br) Rio de Janeiro
-218	192.108.148.0/24		
-219	119.110.116.0/23	Matrix Cable Internet eXchange	MCIX - Matrix Networks
-220	144.92.233.224/28	 Madison Internet Exchange	 MadIX
-221	206.223.138.0/24	 Equinix Chicago IBX	 Equinix Chicago IBX
-222	206.223.116.0/24		 Equinix IBX San Jose
-223	200.219.141.0/24	PTT Florianopolis	IX.br (PTT.br) Florianópolis
-224	198.32.124.0/23	 NAP of the Americas	 NOTA
-225	202.79.197.0/24	 Equinix Singapore IBX	 Equinix Singapore
-226	80.81.202.0/24	Deutscher Commercial Internet Exchange Munich	DE-CIX Munich
-227	202.97.10.0/24	 CNC Beijing NAP	 CNC Beijing NAP
-228	198.32.162.0/24	 Oregon Internet Exchange	 OIX
-229	218.100.56.0/24	 Hamilton Internet Exchange	 HIX
-230	196.223.12.0/24	 Rwanda Internet exchange	 RINEX
-231	196.223.5.0/24	Tanzania Internet eXchange	TIX - Tanzania
-232	45.127.172.0/22	Equinix Sydney Exchange	Equinix Sydney
-233	198.32.157.0/24	 Beirut Internet Exchange	 BeirutIX
-234	45.120.248.0/24	Extreme Broadband Services	Extreme IX
-235	192.114.62.0/24	 Israeli Internet Exchange	 IIX
-236	119.110.115.0/24	Matrix Cable Internet eXchange	MCIX - Matrix Networks
-237	78.41.189.128/26	 PhibIX Gix & Nap	 PhibIX
-238	185.1.52.0/24		DataLine-IX
-239	206.53.172.0/24	Megaport MegaIX Los Angeles	MegaIX Los Angeles
-240	103.26.71.0/24	Megaport MegaIX Melbourne	MegaIX Melbourne
-241	81.201.48.192/26	 Neutral czFree eXchange	 NFXzspo
-242	91.203.127.0/24	Yaroslavl Internet Exchange	YAR-IX
-243	194.254.208.128/27		MARTINIX
-244	206.223.129.0/24	 Rice EduPOP	 Rice EduPOP
-245	185.1.2.128/25	IXP et NAP d’Auvergne et du Massif Central	AuvernIX
-246	193.148.15.0/24	 Amsterdam Internet Exchange	 AMS-IX
-247	202.78.121.0/24	Bayan Telecommunications Internet and Gaming Exchange	BAYANTEL
-248	206.126.109.0/24	 Winnipeg Internet Exchange	 WPGIX
-249	200.0.19.0/24		
-250	198.32.182.0/24	Equinix Internet Exchange Atlanta	Equinix Atlanta
-251	212.91.0.0/22	 Thinx Poland	
-252	193.105.163.0/24	Serbian Open eXchange	SOX d.o.o. Serbia
-253	203.163.222.0/24		
-254	200.219.144.0/24	PTT Londrina	IX.br (PTT.br) Londrina
-255	192.67.199.0/24	 MAE-Frankfurt	 MAE-Frankfurt
-256	192.65.185.0/24	 CERN Internet Exchange Point	 CIXP
-257	195.66.224.0/22	London Internet Exchange Ltd.	LINX LON1
-258	193.203.0.0/24	 Vienna Internet Exchange	 VIX
-259	123.255.88.0/21	Hong Kong Internet Exchange	HKIX
-260	91.213.211.0/24		 Peering.cz
-261	198.32.229.0/24	Free NYIIX Alternative	NYCX
-262	196.13.207.128/26	 Burkina Faso IXP	 BFIX
-263	185.1.4.0/24	Poznan Internet Exchange	POZIX
-264	201.131.204.0/26	 Mexico IXP	 CCIT
-265	198.32.232.0/24	 AusBONE-Sydney Internet Exchange	 AusBONE-SYD
-266	206.41.109.0/24	 Tahoe Internet Exchange 	 TahoeIX 
-267	206.223.128.0/24	 BellSouth Multimedia Internet Exchange	 BellSouth MIX
-268	92.60.70.0/24	 Milan Neutral Access Point	 MiNAP
-269	206.126.225.0/24	 Calgary Internet Exchange	 YYCIX
-270	218.100.45.0/24	JPNAP Tokyo II Service	JPNAP Tokyo 2
-271	194.88.240.0/25	Internet Neutral Exchange Association Ltd.	INEX LAN2
-272	217.29.66.0/23	Milan Internet eXchange	MIX-IT
-273	198.32.192.0/24		
-274	91.245.221.0/24	 Giganet Internet Exchange	 Giganet
-275	91.240.225.0/24	 Sea-IX Internet exchange	 Sea-IX
-276	198.32.177.0/24	Equinix Internet Exchange Palo Alto	Equinix Palo Alto
-277	185.1.30.0/24	Balkan Internet Exchange	B-IX
-278	193.110.12.0/24	Stockholm Open Local Internet Exchange	SOLIX
-279	193.169.198.0/23	 Bulgarian Internet eXchange	 BIX.BG
-280	200.107.83.128/25	 Punto de Intercambio Neutro de Internet	 IXP Costa Rica
-281	195.42.144.0/23		 Equinix Paris
-282	217.174.157.0/24	 Balkan Internet Exchange	
-283	198.32.235.0/24	 Ottawa Internet Exchange	 OttIX
-284	193.203.0.0/23	Vienna Internet Exchange	VIX
-285	194.116.96.0/24		 TOP-ix
-286	196.223.24.0/24	 Lesotho Internet Exchange Point	 LIXP
-287	196.223.4.0/24	 Côte d'Ivoire Internet Exchange Point	 CIVIX
-288	195.69.118.0/24	Netnod Internet Exchange i Sverige AB	Netnod COMIX
-289	192.108.145.0/24	 Slovak Internet Exchange Koice	
-290	43.243.21.0/24	Auckland Internet Exchange	AKL-IX
-291	193.156.90.0/24	Norwegian Internet Exchange, NIX1 (location 1)	NIX
-292	200.13.83.0/24	CABASE NAP Rosario	CABASE-ROS
-293	196.223.14.0/24	 Johannesburg Internet Exchange	 JINX
-294	212.121.32.0/19	 Edge-IX	 Edge-IX
-295	195.137.179.0/24	 Tallinn Internet Exchange (TLLIX)	 TLLIX
-296	193.110.12.0/23	 SOLIX	 SOLIX
-297	198.32.7.0/24	 Andrew's Basement Exchange	 ABX
-298	196.223.5.0/25	 Tanzania Internet Exchange	 TIX
-299	206.223.130.0/24	 NAP Perú	 NAP Perú
-300	206.223.114.0/24	 Excel Telecom NAP	 Excel Telecom NAP
-301	185.1.58.0/24	Deutscher Commercial Internet Exchange Dusseldorf	DE-CIX Dusseldorf
-302	200.185.4.0/24	 Tivit	 Tivit
-303	193.242.111.0/25	Internet Neutral Exchange Association Ltd.	INEX LAN1
-304	206.223.115.0/24	 Equinix IBX Ashburn	 Equinix Ashburn
-305	198.32.234.0/24	 AusBONE-Melbourne Internet Exchange	 AusBONE-MEL
-306	198.32.195.0/24	 Northwest Access Exchange	 NWAX
-307	193.189.130.0/24	Enlightened Internet Exchange	ENLIX
-308	193.34.203.0/24	 Donetsk Internet Exchange	 DN-IX
-309	210.173.176.0/24	Japan Network Access Point Tokyo	JPNAP Tokyo
-310	103.27.170.0/24	 Mumbai Convergence Hub	 Mumbai CH
-311	217.29.68.0/23	Milan Internet eXchange	MIX-IT
-312	206.53.174.0/24	Megaport MegaIX Dallas	MegaIX Dallas
-313	195.140.192.0/24	 Tampere Region Exchange	 TREX
-314	192.157.69.0/24	 Sprint NAP	 Sprint NAP
-315	196.223.30.0/24	 Durban Internet eXchange	 DINX
-316	204.228.158.0/24	 Salt Lake Internet Exchange	 SLIX
-317	203.190.230.0/24	Equinix Tokyo	Equinix Tokyo
-318	81.21.96.0/24	 Cairo Internet Exchange	 CAIX
-319	193.8.61.192/26	Central Polish Internet eXchange	CePIX.pl
-320	194.254.208.158/27	 Martinix	 Martinix
-321	82.193.63.0/24	 Friuli Venezia Giulia Internet Exchange	 FVG-IX
-322	206.130.10.0/24	DE-CIX, the New York / New Jersey  Internet Exchange	DE-CIX New York
-323	206.51.45.0/24		
-324	187.16.195.0/24	PTT Belem	IX.br (PTT.br) Belém
-325	200.1.6.0/24	NAP.EC Quito	NAP.EC-UIO
-326	206.53.200.0/24	Montgomery Internet Exchange	MIX-AL Montgomery
-327	185.1.2.0/25	IXP et NAP d’Auvergne et du Massif Central	AuvernIX
-328	206.51.33.0/24	 Chicago Internet Exchange	 ChIX
-329	206.53.171.0/24	Megaport MegaIX Seattle	MegaIX Seattle
-330	198.32.190.0/24	Equinix Internet Exchange Vienna, VA	Equinix Vienna (VA)
-331	198.32.72.0/24		Doha-IX
-332	218.100.23.0/24	 Dunedin Peering Exchange	 DPE
-333	198.32.164.0/24	 Utah Regional Exchange Point	 Utah-REP
-334	198.78.5.0/24	Miami Internet Exchange	MiamiIX
-335	91.217.231.0/24	 Leeds Internet Exchange	 IXLeeds
-336	196.223.36.0/24	 BurundiX Internet Exchange Point	 BurundiX
-337	195.82.138.0/23	 Gateway Gulf Internet Exchange Bahrain	 GulfIX Bahrain
-338	204.107.122.0/25		 MKEIX
-339	193.227.132.0/24	 Terremark NAP de las Americas - Madrid	 Terremark NAP Madrid
-340	198.32.134.0/24	Equinix Internet Exchange Seattle	Equinix Seattle
-341	206.130.0.0/24	 AlbertaIX	 AlbertaIX
-342	95.140.128.0/23	 VSIX NAP del Nord Est	 NAP VSIX IPv4
-343	195.130.211.0/26	Reykjavik Internet Exchange	RIX
-344	188.93.170.0/23	 Luxembourg Commercial Internet Exchange	 LU-CIX
-345	206.126.114.0/24		
-346	193.232.136.0/24	 MSK-IX Vladivostok	 MSK-IX Vladivostok
-347	193.110.13.0/24	Stockholm Open Local Internet Exchange	SOLIX
-348	194.59.190.0/24	INXS / ECIX-MUC	INXS by ecix
-349	194.50.181.128/25	 Stockholm Internet Exchange	 STHIX
-350	206.197.187.0/24	 San Francisco Metropolitan Internet Exchange	 SFMIX
-351	198.32.231.128/25	Nepal Internet Exchange	npIX
-352	206.223.120.0/24	Arizona Internet Exchange	AZIX
-353	206.126.236.0/22	Equinix Ashburn Exchange	Equinix Ashburn
-354	193.2.141.0/24	 Slovenian Internet Exchange	 SIX
-355	206.108.255.0/24	Midwest Internet Cooperative Exchange	MICE
-356	103.25.228.0/24	Vanuatu Internet Exchange	VIX.VU
-357	200.219.147.0/24	PTT Recife	IX.br (PTT.br) Recife
-358	193.111.172.0/24		 GN-IX
-359	69.51.84.0/25	 Northwest Internet Exchange	 NWIX Helena
-360	206.126.228.0/24	 The Philadelphia Internet Exchange	 PHLIX
-361	194.85.107.0/24		
-362	196.216.148.0/24		 IXPN - Lagos
-363	195.245.196.0/24	 Madrid Internet Exchange	 MAD-IX
-364	185.1.47.0/24	DE-CIX, the Marseille Internet Exchange	DE-CIX Marseille
-365	217.117.187.0/24	 Krasnoyarsk Internet Exchange	 KRS-IX
-366	200.14.38.0/24	CABASE NAP Mendoza	CABASE-MZA
-367	193.239.116.0/23	Neutral Internet Exchange	NL-IX
-368	206.53.203.0/24		MegaIX Toronto
-369	187.16.204.0/24		IX.br (PTT.br) Foz do Iguaçu
-370	5.57.80.0/22	 London Network Access Point	 LoNAP
-371	193.156.93.0/24	 Trondheim Internet Exchange	 TRDIX
-372	198.32.171.0/24	 Pacific Wave International Peering Exchange	 Pacific Wave
-373	91.218.4.0/24	 Armenian Internet Traffic Exchange	 ARMIX
-374	198.32.244.0/24	 VermontIX	 VermontIX
-375	185.1.32.0/24	Data Facilities Internet Exchange	DF-IX
-376	198.32.166.0/24	 MAE-NY	 MAE-NY
-377	218.100.41.0/24	 Biznet Internet Exchange	
-378	80.67.163.0/24	 Gigabit European Internet eXchange	 GEIX
-379	109.239.136.0/23	Global-IX	Global-IX
-380	206.108.34.0/23		 TORIX
-381	193.192.15.64/26	 Croatian Internet Exchange	 CIX
-382	193.105.116.0/24	GlobalConnect Content-IX	Content-IX
-383	203.190.227.0/24	Equinix Osaka	Equinix Osaka
-384	194.68.133.0/24	 Netnod Sundsvall	 Netnod Sundsvall
-385	206.197.184.0/24	 St. Louis Regional Exchange Point	 
-386	218.100.3.0/24	 PIPE Networks Adelaide	 PIPE Adelaide
-387	193.25.170.0/23	 Redbus Internet Exchange	 RBIEX
-388	195.35.120.0/24	London Network Access Point	LONAP
-389	194.107.117.0/24	 Odessa Internet Exchange	 OD-IX
-390	198.32.107.0/24	 Equinix-Philly(former Paix)	 Equinix-Philly
-391	185.1.62.0/23	Giganet Internet exchange network	GigaNET
-392	178.18.224.0/23	Peering, LTD	DATAIX
-393	198.32.252.0/24	 AMPATH - Florida International University/CIARA	 AMPATH
-394	198.32.152.0/24	 NGIX-West	 NGIX-West
-395	212.121.34.0/24	 Manchester Network Access Point	 MaNAP
-396	106.48.34.0/23	CHN-IX Beijing	CHN-IX Beijing
-397	206.223.123.0/24		
-398	206.123.7.0/24	 Jacksonville Internet Exchange	 JXIX
-399	206.126.240.0/24	AMS-IX New York	AMS-IX NY
-400	103.26.68.0/23	Megaport MegaIX Sydney	MegaIX Sydney
-401	193.109.219.0/24	 London Internet Providers Exchange	 LIPEX
-402	91.194.218.0/24	Rotterdam Internet Exchange	R_ix
-403	194.117.52.0/24	 Copenhagen Internet Exchange	 COPHIX
-404	217.79.160.0/23	 XchangePoint London IPP	 XP-London IXP
-405	119.110.118.0/24	Matrix Cable Internet eXchange	MCIX - Matrix Networks
-406	193.149.1.0/25	Espana Internet Exchange Lower LAN	ESPANIX Lower LAN
-407	198.32.141.0/24	 Singapore Open Exchange	 SOX
-408	198.32.213.0/24	 Tasmanian Internet Exchange	 TAIX
-409	91.198.176.0/24	 Free Internet eXchange Oslo	 FIXO
-410	103.7.144.0/24	 Cambodian Network Exchange	 CNX
-411	202.167.228.0/24	 Equinix Sydney	 Equinix Sydney
-412	103.54.2.0/23	Riau Internet Exchange Point	IIX-RI
-413	206.53.139.0/24		 Midwest-IX
-414	185.1.40.0/24	 T-CIX	 T-CIX
-415	210.62.255.0/24	 Taiwan Internet Exchange	 TWIX
-416	80.94.94.0/23	Global Internet Exchange & Peering Network	GE-CIX
-417	103.22.233.0/22	 OpenIXP Internet exchange Point	 Open IXP
-418	198.32.136.0/24	NASA Ames Internet eXchange	NASA-AIX
-419	207.231.241.0/24	Pacific Wave Exchange in Los Angeles and Seattle	PacificWave
-420	218.100.59.0/24	 ACT Internet Exchange	 ACT-IX
-421	193.156.125.0/24	 Bergen Internet Exchange	 BIX
-422	62.63.142.0/24	Latvian Internet Exchange	LIX-LV
-423	193.110.227.64/27	FICIX Helsinki / FICIX2	FICIX Helsinki
-424	195.85.217.0/24	 Nürnberger Internet Exchange	 N-IX
-425	198.32.160.0/24	 New York International Internet Exchange	 NYIIX
-426	185.1.68.0/24		DE-CIX Madrid
-427	185.1.43.0/24	 Salzburg Internet eXchange	 SAIX
-428	198.32.158.0/24	 PhoenixNAP	 PhoenixNAP
-429	193.4.59.0/24	 Reykjavik Internet Exchange	 RIX
-430	193.95.1.0/24	 Tunisian Internet Exchange Point	 TunIXP Tunis
-431	195.85.195.0/24	 Warsaw Internet Exchange	 WIX
-432	213.162.194.0/24	Neutral Internet Exchange Valencia	NIXVAL-ix
-433	208.50.192.0/24	 IXNM	 IXNM
-434	198.32.169.0/24	 Nashville NAP	 Nashville NAP
-435	194.53.172.0/25	Belgian National Internet eXchange	BNIX
-436	144.92.233.224/27	Madison Internet Exchange	MadIX
-437	86.104.125.0/24		
-438	198.32.200.0/24	 MAE-West-ATM	
-439	80.81.192.0/22	Deutscher Commercial Internet Exchange	DE-CIX Frankfurt
-440	91.213.236.0/24		 Touix
-441	185.1.14.0/24	 EuroGIX	 EuroGIX
-442	194.54.93.0/25	 OpenCarrier e.G. Member IX Frankfort	 OCIX Frankfurt
-443	194.165.32.0/24	 Gothenburg Internet Exchange	
-444	80.249.208.0/21	Amsterdam Internet Exchange	AMS-IX
-445	210.100.3.0/24	PIPE Networks Adelaide	PIPE Networks Adelaide
-446	198.32.183.0/24	 Equinix Atlanta	 Equinix-Atlanta
-447	206.108.115.0/24	AMS-IX Chicago	AMS-IX Chicago
-448	193.201.40.0/24	 NaMeX - Nautilus Mediterranean Exchange Point	 NaMeX
-449	206.51.42.0/24		
-450	193.188.137.0/24	 Budapest Internet Exchange	 BIX
-451	206.51.7.0/25	 Kansas City Internet Exchange	
-452	198.32.243.0/24	 Equinix-LA(former Paix)	 Equinix-LA
-453	206.223.125.0/25	Twin Ports Internet Exchange	TP-IX
-454	198.133.49.0/24	 CANIX	 CANIX
-455	196.46.25.0/24	NAPAfrica IX Johannesburg	NAPAfrica IX Johannesburg
-456	218.100.1.0/24	 AUSIX	 AUSIX
-457	213.234.0.0/25	 Catalunya Neutral Internet Exchange Point	 CATNIX
-458	198.32.206.0/24	 San Antonio Metro Access Point	 SAMAP
-459	200.0.22.0/23	Open Caribbean Internet eXchange	OCIX
-460	193.232.244.0/24	 MSK-IX Moscow	 MSK-IX Moscow
-461	206.126.115.0/24		
-462	103.14.9.0/24	Symphony Internet Exchange	SYMC-IX
-463	193.243.183.64/26	 Internet exchange point of the Oresund Region	
-464	198.32.249.0/24	 Calren2 North	 Calren2 North
-465	195.60.89.0/24	Commercial Brno Internet Exchange	CBIX
-466	195.66.236.0/22	 London Internet Exchange	
-467	198.32.224.0/24	 MAGPI Gigapop	 MAGPI
-468	198.32.153.0/24	NASA Ames Internet eXchange	NASA-AIX
-469	185.1.19.0/26	 Ulyanovsk Internet Exchange	 ULN-IX
-470	206.223.127.0/25	Peer1 Internet Exchange - Vancouver	PIX Vancouver
-471	198.32.208.0/24	 MAE-Zurich	 MAE-Zurich
-472	200.115.82.0/24	CABASE NAP Mar Del Plata	CABASE-MDQ
-473	196.10.141.0/24	NAPAfrica IX Durban	NAPAfrica IX Durban
-474	91.216.67.0/24		
-475	183.177.61.0/24	Equinix Melbourne	Equinix Melbourne
-476	194.112.112.0/24	 Internet Exchange Service	 INXS
-477	185.154.168.0/23	 Qatar Internet Exchange Point	 QIXP
-478	206.51.44.0/24		
-479	185.1.1.0/24	 Palestinian Internet Exchange	 PIX
-480	206.197.169.0/24	 Equinix New York IBX	 Equinix NY
-481	194.190.119.0/24		
-482	198.32.222.0/24	 TaiwanEP	 TaiwanEP
-483	198.32.178.0/24		
-484	80.67.175.0/24	 Paris Operators for Universal Internet eXchange	 POUIX
-485	206.223.126.0/24	 Dayton Metro Internet Exchange	 DMIX
-486	193.232.135.0/24		
-487	195.5.49.0/24	 Ukrtelecom Internet Exchange	 UTC-IX
-488	198.32.104.0/24	 Equinix-Denver	 Equinix-Denver
-489	218.100.4.0/24	 Indonesian Internet Exchange	 IIX
-490	198.32.146.0/24	Los Angeles International Internet eXchange	LAIIX
-491	198.32.130.0/24	CyrusOne Internet Exchange	CyrusOne IX Dallas
-492	218.100.72.0/23	 NEX Internet Exchange	 NEX-IX
-493	203.159.68.0/23	Bangkok Neutral Internet Exchange	BKNIX
-494	195.69.119.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
-495	198.32.132.0/24	Digital Realty Atlanta Internet Exchange	Digital Realty | Telx Atlanta
-496	206.223.119.0/24	Equinix Chicago Exchange	Equinix Chicago
-497	195.140.149.128/25	 French National Internet Exchange IPv6	 FNIX6
-498	213.238.34.0/24	 DE-CIX Hamburg	 DE-CIX Hamburg
-499	193.28.6.0/24	Pirix Internet Exchange	PIRIX
-500	195.245.240.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
-501	196.223.28.0/24	Kinix	RDC-IX Kinshasa
-502	80.81.199.0/24	Deutscher Commercial Internet Exchange	DE-CIX Frankfurt
-503	198.32.217.0/24	 Mountain Area Exchange	 MAX
-504	134.202.255.0/24	 Internet Exchange of Puerto Rico	 IX.PR
-505	206.108.114.0/24	Tampa Internet Exchange	TPAIX
-506	198.32.135.0/24	 Equinix-Seattle	 Equinix-Seattle
-507	218.100.52.0/24		
-508	106.48.38.0/23		CHN-IX Shanghai
-509	62.69.146.0/23		
-510	218.100.24.0/24	 Christchurch Internet Exchange	
-511	206.108.236.0/24	 Boston Internet Exchange	
-512	192.42.99.128/25	 Grahamstown Internet Exchange	 GINX
-513	41.231.34.0/26	 Enfidha Internet Exchange	 TuniXP Enfidha
-514	193.110.225.0/24		
-515	193.1.208.192/26	 Internet Neutral Exchange Association Limited	 INEX
-516	195.66.230.0/26	London Internet Exchange Ltd.	LINX LON1
-517	200.14.74.0/24	CABASE NAP Santa Fé	CABASE-SFE
-518	198.32.122.0/24	NAP do Brasil	NDB
-519	194.117.52.128/25	Copenhagen Internet eXchange	COPHIX
-520	198.32.198.0/24	 Tampa Internet Exchange	 TampaIX
-521	198.32.151.0/24	 Ibadan Internet Exchange	 IBIX
-522	198.32.161.0/24	 NY-RIX	 NY-RIX
-523	193.201.116.128/26	 Khmelnytskiy Internet exchange point	 KM-IX
-524	192.38.7.248/32	Danish Internet Exchange	DIX
-525	198.32.129.0/24		
-526	206.51.46.0/24		
-527	196.223.2.0/24	 Zambia Internet Exchange Point	 Zambia IXP
-528	198.32.172.0/24	 Philippine Open Internet Exchange	 PhOpenIX
-529	195.60.89.0/25	 Commercial Brno Internet Exchange	 CBIX
-530	91.213.73.0/24	 Cork Neutral Internet Exchange	 CNIX
-531	194.50.100.0/24	 Neutral Internet Exchange	 NIX
-532	194.68.128.0/24		
-533	196.223.40.0/24	BENIN-IX	BENIN-IX
-534	187.16.200.0/24	 Ponto de Troca de Trafego do Central Paulista 	 PTT Central Paulista 
-535	213.184.52.0/24	 Tallinn Governmental Internet Exchange	 RTIX
-536	195.66.246.0/24	IXScotland powered by LINX	IXScotland
-537	200.14.39.0/24	CABASE NAP De La Costa	CABASE-DLC
-538	43.243.22.0/23		
-539	115.42.32.0/24	JetPeer IX	JetPeer IX
-540	218.100.54.128/25	Australian Capital Territory	IX Australia ACT
-541	198.32.248.0/24	 Calren2 South	 Calren2 South
-542	218.100.14.0/24	 Viet Nam Internet Exchange	 VNIX
-543	194.116.100.0/24	Consorzio Top-IX	TOP-IX
-544	206.41.104.0/24	 Vancouver Internet Exchange	 VANIX
-545	37.77.32.0/20	Hopus, the routed exchange	Hopus
-546	178.18.233.0/24	Peering, LTD	DATAIX
-547	196.11.234.0/24		 ANGONIX
-548	198.32.114.0/24	Equinix Internet Exchange Miami	Equinix Miami
-549	208.157.218.0/24	 Phoenix-IX	 Phoenix-IX
-550	194.53.172.0/24	 Belgian National Internet Exchange	 BNIX
-551	91.232.229.0/24	 Rheintal Internet Exchange	 Rheintal IX
-552	103.41.12.0/22	Megaport MegaIX Singapore	MegaIX Singapore
-553	206.223.124.0/24	 NAP-Colombia	 NAP-Colombia
-554	193.168.127.0/24	 Luxembourg Internet Exchange	 LIX
-555	206.197.131.11/24	 Central Oregon Internet eXchange	 COIX
-556	198.17.46.0/24		 SD-NAP
-557	185.1.71.0/25	Liverpool Internet Exchange	IX Liverpool
-558	198.32.138.0/24	 MetroIX	 MetroIX
-559	106.48.36.0/23		CHN-IX Guangzhou
-560	200.14.75.0/24		
-561	185.1.67.0/24	Moscow One IXcellerate Russia	EURASIA:peering
-562	206.41.105.0/24	Phoenix IX	Phoenix IX
-563	198.9.202.0/24	NASA Ames Internet eXchange	NASA-AIX
-564	198.32.191.0/24	Equinix Internet Exchange Vienna, VA	Equinix Vienna (VA)
-565	198.32.236.0/24	 Texas GigaPOP	 Texas GigaPOP
-566	195.208.208.0/21	MSK-IX	MSK-IX
-567	194.153.159.192/26	 Gästrikland-Hälsingland Regional Internet Exchange	 RIX-GH
-568	218.100.27.0/24	National Inter Connection Exchange (NiCE)	OpenIXP / NiCE
-569	203.190.230.0/25	 Equinix IBX Tokyo	 Equinix Tokyo
-570	193.25.180.255/23	 Digital Telecom Internet Exchange	 DTEL-IX
-571	206.197.131.0/24	Central Oregon Internet eXchange	COIX
-572	200.115.84.0/24	CABASE NAP Puerto Madryn	CABASE-PMY
-573	193.149.1.128/25	Espana Internet Exchange Upper LAN	ESPANIX Upper LAN
-574	185.1.25.0/24	Brno University of Technology	BR-IX
-575	210.171.224.0/24	 Japan Internet Exchange	 JPIX
-576	218.100.44.0/24	 Malaysia Internet Exchange	 MyIX
-577	103.216.40.0/23	CNIX	China internet exchange
-578	198.32.186.0/24	Digital Realty Phoenix Internet Exchange	Digital Realty | Telx Phoenix
-579	193.201.29.0/25	Nautilus Mediterranean Exchange Point	NaMeX
-580	27.111.228.0/22	Equinix Singapore Exchange	Equinix Singapore
-581	213.148.192.0/24	 Scottish Internet Exchange	 ScotIX
-582	185.1.35.0/24	BREM-IX	BREM-IX
-583	194.68.129.0/24	Service for French INternet eXchange	SFINX
-584	200.0.18.0/24	Haiti Internet Exchange	HIX Haiti
-585	206.41.107.0/24	 Jamaica Internet Exchange Point	 JAIXP
-586	198.179.18.0/24		 QIX
-587	198.32.181.0/24	Equinix Internet Exchange Toronto	Equinix Toronto
-588	194.68.131.0/24	 Netnod Malmö	 Netnod Malmö
-589	202.249.2.0/24	Distributed IX in EDO (former NSPIXP2)	DIX-IE
-590	185.1.74.0/26	non-commercial Community Exchange	Community-IX
-591	217.29.66.0/24	 Milan Internet Exchange	 MIX
-592	91.192.104.0/24	Lviv Internet Exchange Point	Lviv-IX
-593	194.54.92.0/25	 OpenCarrier e.G. Member IX Duesseldorf	
-594	192.203.154.0/24	 Auckland Peering Exchange	 APE
-595	200.14.37.0/24	CABASE NAP Bahía Blanca	CABASE-BHB
-596	187.16.194.0/24	PTT Vitoria	IX.br (PTT.br) Vitória
-597	103.246.232.0/24	Japan Internet Exchange Osaka	JPIX OSAKA
-598	69.147.218.0/24	 Midwest Internet Cooperative Exchange	 MICE
-599	194.31.232.0/24	 Deutscher Commercial Internet Exchange	 DE-CIX
-600	77.95.71.0/24	Lyonix, the Lyon IX	Lyonix
-601	193.34.200.0/24	 Crimea Internet Exchange	 Crimea-IX
-602	198.32.128.0/24	 PB-NAP	 PB-NAP
-603	198.32.188.0/24	 Baltimore-NAP	 BNAP
-604	217.156.113.0/24	 Romanian National Internet Exchange	 RoNIX
-605	62.35.254.0/24	 Paris NAP	 PaNAP
-606	198.32.187.0/24	 DC	
-607	91.210.16.0/22	Neutral Internet Exchange in the Czech Republic	NIX.CZ
-608	206.55.196.0/23	LINX Northern Virginia	LINX NoVA
-609	195.66.244.0/24	 IXManchester powered by LINX	 IXManchester
-610	200.75.174.0/24	 IX-LAPAZ	 IX-LAPAZ
-611	200.219.140.0/24		
-612	196.223.35.0/24	 Windhoek IXP	 WHKIX
-613	218.100.2.0/24		
-614	206.197.210.0/24		
-615	206.72.208.0/24	 Manitoba Internet Exchange	 MBIX
-616	198.32.96.0/23	CyrusOne Internet Exchange	CyrusOne IX Houston
-617	198.32.205.0/24	 IndonesiaEP	 IndonesiaEP
-618	193.54.79.0/24	Service for French INternet eXchange	SFINX
-619	188.116.45.0/24	Gdansk Internet eXchange	GIX Gdansk
-620	196.223.34.0/24	 Serrekunda Internet Exchange Point	 SIXP
+0	+	176.126.38.0/24	GR-IX	GR-IX
+1	195.66.244.0/24	 IXManchester powered by LINX	 IXManchester
+2	203.163.222.0/24		
+3	106.48.38.0/23		CHN-IX Shanghai
+4	103.26.71.0/24	Megaport MegaIX Melbourne	MegaIX Melbourne
+5	200.219.139.0/24	PTT Belo Horizonte	IX.br (PTT.br) Belo Horizonte
+6	196.223.36.0/24	 BurundiX Internet Exchange Point	 BurundiX
+7	213.234.0.0/25	 Catalunya Neutral Internet Exchange Point	 CATNIX
+8	206.72.208.0/24	 Manitoba Internet Exchange	 MBIX
+9	206.223.125.128/25	Twin Ports Internet Exchange	TP-IX
+10	206.53.140.0/24	YEGIX Internet Exchange Community Ltd.	YEGIX
+11	193.106.112.0/24		W-IX
+12	194.85.107.0/24		
+13	185.1.4.0/24	Poznan Internet Exchange	POZIX
+14	193.110.12.0/23	 SOLIX	 SOLIX
+15	206.108.34.0/23		 TORIX
+16	196.223.2.0/24	 Zambia Internet Exchange Point	 Zambia IXP
+17	193.189.82.0/23	 KleyReX Internet Exchange	 KleyRex
+18	187.16.196.0/24	PTT Natal	IX.br (PTT.br) Natal
+19	195.82.138.0/23	 Gateway Gulf Internet Exchange Bahrain	 GulfIX Bahrain
+20	106.48.34.0/23	CHN-IX Beijing	CHN-IX Beijing
+21	80.67.163.0/24	 Gigabit European Internet eXchange	 GEIX
+22	206.51.43.0/24		
+23	196.223.34.0/24	 Serrekunda Internet Exchange Point	 SIXP
+24	206.51.30.0/24	New York International Internet eXchange	NYIIX
+25	218.100.52.0/24		
+26	185.1.67.0/24	Moscow One IXcellerate Russia	EURASIA:peering
+27	218.100.78.0/24	Victorian Internet Exchange (VIC-IX)	IX Australia VIC
+28	208.50.192.0/24	 IXNM	 IXNM
+29	193.109.219.0/24	 London Internet Providers Exchange	 LIPEX
+30	193.232.140.0/24		
+31	185.1.61.0/24	Baden-Württemberg Internet Exchange - Karlsruhe	BW-IX Karlsruhe
+32	103.25.229.0/24	 Vanuatu Internet Exchange	 VIX
+33	193.189.129.0/22	 Enlightened Internet Exchange	 ENLIX
+34	91.245.221.0/24	 Giganet Internet Exchange	 Giganet
+35	43.243.21.0/24	Auckland Internet Exchange	AKL-IX
+36	218.100.0.0/24	 PIPE Networks Brisbane	
+37	218.100.6.0/24	BroadBand Internet eXchange Tokyo	BBIX Tokyo
+38	198.32.246.0/24	 PARIX	 PARIX
+39	193.1.208.192/26	 Internet Neutral Exchange Association Limited	 INEX
+40	206.130.10.0/24	DE-CIX, the New York / New Jersey  Internet Exchange	DE-CIX New York
+41	206.223.114.0/24	 Excel Telecom NAP	 Excel Telecom NAP
+42	206.51.41.0/24	 Coresite - Any 2 Northern California	
+43	206.223.123.0/24		
+44	198.32.157.0/24	 Beirut Internet Exchange	 BeirutIX
+45	134.202.255.0/24	 Internet Exchange of Puerto Rico	 IX.PR
+46	200.14.74.0/24	CABASE NAP Santa Fé	CABASE-SFE
+47	210.100.3.0/24	PIPE Networks Adelaide	PIPE Networks Adelaide
+48	195.66.236.0/22	London Internet Exchange Ltd.	LINX LON2
+49	195.60.82.64/26	 eXchange West	 eXchange West
+50	80.67.175.0/24	 Paris Operators for Universal Internet eXchange	 POUIX
+51	62.69.146.0/23		
+52	80.94.94.0/23	Global Internet Exchange & Peering Network	GE-CIX
+53	194.117.52.0/24	 Copenhagen Internet Exchange	 COPHIX
+54	195.66.246.0/23	 IXScotland powered by LINX	 IXScotland
+55	217.29.66.0/23	Milan Internet eXchange	MIX-IT
+56	200.0.17.0/24		
+57	37.49.232.0/24	FranceIX Marseille	France-IX Marseille
+58	185.1.1.0/24	 Palestinian Internet Exchange	 PIX
+59	206.53.170.0/24	Megaport MegaIX Ashburn	MegaIX Ashburn
+60	195.35.65.0/24	 Ukrainian Internet Exchange	 UA-IX
+61	206.81.82.0/23	Seattle Internet Exchange (9000 MTU)	SIX Seattle (Jumbo)
+62	206.123.0.0/24	 Greater Toronto International Internet Exchange	 GTIIX
+63	203.190.230.0/24	Equinix Tokyo	Equinix Tokyo
+64	198.32.231.128/25	Nepal Internet Exchange	npIX
+65	206.130.0.0/24	 AlbertaIX	 AlbertaIX
+66	200.1.6.0/24	NAP.EC Quito	NAP.EC-UIO
+67	202.78.121.0/24	Bayan Telecommunications Internet and Gaming Exchange	BAYANTEL
+68	206.53.137.0/24	 Richmond Virginia Internet Exchange	 RVA-IX
+69	200.0.16.0/24	 NAP de Cuba	 NAP de Cuba
+70	198.133.49.0/24	 CANIX	 CANIX
+71	193.34.203.0/24	 Donetsk Internet Exchange	 DN-IX
+72	193.219.13.64/26	Lietuvos Interneto paslaugų tiekėjų apsikeitimo mazgu	LIPTAM
+73	196.223.44.0/24	 Liberia Internet Exchange Point	 LIXP
+74	193.242.111.0/25	Internet Neutral Exchange Association Ltd.	INEX LAN1
+75	206.197.184.0/24	 St. Louis Regional Exchange Point	 
+76	198.78.5.0/24	Miami Internet Exchange	MiamiIX
+77	200.61.194.0/24	 Cubecorp	 OptIX-LA
+78	196.223.7.0/24		 MEIX
+79	185.1.43.0/24	 Salzburg Internet eXchange	 SAIX
+80	206.51.40.0/24	 Coresite - Any 2 NorthEast	
+81	69.51.84.0/25	 Northwest Internet Exchange	 NWIX Helena
+82	206.126.235.0/26		 OmahaIX
+83	194.54.93.0/25	 OpenCarrier e.G. Member IX Frankfort	 OCIX Frankfurt
+84	198.32.150.0/24	 MAE-Houston	 MAE-Houston
+85	178.18.226.0/23	Peering, LTD	DATAIX
+86	198.17.46.0/24		 SD-NAP
+87	198.32.129.0/24		
+88	196.13.207.128/26	 Burkina Faso IXP	 BFIX
+89	198.32.171.0/24	 Pacific Wave International Peering Exchange	 Pacific Wave
+90	193.95.0.0/24	 Tunisian Internet Exchange Point	 TunIXP Tunis
+91	196.223.35.0/24	 Windhoek IXP	 WHKIX
+92	119.110.116.0/23	Matrix Cable Internet eXchange	MCIX - Matrix Networks
+93	198.32.231.0/25	Nepal Internet Exchange	npIX
+94	198.32.96.0/23	CyrusOne Internet Exchange	CyrusOne IX Houston
+95	206.223.120.0/24	Arizona Internet Exchange	AZIX
+96	185.1.54.0/24		
+97	200.13.83.0/24	CABASE NAP Rosario	CABASE-ROS
+98	213.148.192.0/24	 Scottish Internet Exchange	 ScotIX
+99	185.1.71.128/25	Liverpool Internet Exchange	IX Liverpool
+100	103.216.40.0/23	CNIX	China Internet Exchange
+101	217.174.157.0/24	Balkan Internet Exchange	B-IX
+102	198.32.175.0/24	Equinix Internet Exchange Palo Alto	Equinix Palo Alto
+103	196.201.2.0/24	Ghana Internet Exchange Association	GIXA
+104	195.182.218.0/23	 Polish Internet Exchange	 PLIX
+105	103.25.228.0/24	Vanuatu Internet Exchange	VIX.VU
+106	198.32.98.0/24	CyrusOne Internet Exchange	CyrusOne IX Phoenix
+107	206.53.175.0/24	Interconnection eXchange Denver	IX-Denver
+108	206.223.126.0/24	 Dayton Metro Internet Exchange	 DMIX
+109	198.32.184.0/24	 MAE-West	 MAE-West
+110	200.192.109.0/24	IX.br (PTT.br) Campina Grande	IX.br (PTT.br) Campina Grande
+111	206.53.168.0/24	Megaport MegaIX Chicago	MegaIX Chicago
+112	194.153.159.192/26	 Gästrikland-Hälsingland Regional Internet Exchange	 RIX-GH
+113	185.1.14.0/24	 EuroGIX	 EuroGIX
+114	198.32.135.0/24	 Equinix-Seattle	 Equinix-Seattle
+115	202.0.91.0/24	 Manila Internet Exchange	
+116	187.16.192.0/24	PTT Sao Jose dos Campos	IX.br (PTT.br) São José dos Campos
+117	95.140.128.0/23	 VSIX NAP del Nord Est	 NAP VSIX IPv4
+118	198.32.163.0/24	 Oregon Internet Exchange	 OIX
+119	194.68.130.0/24	 Netnod Gothenburg	 Netnod Gothenburg
+120	200.107.83.128/25	 Punto de Intercambio Neutro de Internet	 IXP Costa Rica
+121	198.32.128.0/24	 PB-NAP	 PB-NAP
+122	200.192.108.0/24	PTT Campinas	IX.br (PTT.br) Campinas
+123	206.197.131.11/24	 Central Oregon Internet eXchange	 COIX
+124	195.140.149.128/25	 French National Internet Exchange IPv6	 FNIX6
+125	192.38.7.249/32	Danish Internet Exchange	DIX
+126	195.246.227.0/24	 Santa Monica Internet Local Exchange	
+127	206.41.108.0/24	FL-IX - The South Florida Internet Exchange	FL-IX
+128	200.219.147.0/24	PTT Recife	IX.br (PTT.br) Recife
+129	200.0.22.0/23	Open Caribbean Internet eXchange	OCIX
+130	213.162.194.0/24	Neutral Internet Exchange Valencia	NIXVAL-ix
+131	209.124.52.0/24	 DET-IX	 DET-IX
+132	206.41.106.0/24	AMS-IX Bay Area	AMS-IX BA
+133	193.2.141.0/24	 Slovenian Internet Exchange	 SIX
+134	206.51.33.0/24	 Chicago Internet Exchange	 ChIX
+135	210.173.178.0/25	Internet Multifeed JPNAP Osaka	JPNAP Osaka
+136	198.32.181.0/24	Equinix Internet Exchange Toronto	Equinix Toronto
+137	206.41.105.0/24	 Phoenix-IX	 Phoenix-IX
+138	196.223.21.0/24	 Kenya Internet Exchange Point	 KIXP
+139	196.223.5.0/25	 Tanzania Internet Exchange	 TIX
+140	206.51.45.0/24		
+141	193.105.116.0/24	GlobalConnect Content-IX	Content-IX
+142	198.32.176.0/24	Equinix Internet Exchange Palo Alto	Equinix Palo Alto
+143	185.1.69.0/24		INEX Cork
+144	103.7.144.0/24	 Cambodian Network Exchange	 CNX
+145	185.1.30.0/24	 Balkan Internet Exchange	
+146	178.18.230.0/24	Peering, LTD	DATAIX
+147	185.1.40.0/24	 T-CIX	 T-CIX
+148	198.32.250.0/24	 DC	 NeutralNAP
+149	198.32.133.0/24	Equinix Internet Exchange Seattle	Equinix Seattle
+150	85.31.223.0/24	 Marseille Internet Exchange	 Marseille Internet Exchange
+151	193.232.135.0/24		
+152	218.100.3.0/24	 PIPE Networks Adelaide	 PIPE Adelaide
+153	193.54.79.0/24	Service for French INternet eXchange	SFINX
+154	185.1.23.0/24	CODIX	CODIX
+155	193.227.132.0/24	 Terremark NAP de las Americas - Madrid	 Terremark NAP Madrid
+156	198.179.18.0/24		 QIX
+157	37.77.32.0/20	Hopus, the routed exchange	Hopus
+158	198.32.166.0/24	 MAE-NY	 MAE-NY
+159	198.32.224.0/24	 MAGPI Gigapop	 MAGPI
+160	200.136.37.0/24	 An Academic Network at Sao Paulo	 ANSP
+161	218.100.21.0/24	 Palmerston North Internet Exchange	 PNIX
+162	218.100.56.0/24	 Hamilton Internet Exchange	 HIX
+163	200.192.110.0/24	PTT Brasilia	IX.br (PTT.br) Brasília
+164	198.32.240.0/24	 South Australian Internet Exchange	 SAIX SE
+165	198.32.192.0/24		
+166	192.67.199.0/24	 MAE-Frankfurt	 MAE-Frankfurt
+167	198.32.186.0/24	Digital Realty Phoenix Internet Exchange	Digital Realty | Telx Phoenix
+168	206.72.210.0/23	CoreSite - Any2 California	CoreSite - Any2 California
+169	206.41.107.0/24	 Jamaica Internet Exchange Point	 JAIXP
+170	194.59.190.0/24	INXS / ECIX-MUC	INXS by ecix
+171	218.100.23.0/24	 Dunedin Peering Exchange	 DPE
+172	193.8.61.192/26	Central Polish Internet eXchange	CePIX.pl
+173	193.108.98.0/24	 Nederlands-Duitse Internet Exchange	 NDIX
+174	193.156.93.0/24	 Trondheim Internet Exchange	 TRDIX
+175	193.25.180.255/23	 Digital Telecom Internet Exchange	 DTEL-IX
+176	206.223.118.0/24		
+177	198.32.190.0/24	Equinix Internet Exchange Vienna, VA	Equinix Vienna (VA)
+178	80.81.203.0/24	Deutscher Commercial Internet Exchange Hamburg	DE-CIX Hamburg
+179	200.0.18.0/24	Haiti Internet Exchange	HIX Haiti
+180	41.231.34.0/26	 Enfidha Internet Exchange	 TuniXP Enfidha
+181	198.32.110.0/24	 Equinix-SD(former Paix)	 Equinix-SD
+182	80.81.202.0/24	Deutscher Commercial Internet Exchange Munich	DE-CIX Munich
+183	192.38.7.0/24	 Danish Internet Exchange	 DIX
+184	198.32.158.0/24	 PhoenixNAP	 PhoenixNAP
+185	198.32.169.0/24	 Nashville NAP	 Nashville NAP
+186	218.100.14.0/24	 Viet Nam Internet Exchange	 VNIX
+187	218.100.44.0/24	 Malaysia Internet Exchange	 MyIX
+188	193.156.120.0/24	Norwegian Internet Exchange (location 2)	NIX2
+189	206.126.240.0/24	AMS-IX New York	AMS-IX NY
+190	193.110.224.0/24		
+191	198.32.177.0/24		 Equinix- Palo Alto
+192	218.100.19.0/24	 PIPE Networks Canberra	
+193	193.110.225.0/24		
+194	195.149.232.0/23		 TPIX
+195	69.147.218.0/24	 Midwest Internet Cooperative Exchange	 MICE
+196	91.234.18.0/24	 Leeds Internet Exchange	 IXLeeds
+197	91.240.225.0/24	 Sea-IX Internet exchange	 Sea-IX
+198	198.32.236.0/24	 Texas GigaPOP	 Texas GigaPOP
+199	91.198.176.0/24	 Free Internet eXchange Oslo	 FIXO
+200	198.32.182.0/24	Equinix Internet Exchange Atlanta	Equinix Atlanta
+201	193.42.155.0/24	 European Commercial Internet Exchange Hamburg	 ECIX HAM
+202	193.168.127.0/24	 Luxembourg Internet Exchange	 LIX
+203	200.219.144.0/24	PTT Londrina	IX.br (PTT.br) Londrina
+204	198.32.130.0/24	CyrusOne Internet Exchange	CyrusOne IX Dallas
+205	206.53.200.0/24	Montgomery Internet Exchange	MIX-AL Montgomery
+206	188.93.170.0/23	 Luxembourg Commercial Internet Exchange	 LU-CIX
+207	213.228.3.0/24	 Free-IX	 Free-IX
+208	45.127.172.0/22	Equinix Sydney Exchange	Equinix Sydney
+209	193.105.163.0/24	Serbian Open eXchange	SOX d.o.o. Serbia
+210	91.210.16.0/22	Neutral Internet Exchange in the Czech Republic	NIX.CZ
+211	193.218.0.0/24		 NetIX
+212	103.48.48.0/23	Megaport MegaIX Hong Kong	MegaIX Hong Kong
+213	217.79.160.0/23	 XchangePoint London IPP	 XP-London IXP
+214	103.26.70.0/24	Megaport MegaIX Brisbane	MegaIX Brisbane
+215	198.32.118.0/24		
+216	204.107.122.0/25		 MKEIX
+217	198.32.114.0/24	Equinix Internet Exchange Miami	Equinix Miami
+218	198.32.122.0/24	NAP do Brasil	NDB
+219	91.213.73.0/24	 Cork Neutral Internet Exchange	 CNIX
+220	92.60.70.0/24	 Milan Neutral Access Point	 MiNAP
+221	202.79.197.0/24	 Equinix Singapore IBX	 Equinix Singapore
+222	210.171.224.0/24	 Japan Internet Exchange	 JPIX
+223	218.100.41.0/24	 Biznet Internet Exchange	
+224	192.203.154.0/24	 Auckland Peering Exchange	 APE
+225	185.1.15.0/24	SMARTHUB Internet Exchange	SH-IX
+226	198.32.107.0/24	 Equinix-Philly(former Paix)	 Equinix-Philly
+227	187.16.195.0/24	PTT Belem	IX.br (PTT.br) Belém
+228	78.41.189.128/26	 PhibIX Gix & Nap	 PhibIX
+229	185.1.74.0/26	non-commercial Community Exchange	Community-IX
+230	206.223.116.0/24		 Equinix IBX San Jose
+231	193.4.59.0/24	 Reykjavik Internet Exchange	 RIX
+232	212.121.32.0/19	 Edge-IX	 Edge-IX
+233	195.69.144.0/22	 Amsterdam Internet Exchange	 AMS-IX
+234	115.42.32.0/24	JetPeer IX	JetPeer IX
+235	195.234.168.0/24	 Cairo Regional Internet Exchange	 CR-IX
+236	194.68.123.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
+237	62.63.142.0/24	Latvian Internet Exchange	LIX-LV
+238	81.201.48.192/26	 Neutral czFree eXchange	 NFXzspo
+239	198.32.226.0/24	 Dallas/Fort Worth Metropolitan Access Point	 DFW-MAP
+240	91.213.236.0/24		 Touix
+241	196.223.23.0/24	Cape Town Internet Exchange	CINX
+242	192.121.80.0/24	Stockholm Internet eXchange	STHIX (Stockholm IX)
+243	198.32.124.0/23	 NAP of the Americas	 NOTA
+244	91.212.9.0/24	EPIX	EPIX.Warszawa-KIX
+245	202.167.228.0/24	 Equinix Sydney	 Equinix Sydney
+246	194.50.100.0/24	 Neutral Internet Exchange	 NIX
+247	198.32.183.0/24	 Equinix Atlanta	 Equinix-Atlanta
+248	203.190.227.0/24	Equinix Osaka	Equinix Osaka
+249	195.69.117.0/24		
+250	198.32.132.0/24	Digital Realty Atlanta Internet Exchange	Digital Realty | Telx Atlanta
+251	198.9.201.0/24		
+252	198.32.16.0/24	 ISI DMZ/Gigapop	 ISI DMZ/Gigapop
+253	198.32.178.0/24		
+254	195.137.179.0/24	 Tallinn Internet Exchange (TLLIX)	 TLLIX
+255	218.100.1.0/24	 AUSIX	 AUSIX
+256	194.112.112.0/24	 Internet Exchange Service	 INXS
+257	206.223.130.0/24	 NAP Perú	 NAP Perú
+258	194.146.118.0/24	 European Commercial Internet Exchange Düsseldorf	 ECIX DUS
+259	209.33.201.176/28	 Southern Utah Peering Regional Network	 SUPrnet
+260	196.223.4.128/26	 Côte d'Ivoire Internet Exchange Point	 CI-IXP
+261	196.11.234.0/24		 ANGONIX
+262	195.245.196.0/24	 Madrid Internet Exchange	 MAD-IX
+263	103.22.233.0/22	 OpenIXP Internet exchange Point	 Open IXP
+264	103.247.139.0/24	 AMS-IX Hong Kong	 ASM-IX HK
+265	200.115.83.0/24	CABASE NAP Posadas	CABASE-POS
+266	206.53.139.0/24		 Midwest-IX
+267	109.239.136.0/23	Global-IX	Global-IX
+268	206.53.169.0/24	Megaport MegaIX Bay Area	MegaIX Bay Area
+269	206.223.128.0/24	 BellSouth Multimedia Internet Exchange	 BellSouth MIX
+270	198.32.210.0/24	 NAP Panamericano S.A.	 PanAmNAP
+271	194.107.117.0/24	 Odessa Internet Exchange	 OD-IX
+272	218.100.27.0/24	National Inter Connection Exchange (NiCE)	OpenIXP / NiCE
+273	194.57.253.128/27		 REUNIX
+274	91.213.211.0/24		 Peering.cz
+275	198.32.247.0/24		PARIX
+276	200.14.38.0/24	CABASE NAP Mendoza	CABASE-MZA
+277	206.81.80.0/23		
+278	198.32.188.0/24	 Baltimore-NAP	 BNAP
+279	178.18.228.0/23	Peering, LTD	DATAIX
+280	206.53.172.0/24	Megaport MegaIX Los Angeles	MegaIX Los Angeles
+281	195.66.224.0/22	London Internet Exchange Ltd.	LINX LON1
+282	187.16.216.0/21	PTT Sao Paulo	IX.br (PTT.br) São Paulo
+283	193.201.116.128/26	 Khmelnytskiy Internet exchange point	 KM-IX
+284	196.223.41.0/24	 Madagascar Global Internet Exchange	 MGIX
+285	198.32.238.0/24	The Big Apple Peering Exchange	BigApe
+286	103.231.152.0/22	BroadBand Internet eXchange Hong Kong / Singapore	BBIX Hong Kong / Singapore
+287	196.10.140.0/24	 NAPAfrica Cape Town	
+288	103.247.139.0/25	Amsterdam Internet Exchange Hong Kong	AMS-IX Hong Kong
+289	218.100.25.0/24	 Southland Internet Exchange	 SIX
+290	195.60.84.128/25	 Meridian Gate Internet Exchange	 MerieX
+291	206.51.42.0/24		
+292	193.232.136.0/24	 MSK-IX Vladivostok	 MSK-IX Vladivostok
+293	195.35.120.0/24	London Network Access Point	LONAP
+294	103.14.9.0/24	Symphony Internet Exchange	SYMC-IX
+295	185.1.13.0/24		RED-IX
+296	198.32.206.0/24	 San Antonio Metro Access Point	 SAMAP
+297	193.239.116.0/23	Neutral Internet Exchange	NL-IX
+298	194.190.119.0/24		
+299	198.32.40.0/24	 NWnet Gigapop	 NWnet Gigapop
+300	188.116.45.0/24	Gdansk Internet eXchange	GIX Gdansk
+301	198.32.222.0/24	 TaiwanEP	 TaiwanEP
+302	202.249.2.0/24	Distributed IX in EDO (former NSPIXP2)	DIX-IE
+303	106.48.36.0/23		CHN-IX Guangzhou
+304	91.203.127.0/24	Yaroslavl Internet Exchange	YAR-IX
+305	193.111.172.0/24		 GN-IX
+306	200.115.82.0/24	CABASE NAP Mar Del Plata	CABASE-MDQ
+307	200.219.138.0/24	PTT Rio de Janeiro	IX.br (PTT.br) Rio de Janeiro
+308	210.173.176.0/24	Japan Network Access Point Tokyo	JPNAP Tokyo
+309	198.32.191.0/24	Equinix Internet Exchange Vienna, VA	Equinix Vienna (VA)
+310	206.53.202.0/24		DE-CIX Dallas
+311	193.28.6.0/24	Pirix Internet Exchange	PIRIX
+312	196.223.24.0/24	 Lesotho Internet Exchange Point	 LIXP
+313	192.108.148.0/24		
+314	196.223.15.0/24	Johannesburg Internet Exchange	JINX
+315	80.97.248.0/23	Balcan-IX	Balcan-IX
+316	206.197.169.0/24	 Equinix New York IBX	 Equinix NY
+317	194.88.240.0/25	Internet Neutral Exchange Association Ltd.	INEX LAN2
+318	185.1.32.0/24	Data Facilities Internet Exchange	DF-IX
+319	196.10.141.0/24	NAPAfrica IX Durban	NAPAfrica IX Durban
+320	185.1.45.0/24	Chisinau Internet Exchange	KIVIX
+321	198.32.202.0/24	 IndonesiaEP	 IndonesiaEP
+322	210.184.127.0/24	iAdvantage Internet Exchange	iAIX
+323	218.100.45.0/24	JPNAP Tokyo II Service	JPNAP Tokyo 2
+324	198.32.212.0/24		
+325	196.223.38.0/24	The Djibouti Internet Exchange	DjIX
+326	193.17.78.0/24	Internet eXchange Moldova	MD-IX
+327	195.42.144.0/23		 Equinix Paris
+328	206.130.61.0/24	 Buffalo Niagara International Internet Exchange	 BNIIX
+329	193.156.125.0/24	 Bergen Internet Exchange	 BIX
+330	27.111.228.0/22	Equinix Singapore Exchange	Equinix Singapore
+331	217.29.66.0/24	 Milan Internet Exchange	 MIX
+332	185.1.18.0/24	Dortmund Internet eXchange	DO-IX
+333	195.60.89.0/24	Commercial Brno Internet Exchange	CBIX
+334	192.108.145.0/24	 Slovak Internet Exchange Koice	
+335	187.16.194.0/24	PTT Vitoria	IX.br (PTT.br) Vitória
+336	200.75.174.0/24	 IX-LAPAZ	 IX-LAPAZ
+337	80.81.192.0/22	 Deutscher Commercial Internet Exchange	
+338	213.184.52.0/24	 Tallinn Governmental Internet Exchange	 RTIX
+339	178.18.233.0/24	Peering, LTD	DATAIX
+340	196.223.25.0/25	Uganda Internet Exchange Point	UIXP
+341	103.16.102.0/23	 Singapore Internet Exchange	 SGIX
+342	206.41.104.0/24	 Vancouver Internet Exchange	 VANIX
+343	206.126.225.0/24	 Calgary Internet Exchange	 YYCIX
+344	196.223.30.0/24	 Durban Internet eXchange	 DINX
+345	192.145.251.0/24	 Korea Internet Neutral Exchange KINX	 KINX
+346	200.115.84.0/24	CABASE NAP Puerto Madryn	CABASE-PMY
+347	198.32.243.0/24	 Equinix-LA(former Paix)	 Equinix-LA
+348	196.223.12.0/24	 Rwanda Internet exchange	 RINEX
+349	206.126.236.0/22		 Equinix Ashburn
+350	200.46.153.8/30	 Intered Panamá	 Intered Panamá
+351	185.1.8.0/24		 UAE-IX
+352	195.85.195.0/24	 Warsaw Internet Exchange	 WIX
+353	198.32.235.0/24	 Ottawa Internet Exchange	 OttIX
+354	198.32.139.0/24		MAE Central
+355	62.35.254.0/24	 Paris NAP	 PaNAP
+356	195.69.118.0/24	Netnod Internet Exchange i Sverige AB	Netnod COMIX
+357	82.193.63.0/24	 Friuli Venezia Giulia Internet Exchange	 FVG-IX
+358	200.185.4.0/24	 Tivit	 Tivit
+359	119.27.63.0/24	 Equinix Hong Kong	 Equinix Hong Kong
+360	200.14.39.0/24	CABASE NAP De La Costa	CABASE-DLC
+361	193.243.183.64/26	 Internet exchange point of the Oresund Region	
+362	206.223.127.0/25	Peer1 Internet Exchange - Vancouver	PIX Vancouver
+363	218.100.4.0/24	 Indonesian Internet Exchange	 IIX
+364	91.220.194.0/24	Slovenian Internet Exchange	SIX SI
+365	206.130.15.0/24	 Halifax Internet Exchange	 Halifax IXP
+366	218.100.12.0/24	 PIPE Networks Hobart	
+367	195.245.240.0/24		
+368	193.37.144.0/24	 Alpes Adria Internet Exchange	 AAIX
+369	203.190.230.0/25	 Equinix IBX Tokyo	 Equinix Tokyo
+370	196.223.0.0/24	 Mauritius Internet Exchange	 MIXP
+371	196.216.148.0/24		 IXPN - Lagos
+372	198.32.113.0/24	 Equinix-Boston	 Equinix-Boston
+373	206.53.203.0/24		MegaIX Toronto
+374	193.149.1.0/25	Espana Internet Exchange Lower LAN	ESPANIX Lower LAN
+375	187.16.216.0/22	 Ponto de Troca de Tráfego Metro São Paulo	 PTTMetro São Paulo
+376	206.51.44.0/24		
+377	193.178.185.0/24	 Berlin Commercial Internet Exchange	 BCIX
+378	185.1.62.0/23	Giganet Internet exchange network	GigaNET
+379	206.41.109.0/24	 Tahoe Internet Exchange 	 TahoeIX 
+380	198.32.152.0/24	 NGIX-West	 NGIX-West
+381	200.14.37.0/24	CABASE NAP Bahía Blanca	CABASE-BHB
+382	193.110.13.0/24	Stockholm Open Local Internet Exchange	SOLIX
+383	178.18.235.0/24	Peering, LTD	DATAIX
+384	45.120.248.0/24	Extreme Broadband Services	Extreme IX
+385	193.201.40.0/24	 NaMeX - Nautilus Mediterranean Exchange Point	 NaMeX
+386	198.32.136.0/24	NASA Ames Internet eXchange	NASA-AIX
+387	198.32.141.0/24	 Singapore Open Exchange	 SOX
+388	194.68.131.0/24	 Netnod Malmö	 Netnod Malmö
+389	194.254.208.128/27		MARTINIX
+390	185.154.168.0/23	 Qatar Internet Exchange Point	 QIXP
+391	198.32.198.0/24	 Tampa Internet Exchange	 TampaIX
+392	200.14.75.0/24		
+393	196.223.5.0/24	Tanzania Internet eXchange	TIX - Tanzania
+394	198.32.120.0/24	 Terremark IST-IX	 IST-IX
+395	206.126.115.0/24		
+396	185.91.96.0/22	Beirut Internet Exchange	Beirut IX
+397	43.243.22.0/23		
+398	198.32.146.0/24	Los Angeles International Internet eXchange	LAIIX
+399	206.223.119.0/24		 Equinix Chicago IBX
+400	62.208.162.0/24	 Internet Exchange Hamburg	 INXS-HH
+401	200.0.19.0/24		
+402	185.1.2.128/25	IXP et NAP d’Auvergne et du Massif Central	AuvernIX
+403	213.238.34.0/24	 DE-CIX Hamburg	 DE-CIX Hamburg
+404	206.53.143.0/24		 Mass-IX
+405	103.246.232.0/24	Japan Internet Exchange Osaka	JPIX OSAKA
+406	91.232.229.0/24	 Rheintal Internet Exchange	 Rheintal IX
+407	194.42.48.0/25	Equinix Zurich, formerly TIX	Equinix Zurich
+408	195.85.217.0/24	 Nürnberger Internet Exchange	 N-IX
+409	200.192.111.0/24	PTT Goiania	IX.br (PTT.br) Goiânia
+410	198.32.148.0/24	 Metropolitan Area Ethernet-Paris	 MAE-Paris
+411	196.223.14.0/24	 Johannesburg Internet Exchange	 JINX
+412	195.66.246.0/24	IXScotland powered by LINX	IXScotland
+413	185.1.68.0/24		DE-CIX Madrid
+414	103.41.12.0/22	Megaport MegaIX Singapore	MegaIX Singapore
+415	202.7.0.0/23	 Wellington Internet Exchange	
+416	192.65.185.0/24	 CERN Internet Exchange Point	 CIXP
+417	187.16.200.0/24	 Ponto de Troca de Trafego do Central Paulista 	 PTT Central Paulista 
+418	198.32.172.0/24	 Philippine Open Internet Exchange	 PhOpenIX
+419	218.100.54.0/25		
+420	198.32.140.0/24	 MAE-Chicago	 MAE-Chicago
+421	193.156.90.0/24	Norwegian Internet Exchange, NIX1 (location 1)	NIX
+422	185.1.52.0/24		DataLine-IX
+423	206.55.196.0/23	LINX Northern Virginia	LINX NoVA
+424	193.188.137.0/24	 Budapest Internet Exchange	 BIX
+425	206.51.7.0/25	 Kansas City Internet Exchange	
+426	206.126.114.0/24		
+427	194.116.100.0/24	Consorzio Top-IX	TOP-IX
+428	198.32.160.0/24	 New York International Internet Exchange	 NYIIX
+429	103.28.74.0/23	 Indonesian Internet Exchange	 IIX
+430	194.53.172.0/25	Belgian National Internet eXchange	BNIX
+431	80.97.248.0/24	 Balcan-IX	 Balcan-IX
+432	193.232.244.0/24	 MSK-IX Moscow	 MSK-IX Moscow
+433	193.201.28.0/25	Nautilus Mediterranean Exchange Point	NaMeX
+434	91.206.52.0/23		 SwissIX
+435	200.0.20.0/24		 AMS-IX Caribbean
+436	206.223.143.0/24	 Any2 California	 Any2
+437	193.149.1.128/25	Espana Internet Exchange Upper LAN	ESPANIX Upper LAN
+438	196.223.22.0/24	 Cape Town Internet Exchange	 CINX
+439	80.249.208.0/21	Amsterdam Internet Exchange	AMS-IX
+440	194.246.39.224/27	 Neutral Internet Exchange	 NL-ix
+441	198.32.232.0/24	 AusBONE-Sydney Internet Exchange	 AusBONE-SYD
+442	206.197.187.0/24	 San Francisco Metropolitan Internet Exchange	 SFMIX
+443	144.92.233.224/28	 Madison Internet Exchange	 MadIX
+444	198.32.249.0/24	 Calren2 North	 Calren2 North
+445	193.252.127.0/24		PARIX
+446	206.223.129.0/24	 Rice EduPOP	 Rice EduPOP
+447	93.156.93.0/24	Trondheim Internet eXchange	TRDIX
+448	198.32.195.0/24	 Northwest Access Exchange	 NWAX
+449	193.105.214.0/24	 Grazer Internet Exchange	 GraX
+450	193.110.12.0/24	Stockholm Open Local Internet Exchange	SOLIX
+451	178.18.232.0/24	Peering, LTD	DATAIX
+452	192.42.99.128/25	 Grahamstown Internet Exchange	 GINX
+453	195.66.230.0/26	London Internet Exchange Ltd.	LINX LON1
+454	193.169.198.0/23	 Bulgarian Internet eXchange	 BIX.BG
+455	198.9.202.0/24	NASA Ames Internet eXchange	NASA-AIX
+456	195.130.89.0/24	 Greek Internet Exchange	 GR-IX
+457	198.32.119.0/24	Equinix Internet Exchange New York	Equinix New York
+458	206.123.30.0/24	 Greater Chicago International Internet Exchange	 GCIIX
+459	195.140.192.0/24	 Tampere Region Exchange	 TREX
+460	201.131.204.0/26	 Mexico IXP	 CCIT
+461	194.68.128.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
+462	91.192.104.0/24	Lviv Internet Exchange Point	Lviv-IX
+463	187.16.204.0/24		IX.br (PTT.br) Foz do Iguaçu
+464	185.1.25.0/24	Brno University of Technology	BR-IX
+465	195.69.119.0/24	Netnod Internet Exchange i Sverige AB	Netnod Stockholm
+466	80.81.199.0/24	Deutscher Commercial Internet Exchange	DE-CIX Frankfurt
+467	91.194.218.0/24	Rotterdam Internet Exchange	R_ix
+468	198.32.217.0/24	 Mountain Area Exchange	 MAX
+469	194.9.117.0/24	 European Commercial Internet Exchange Berlin	
+470	193.242.98.0/24	Catalunya Neutral Internet Exchange	CATNIX
+471	196.223.28.0/24	Kinix	RDC-IX Kinshasa
+472	91.206.134.0/24	 Internet Exchange of Saudi Arabia	 IXSA Riyadh
+473	198.32.244.0/24	 VermontIX	 VermontIX
+474	187.16.198.0/24	PTT Manaus	IX.br (PTT.br) Manaus
+475	218.100.59.0/24	 ACT Internet Exchange	 ACT-IX
+476	193.110.227.64/27	FICIX Helsinki / FICIX2	FICIX Helsinki
+477	185.1.71.0/25	Liverpool Internet Exchange	IX Liverpool
+478	210.62.255.0/24	 Taiwan Internet Exchange	 TWIX
+479	218.100.24.0/24	 Christchurch Internet Exchange	
+480	103.27.170.0/32	Mumbai Convergence Hub : India's Largest Peering Internet Exchange Hub	Mumbai CH
+481	123.255.88.0/21	Hong Kong Internet Exchange	HKIX
+482	200.219.146.0/24	PTT Fortaleza	IX.br (PTT.br) Fortaleza
+483	202.128.12.0/26	 Guam Internet Exchange	 GU-IX
+484	193.110.226.0/24		
+485	194.117.52.128/25	Copenhagen Internet eXchange	COPHIX
+486	206.53.174.0/24	Megaport MegaIX Dallas	MegaIX Dallas
+487	195.208.208.0/21	MSK-IX	MSK-IX
+488	194.116.96.0/24		 TOP-ix
+489	193.203.0.0/23	Vienna Internet Exchange	VIX
+490	196.223.6.0/25	 Arusha Internet Exchange Point	 AIXP
+491	69.51.84.128/25	 Northwest Internet Exchange	 NWIX Missoula
+492	217.117.187.0/24	 Krasnoyarsk Internet Exchange	 KRS-IX
+493	195.191.170.0/23	Stowarzyszenie na Rzecz Rozwoju Spoleczenstwa Informacyjnego e-Poludnie	EPIX.Katowice
+494	206.223.125.0/25	Twin Ports Internet Exchange	TP-IX
+495	206.108.115.0/24	AMS-IX Chicago	AMS-IX Chicago
+496	103.27.170.0/24	 Mumbai Convergence Hub	 Mumbai CH
+497	198.32.156.0/24	 Edmonton Internet Exchange	 EIX
+498	198.32.187.0/24	 DC	
+499	5.57.80.0/22	 London Network Access Point	 LoNAP
+500	194.54.92.0/25	 OpenCarrier e.G. Member IX Duesseldorf	
+501	198.32.134.0/24	Equinix Internet Exchange Seattle	Equinix Seattle
+502	218.100.85.0/24	 Zero Point Internet Exchange	 ZPIX
+503	119.110.118.0/24		
+504	193.110.227.96/27	FICIX Oulu / FICIX3	FICIX Oulu
+505	198.32.194.0/24	 Pittsburgh Exchange Point	 PITX
+506	206.126.228.0/24	 The Philadelphia Internet Exchange	 PHLIX
+507	194.30.187.0/24		
+508	206.108.114.0/24	Tampa Internet Exchange	TPAIX
+509	185.1.2.0/25	IXP et NAP d’Auvergne et du Massif Central	AuvernIX
+510	183.177.61.0/24	Equinix Melbourne	Equinix Melbourne
+511	193.34.200.0/24	 Crimea Internet Exchange	 Crimea-IX
+512	84.22.159.0/24	Krasnoyarsk Internet Exchange	Sibir-IX
+513	198.32.72.0/24		Doha-IX
+514	207.231.241.0/24	Pacific Wave Exchange in Los Angeles and Seattle	PacificWave
+515	196.60.2.0/24	 Mombasa Internet Exchange Point	 MSA-IX
+516	91.216.67.0/24		
+517	187.16.199.0/24	PTT Sao Jose do Rio Preto	IX.br (PTT.br) São José do Rio Preto
+518	204.228.158.0/24	 Salt Lake Internet Exchange	 SLIX
+519	200.219.140.0/24		
+520	195.5.49.0/24	 Ukrtelecom Internet Exchange	 UTC-IX
+521	218.100.13.0/24	 PIPE Networks Melbourne	
+522	198.32.252.0/24	 AMPATH - Florida International University/CIARA	 AMPATH
+523	185.1.31.0/24	Tirol-IX Internet Exchange	Tirol-IX
+524	198.32.154.0/24	 NIX	 NIX
+525	37.49.236.0/23	 France-IX	 France-IX
+526	206.108.255.0/24	Midwest Internet Cooperative Exchange	MICE
+527	217.29.68.0/23	Milan Internet eXchange	MIX-IT
+528	198.32.161.0/24	 NY-RIX	 NY-RIX
+529	198.32.100.0/24	 Equinix-Miami	 Equinix-Miami
+530	195.85.203.0/24	 Free Belgian Internet Exchange	 FreeBIX
+531	200.115.81.0/24	CABASE NAP La Plata	CABASE-LPL
+532	198.32.229.0/24	Free NYIIX Alternative	NYCX
+533	176.126.38.0/24	GReek Internet eXchange	GR-IX
+534	193.110.227.32/27	FICIX Espoo / FICIX1	FICIX Espoo
+535	81.21.96.0/24	 Cairo Internet Exchange	 CAIX
+536	198.32.248.0/24	 Calren2 South	 Calren2 South
+537	91.212.235.0/24		OM-NIX
+538	198.32.138.0/24	 MetroIX	 MetroIX
+539	37.249.232.0/26	 France-IX Marseille	 France-IX Marseille
+540	196.60.0.0/24	 Mwanza Internet Exchange Point	 Mwanza IXP
+541	198.32.234.0/24	 AusBONE-Melbourne Internet Exchange	 AusBONE-MEL
+542	193.136.250.0/24	 Gigabit Portugese Internet Exchange	 GIGA-PIX
+543	206.123.7.0/24	 Jacksonville Internet Exchange	 JXIX
+544	200.219.143.0/24	PTT Porto Alegre	IX.br (PTT.br) Porto Alegre
+545	203.159.68.0/23	Bangkok Neutral Internet Exchange	BKNIX
+546	206.197.210.0/24		
+547	193.251.216.0/24		PARIX
+548	192.157.69.0/24	 Sprint NAP	 Sprint NAP
+549	198.32.7.0/24	 Andrew's Basement Exchange	 ABX
+550	144.92.233.224/27	Madison Internet Exchange	MadIX
+551	218.100.72.0/23	 NEX Internet Exchange	 NEX-IX
+552	194.42.48.0/24	 Equinix Zurich	 Equinix Zurich
+553	194.165.32.0/24	 Gothenburg Internet Exchange	
+554	185.1.47.0/24	DE-CIX, the Marseille Internet Exchange	DE-CIX Marseille
+555	200.136.34.0/24	 NAP do Brasil	
+556	200.219.145.0/24	PTT Salvador	IX.br (PTT.br) Salvador
+557	193.189.130.0/24	Enlightened Internet Exchange	ENLIX
+558	119.110.115.0/24	Matrix Cable Internet eXchange	MCIX - Matrix Networks
+559	193.201.29.0/25	Nautilus Mediterranean Exchange Point	NaMeX
+560	218.100.2.0/24		
+561	198.32.213.0/24	 Tasmanian Internet Exchange	 TAIX
+562	187.16.197.0/24	PTT Caxias do Sul	IX.br (PTT.br) Caxias do Sul
+563	206.126.109.0/24	 Winnipeg Internet Exchange	 WPGIX
+564	198.32.153.0/24	NASA Ames Internet eXchange	NASA-AIX
+565	195.60.89.0/25	 Commercial Brno Internet Exchange	 CBIX
+566	200.185.100.0/24	 Optiglobe Internet Exchange - Latin America	 OptIX-LA
+567	212.47.215.0/24	 Tallinn Internet Exchange (TIX)	 TIX
+568	212.91.0.0/22	 Thinx Poland	
+569	192.38.7.248/32	Danish Internet Exchange	DIX
+570	194.68.133.0/24	 Netnod Sundsvall	 Netnod Sundsvall
+571	195.130.211.0/26	Reykjavik Internet Exchange	RIX
+572	103.54.2.0/23	Riau Internet Exchange Point	IIX-RI
+573	218.100.26.0/24	 Three Cities Internet Exchange	 3CIX
+574	178.18.224.0/22	Peering, LTD	DATAIX
+575	202.40.160.0/23	 Hong Kong Internet Exchange	 HKIX
+576	206.41.110.0/24	 United IX Chicago	 ChIX
+577	198.32.208.0/24	 MAE-Zurich	 MAE-Zurich
+578	196.46.25.0/24	NAPAfrica IX Johannesburg	NAPAfrica IX Johannesburg
+579	206.223.117.0/24	 Equinix IBX Secaucus	 Equinix IBX Secaucus
+580	198.32.164.0/24	 Utah Regional Exchange Point	 Utah-REP
+581	206.108.236.0/24	 Boston Internet Exchange	
+582	103.26.68.0/23	Megaport MegaIX Sydney	MegaIX Sydney
+583	103.2.116.0/24	Queensland Internet Exchange (QLD-IX)	IX Australia QLD
+584	198.32.151.0/24	 Ibadan Internet Exchange	 IBIX
+585	185.1.19.0/26	 Ulyanovsk Internet Exchange	 ULN-IX
+586	181.188.0.240/28	 Trinidad and Tobago Internet Exchange	 TTIX
+587	196.49.14.0/24	Ghana Internet Exchange Association	GIXA
+588	196.223.40.0/24	BENIN-IX	BENIN-IX
+589	193.192.15.64/26	 Croatian Internet Exchange	 CIX
+590	206.197.131.0/24	Central Oregon Internet eXchange	COIX
+591	206.53.171.0/24	Megaport MegaIX Seattle	MegaIX Seattle
+592	198.32.103.0/24	 Equinix-Denver	 Equinix-Denver
+593	198.32.220.0/24	 OhioEP	 OhioEP
+594	86.104.125.0/24		
+595	217.156.113.0/24	 Romanian National Internet Exchange	 RoNIX
+596	206.223.124.0/24	 NAP-Colombia	 NAP-Colombia
+597	196.223.4.0/24	 Côte d'Ivoire Internet Exchange Point	 CIVIX
+598	212.121.34.0/24	 Manchester Network Access Point	 MaNAP
+599	193.25.170.0/23	 Redbus Internet Exchange	 RBIEX
+600	91.217.231.0/24	Leeds Internet Exchange	IX Leeds
+601	192.114.62.0/24	 Israeli Internet Exchange	 IIX
+602	206.51.46.0/24		
+603	194.50.181.128/25	 Stockholm Internet Exchange	 STHIX
+604	193.138.31.0/24	 Stuttgarter Internet Exchange	
+605	77.95.71.0/24	Lyonix, the Lyon IX	Lyonix
+606	185.1.58.0/24	Deutscher Commercial Internet Exchange Dusseldorf	DE-CIX Dusseldorf
+607	193.203.0.0/24	 Vienna Internet Exchange	 VIX
+608	218.100.48.0/26	National Internet eXchange of India	NIXI Delhi
+609	193.232.87.0/24		
+610	91.218.4.0/24	 Armenian Internet Traffic Exchange	 ARMIX
+611	185.1.35.0/24	BREM-IX	BREM-IX
+612	198.32.228.0/24	 Houston Network Access Point	 Compaq-NAP
+613	202.97.10.0/24	 CNC Beijing NAP	 CNC Beijing NAP
+614	194.254.208.158/27	 Martinix	 Martinix
+615	198.32.200.0/24	 MAE-West-ATM	
+616	195.66.230.0/24	 London Internet Exchange	 LINX
+617	178.18.231.0/24	Peering, LTD	DATAIX
+618	218.100.10.0/24	 Vietnam National Internet Exchange	 VNIX
+619	218.100.54.128/25	Australian Capital Territory	IX Australia ACT
+620	209.124.52.0/23	Detroit Internet Exchange	DET-IX
+621	200.219.141.0/24	PTT Florianopolis	IX.br (PTT.br) Florianópolis
+622	194.68.129.0/24	Service for French INternet eXchange	SFINX
+623	194.153.153.0/25	 Uganda Internet Exchange	 UIXP
+624	194.53.172.0/24	 Belgian National Internet Exchange	 BNIX
