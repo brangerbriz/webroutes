@@ -43,7 +43,7 @@ document.body.appendChild(tracerouteblinds);
 document.body.appendChild(tracerouteinfo);
 
 window.addEventListener('scroll',function(e){
-	var cap = tracerouteinfo.offsetHeight - innerHeight;
+	var cap = tracerouteinfo.offsetHeight - innerHeight + 20;
 	if( e.pageY >= cap){
 		document.documentElement.scrollTop = cap;
 	}
