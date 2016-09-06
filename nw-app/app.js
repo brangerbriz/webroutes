@@ -1,14 +1,23 @@
 const GeoTraceroute = require('./GeoTraceroute');
 const InfrastructureAugmenter  = require('./InfrastructureAugmenter');
+const BorderCrossDetector = require('./BorderCrossDetector')
 
 let geoTracer = null;
 let infraAug = new InfrastructureAugmenter(function(err) {
 	if (!err) console.log('[WebRoutes] InfrastructureAugmenter loaded.');
 	else {
 		console.log('[WebRoutes] Error loading InfrastructureAugmenter.');
-		throw err;
+		console.error(err);
 	}
 });
+
+let borderCross = new BorderCrossDetector(err => {
+	if (!err) console.log('[WebRoutes] BorderCrossDetector loaded.');
+	else {
+		console.log('[WebRoutes] Error loading BorderCrossDetector.');
+		console.error(err)
+	}
+})
 
 let express = require('express');
 let app = express();
@@ -66,6 +75,7 @@ app.get('/traceroute', (req, res) => {
 		geoTracer.on('trace-finished', hops => {
 			
 			infraAug.addInfrastructureData(lastHop, null);
+			borderCross.addBorderCrossData(lastHop, null)
 			printHop(lastHop);
 			io.emit('trace hop', lastHop ); 
 			emitter.emit("trace hop", lastHop );
@@ -77,7 +87,7 @@ app.get('/traceroute', (req, res) => {
 			io.emit('trace complete', hops );
 			// let index.html know
 			emitter.emit('trace complete', hops );
-			hops.forEach(({ip}) => console.log(ip + ','))
+			//hops.forEach(({ip}) => console.log(ip + ','))
 			geoTracer = null;
 		});
 
@@ -115,9 +125,9 @@ http.listen(3001, () => console.log('[WebRoutes] Server listening on http://loca
 function printHop(hop) {
 	let str;
 	if (hop.geo) {
-		str = `hop #${hop.hop}: ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
+		str = `hop #${hop.hop} ${hop.geo.as}: ${hop.ip} [${hop.geo.lat}, ${hop.geo.lon}]`;
 		str += ` ${hop.geo.city + ','} ${hop.geo.regionName + ','} ${hop.geo.country}`;
-		str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org} MOBILE: ${hop.geo.mobile}`;
+		str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org}`;
 	} else {
 		str = `hop #${hop.hop}: ${hop.ip}`
 	}
