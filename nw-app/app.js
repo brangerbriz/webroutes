@@ -57,19 +57,27 @@ app.get('/traceroute', (req, res) => {
 
 		geoTracer.on('ordered-hop', hop => {
 			
-			
-			if (lastHop != null) {
+			if (hop.ip != '*') {
 
-				printHop(lastHop);
-				infraAug.addInfrastructureData(lastHop, hop);
+				if (lastHop != null) {
 
-				// let addon worker know of hop
-				io.emit('trace hop', lastHop ); 
-				// let index.html know
-				emitter.emit("trace hop", lastHop );
+					printHop(lastHop);
+					infraAug.addInfrastructureData(lastHop, hop)
+					// don't check a border crossing if this is a 
+					// submarine cable hop
+					if (!lastHop.infrastructure.cable)
+						borderCross.addBorderCrossData(lastHop, hop)
+					else lastHop.countries = []
+
+					// let addon worker know of hop
+					io.emit('trace hop', lastHop ); 
+					// let index.html know
+					emitter.emit("trace hop", lastHop );
+				}
+				
+				lastHop = hop;
 			}
 			
-			lastHop = hop;
 		});
 
 		geoTracer.on('trace-finished', hops => {
