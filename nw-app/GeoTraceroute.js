@@ -20,7 +20,7 @@ class GeoTraceroute {
 						'trace-started', 
 						'trace-canceled',
 						'trace-timeout',
-						'error'];
+						'trace-error'];
 
 		this._orderedHopCounter = 0;
 
@@ -72,7 +72,7 @@ class GeoTraceroute {
 
 		                	this._fireCachedHops();
 		                }
-		                else this._emitter.emit('error', err);
+		                else this._emitter.emit('trace-error', err);
 		                this._onGeoLookup(err, hop);
 		            });
 		        } else {
@@ -94,7 +94,7 @@ class GeoTraceroute {
 
 	    	this._tracer.on('close', (code) => {
 		        if (code != 0) 
-		        	this._emitter.emit('error', `Traceroute process returned error code ${code}`);
+		        	this._emitter.emit('trace-error', `Traceroute process returned error code ${code}`);
 		        this._tracerouteInProgress = false;
 		    });
 		    
@@ -103,7 +103,7 @@ class GeoTraceroute {
 	    } catch (ex) {
 	    	
 	    	return false;
-	        this._emitter.emit('error', ex);
+	        this._emitter.emit('trace-error', ex);
 	    }
 	}
 
@@ -133,7 +133,7 @@ class GeoTraceroute {
 	    } else if (!err){
 	        this._hops.push(hop);
 	    } else {
-	    	this._emitter.emit('error', err);
+	    	this._emitter.emit('trace-error', err);
 	    }
 	}
 

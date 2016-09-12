@@ -27,7 +27,7 @@
 
 			var nw			= require('nw.gui');
 			var win 		= nw.Window.get();
-			win.showDevTools();
+			//win.showDevTools();
 
 
 			// LEAFLET JS OVERRIDES !!! -----------------------------------------------------------
@@ -693,50 +693,38 @@
 
  			//var pair = [];
 
- 			emitter.on("trace hop", function(hop){ 	
- 				io.emit("browser hop", hop);
+ 			emitter.on("ordered-hop", function(hop){ 	
+ 				//io.emit("browser hop", hop);
  				//if( hop.ip=="*") console.log('got one!',hop);
  				if( hop.geo ) 			tracer.addNode( hop.geo, hop.infrastructure, "hop" );	
  				else if( hop.ip=="*" ) 	tracer.addNode( {}, null, "*" );
-	 			
- 				// if( pair.length==1 ){
- 				// 	pair[1] = hop;
- 				// 	tracer.drawCablePath(pair[0],pair[1]);
- 				// 	console.log('pair');
- 				// 	console.log(pair);
- 				// 	pair = [];
-
- 				// } else if ( hop.infrastructure.cable ) {
- 				// 	pair[0] = hop; 
- 				// }	
-
- 				
+	 				
  			});
 
- 			emitter.on("my ip", function(hop){
- 				io.emit("browser hop", hop);
+ 			emitter.on("my-ip", function(hop){
+ 				//io.emit("browser hop", hop);
  				tracer.reset(); // reset, cause we got a whole new trace happening
  				tracer.redrawInternet();
  				tracer.addNode( hop.geo, hop.infrastructure, "start" );
  			});
 
- 			emitter.on("trace complete", function(hop){ 
+ 			emitter.on("trace-finished", function(hop){ 
  				tracer.complete = true;
  			});
 
- 			emitter.on("trace timeout", function(){ 
+ 			emitter.on("trace-timeout", function(){ 
  				tracer.handleTimeout();
  				tracer.complete = true;
  			});
 
 
- 			emitter.on("trace cancelled", function(){
+ 			emitter.on("trace-canceled", function(){
  				console.log('trace cancelled');
  				tracer.abort();
  			});
  			
  			
- 			emitter.on("trace error", function(){ 
+ 			emitter.on("trace-error", function(){ 
  				console.log('trace error');
  				tracer.abort();
  			});
@@ -763,13 +751,30 @@
 
 
 			document.body.addEventListener('keydown',function(e){
-				switch(e.key){
-					case "e" : tracer.animateEnd(); break;
-					case "z" : map.zoomIn(1); break;
-					case "x" : map.zoomOut(1); break;
-					case "r" : tracer.reset(); break;
+				console.log(e);
+				// TODO: figure out how to override +/-
+
+				// switch(e.key){
+				// 	case "e" : tracer.animateEnd(); break;
+				// 	case "z" : map.zoomIn(1); break;
+				// 	case "x" : map.zoomOut(1); break;
+				// 	case "r" : win.toggleKioskMode(); break;
+				// }
+
+				if( e.key=="+" || e.key=="-"){
+					e.preventDefalt();
+					e.stopPropagation();
 				}
+
+				if(e.key=="K"||e.key=="k"){
+					if(e.ctrlKey && e.shiftKey) win.toggleKioskMode();
+				}
+
 			});
+
+			// win.on('blur',function(){
+			// 	win.focus();
+			// })
 
 
 

@@ -49,9 +49,9 @@ app.get('/traceroute', (req, res) => {
 				str += ` | ISP: ${hop.geo.isp} ORG: ${hop.geo.org} MOBILE: ${hop.geo.mobile}`;
 				console.log(`[WebRoutes] ${str}`);
 				// let addon worker know of hop
-				io.emit('my ip', hop ); 
+				//io.emit('my ip', hop ); 
 				// let index.html know
-				emitter.emit("my ip", hop );
+				emitter.emit("my-ip", hop );
 			}
 		});
 
@@ -70,9 +70,9 @@ app.get('/traceroute', (req, res) => {
 					else lastHop.countries = []
 
 					// let addon worker know of hop
-					io.emit('trace hop', lastHop ); 
+					//io.emit('trace hop', lastHop ); 
 					// let index.html know
-					emitter.emit("trace hop", lastHop );
+					emitter.emit("ordered-hop", lastHop );
 				}
 				
 				lastHop = hop;
@@ -92,29 +92,29 @@ app.get('/traceroute', (req, res) => {
 
 			console.log('[WebRoutes] Trace complete');
 			// let addon worker know of trace completion
-			io.emit('trace complete', hops );
+			//io.emit('trace complete', hops );
 			// let index.html know
-			emitter.emit('trace complete', hops );
+			emitter.emit('trace-finished', hops );
 			//hops.forEach(({ip}) => console.log(ip + ','))
 			geoTracer = null;
 		});
 
 		geoTracer.on('trace-canceled', () => {
 			console.log('[WebRoutes] Trace canceled')
-			io.emit('trace canceled')
-			emitter.emit('trace canceled');
+			//io.emit('trace canceled')
+			emitter.emit('trace-canceled');
 		});
 
 		geoTracer.on('trace-timeout', () => {
 			console.log('[WebRoutes] Trace Timeout')
-			io.emit('trace timeout')
-			emitter.emit('trace timeout');
+			//io.emit('trace timeout')
+			emitter.emit('trace-timeout');
 		});
 		
-		geoTracer.on('error', err => { 	
+		geoTracer.on('trace-error', err => { 	
 			console.log('[WebRoutes] Trace error')
-			io.emit('trace error', err);	
-			emitter.emit('trace error', err);	
+			//io.emit('trace error', err);	
+			emitter.emit('trace-error', err);	
 		});
 
 		geoTracer.trace(req.query.location);
