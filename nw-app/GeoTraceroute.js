@@ -2,6 +2,7 @@ const Traceroute = require('nodejs-traceroute');
 //const FreeGeoIp = require('node-freegeoip');
 const GeoIpLookup = require('./GeoIpLookup');
 const EventEmitter = require('events');
+const geolite = require('geoip-lite')
 
 class GeoTraceroute {
 
@@ -40,11 +41,11 @@ class GeoTraceroute {
 		        this._tracerouteInProgress = true;
 		        this._emitter.emit('trace-started', destination);
 		        GeoIpLookup.getMyLocation((err, location) => {
-		        	if (!err) {
-		        		this._emitter.emit('my-ip', {
+		        	if (!err) {		        		
+	        			this._emitter.emit('my-ip', {
 			        		hop: 0,
 			        		ip: location.query,
-			        		geo: location.status == 'success' ? location : null,
+			        		geo: location.status == 'success' ? location : null
 		        		});
 		        	} else console.error(err);
 		        });
@@ -56,11 +57,22 @@ class GeoTraceroute {
 		        {
 		            this._numHopsExpected++;
 		            
-		            //FreeGeoIp.getLocation(hop.ip, (err, location) => {
 		            GeoIpLookup.getLocation(hop.ip, (err, location) => {
 		                this._numHopsProcessed++;
 		                if (!err) {
+
 		                	hop.geo = location.status == 'success' ? location : null;
+
+		                	// double-check the country code with geoip lite
+		                	let geoTest = geolite.lookup(location.query)
+		        			if (geoTest && geoTest.country !== location.countryCode) {
+		        				let mes = `[WebRoutes] IP address ${hop.ip} geoip-lite country mismatch `
+		        				mes += `between lite: ${geoTest.country} and ip-api: ${location.countryCode}`
+		        				console.log(mes)
+		        				hop.ip = '*'
+		        				hop.geo = null
+		        			}
+
 		                	this._emitter.emit('hop', hop);
 		                	if (hop.hop == this._orderedHopCounter + 1) {
 		                		this._emitter.emit('ordered-hop', hop);
