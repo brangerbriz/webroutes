@@ -76,8 +76,10 @@ app.get('/traceroute', (req, res) => {
 				}
 				
 				lastHop = hop;
+			} else {
+				console.log(`hop #${hop.hop}: * [trace-hop not fired]`)
 			}
-			
+
 		});
 
 		geoTracer.on('trace-finished', hops => {
