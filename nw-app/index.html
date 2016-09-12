@@ -193,82 +193,82 @@
 					}
 					return turf.feature(geometry); 
 				},
-				getRightCableIndex: function( landing, cableFeature ){
-					var cableShapes = cableFeature.geometry.geometries;
-					var closests = [];
-					// loop through all the diff sub-cables
-					for (var i = 0; i < cableShapes.length; i++) {
-						// loop through all coordinates in sub-cable
-						var dist = 9999999999999999;
-						for (var j = 0; j < cableShapes[i].coordinates.length; j++) {
-							var coord = this.geoPoint(
-								cableShapes[i].coordinates[j][1],
-								cableShapes[i].coordinates[j][0]);
-							var newDist = turf.distance( coord, landing );
-							if( newDist < dist ) dist = newDist;
-						}
-						closests.push( dist );
-					}
-					var closest = Math.min( ...closests ); // get smallest number
-					var idx = closests.indexOf( closest ); // get index of that guy in the array
-					closests.splice( idx, 1 ); // remove that guy from the array
-					if( closests.indexOf(closest) > -1 ){
-						// if there's another guy in there w/the same distance
-						// then that coord is a landing point shared by two sub-cables
-						// this test is inconclusive, gonna have to do the same on the other end
-						return false;
-					} else {
-						return idx;
-					}
-				},
-				orderCableCoords: function( coords, landing ){
-					var newOrder = [];
-					// var coords = cableFeature.geometry.coordinates;
-					var first = this.geoPoint(coords[0][1], coords[0][0]);
-					var last = this.geoPoint(coords[coords.length-1][1], coords[coords.length-1][0]);		
-					var deltaA = turf.distance( first, landing );
-					var deltaZ = turf.distance( last, landing );
-					if( deltaA < deltaZ ){
-						for (var i = 0; i < coords.length; i++) 							
-							newOrder.push( [coords[i][1], coords[i][0]] );
-					} else {
-						for (var i = coords.length-1; i>=0; i--)
-							newOrder.push( [coords[i][1], coords[i][0]] );							
-					}
-					return newOrder;
-				},
-				getCableCoordsArray: function( s ){
-					var newOrder = [];
-					var cableFeature = s.infrastructure.cable;
-					var landingPoints = s.infrastructure.landings;
+				// getRightCableIndex: function( landing, cableFeature ){
+				// 	var cableShapes = cableFeature.geometry.geometries;
+				// 	var closests = [];
+				// 	// loop through all the diff sub-cables
+				// 	for (var i = 0; i < cableShapes.length; i++) {
+				// 		// loop through all coordinates in sub-cable
+				// 		var dist = 9999999999999999;
+				// 		for (var j = 0; j < cableShapes[i].coordinates.length; j++) {
+				// 			var coord = this.geoPoint(
+				// 				cableShapes[i].coordinates[j][1],
+				// 				cableShapes[i].coordinates[j][0]);
+				// 			var newDist = turf.distance( coord, landing );
+				// 			if( newDist < dist ) dist = newDist;
+				// 		}
+				// 		closests.push( dist );
+				// 	}
+				// 	var closest = Math.min( ...closests ); // get smallest number
+				// 	var idx = closests.indexOf( closest ); // get index of that guy in the array
+				// 	closests.splice( idx, 1 ); // remove that guy from the array
+				// 	if( closests.indexOf(closest) > -1 ){
+				// 		// if there's another guy in there w/the same distance
+				// 		// then that coord is a landing point shared by two sub-cables
+				// 		// this test is inconclusive, gonna have to do the same on the other end
+				// 		return false;
+				// 	} else {
+				// 		return idx;
+				// 	}
+				// },
+				// orderCableCoords: function( coords, landing ){
+				// 	var newOrder = [];
+				// 	// var coords = cableFeature.geometry.coordinates;
+				// 	var first = this.geoPoint(coords[0][1], coords[0][0]);
+				// 	var last = this.geoPoint(coords[coords.length-1][1], coords[coords.length-1][0]);		
+				// 	var deltaA = turf.distance( first, landing );
+				// 	var deltaZ = turf.distance( last, landing );
+				// 	if( deltaA < deltaZ ){
+				// 		for (var i = 0; i < coords.length; i++) 							
+				// 			newOrder.push( [coords[i][1], coords[i][0]] );
+				// 	} else {
+				// 		for (var i = coords.length-1; i>=0; i--)
+				// 			newOrder.push( [coords[i][1], coords[i][0]] );							
+				// 	}
+				// 	return newOrder;
+				// },
+				// getCableCoordsArray: function( s ){
+				// 	var newOrder = [];
+				// 	var cableFeature = s.infrastructure.cable;
+				// 	var landingPoints = s.infrastructure.landings;
 
-					var land1 = this.geoPoint( // first landing point as geoJson feature
-						landingPoints[0].geometry.coordinates[1],
-						landingPoints[0].geometry.coordinates[0]
-					);
-					var land2 = this.geoPoint( // second landing point as geoJson feature
-						landingPoints[1].geometry.coordinates[1],
-						landingPoints[1].geometry.coordinates[0]
-					);
-					if( cableFeature.geometry.type == "GeometryCollection" ){
-						// get index of the sub-cable ( cableFeature.geometry.geometries )
-						// is the one that connects to the first landing point
-						var cableIdx = this.getRightCableIndex( land1, cableFeature );
-						// if test was inconclusive, try w/other landing point
-						if( !cableIdx ) cableIdx = this.getRightCableIndex( land2, cableFeature );
-						// winner: cableFeature.geometry.geometries[cableIdx].coordinates
+				// 	var land1 = this.geoPoint( // first landing point as geoJson feature
+				// 		landingPoints[0].geometry.coordinates[1],
+				// 		landingPoints[0].geometry.coordinates[0]
+				// 	);
+				// 	var land2 = this.geoPoint( // second landing point as geoJson feature
+				// 		landingPoints[1].geometry.coordinates[1],
+				// 		landingPoints[1].geometry.coordinates[0]
+				// 	);
+				// 	if( cableFeature.geometry.type == "GeometryCollection" ){
+				// 		// get index of the sub-cable ( cableFeature.geometry.geometries )
+				// 		// is the one that connects to the first landing point
+				// 		var cableIdx = this.getRightCableIndex( land1, cableFeature );
+				// 		// if test was inconclusive, try w/other landing point
+				// 		if( !cableIdx ) cableIdx = this.getRightCableIndex( land2, cableFeature );
+				// 		// winner: cableFeature.geometry.geometries[cableIdx].coordinates
 						
-						// pass coordinates array && landing point to determine proper order
-						// ie. from landing point to other end...
-						newOrder = this.orderCableCoords( cableFeature.geometry.geometries[cableIdx].coordinates, land1 );
-					} else {
-						// pass coordinates array && landing point to determine proper order
-						// ie. from landing point to other end...
-						newOrder = this.orderCableCoords( cableFeature.geometry.coordinates, land1 );
-					}
+				// 		// pass coordinates array && landing point to determine proper order
+				// 		// ie. from landing point to other end...
+				// 		newOrder = this.orderCableCoords( cableFeature.geometry.geometries[cableIdx].coordinates, land1 );
+				// 	} else {
+				// 		// pass coordinates array && landing point to determine proper order
+				// 		// ie. from landing point to other end...
+				// 		newOrder = this.orderCableCoords( cableFeature.geometry.coordinates, land1 );
+				// 	}
 
-					return newOrder;
-				},				
+				// 	return newOrder;
+				// },				
 				// ---------------------------------
 				// --------------------------------------------------------- draw leaflet -----
 				// ---------------------------------------------------------------
@@ -288,35 +288,77 @@
 						map.panInsideBounds(this.cables.getBounds());
 					}				
 				},	
-				drawCablePath: function( s, e ){
+				// drawCablePath: function( s, e ){
+				// 	var pts = [];
+				// 	// add starting point
+				// 	pts.push( [s.geo.lat,s.geo.lon] );
+				// 	// add first landing point
+				// 	pts.push([
+				// 		s.infrastructure.landings[0].geometry.coordinates[1],
+				// 		s.infrastructure.landings[0].geometry.coordinates[0]
+				// 	]);
+				// 	// add cable points array ( from infrastructure data in s hop )
+				// 	var newOrder = this.getCableCoordsArray( s );
+				// 	for (var i = 0; i < newOrder.length; i++) pts.push( newOrder[i] );
+				// 	// add second landing point
+				// 	pts.push([
+				// 		s.infrastructure.landings[1].geometry.coordinates[1],
+				// 		s.infrastructure.landings[1].geometry.coordinates[0]
+				// 	]);
+				// 	// add last point
+				// 	pts.push( [e.geo.lat,e.geo.lon] );
+
+				// 	// draw it...
+				// 	var style = this.styles.path;
+				// 		//style["color"] = "#00ff00";
+				// 	// L.polyline(pts, this.styles.path).addTo(map);
+				// 	L.polyline(pts, style).addTo(map);				
+				// },
+				drawCablePathB: function( s, e ){
+					// ...b/c there were too many edge cases w/the logic above
+					// ( which is used to figure out which piece of any given cable 
+					// to draw, as well as which order to draw it )
+					// instead we're just gonna draw the whole cable in one go :(
+					// ...oh well.
 					var pts = [];
-					// add starting point
-					pts.push( [s.geo.lat,s.geo.lon] );
-					// add first landing point
-					pts.push([
-						s.infrastructure.landings[0].geometry.coordinates[1],
-						s.infrastructure.landings[0].geometry.coordinates[0]
-					]);
-					// add cable points array ( from infrastructure data in s hop )
-					var newOrder = this.getCableCoordsArray( s );
-					for (var i = 0; i < newOrder.length; i++) pts.push( newOrder[i] );
-					// add second landing point
+					var style = this.styles.path;
+
+					// draw line from last hop to cable's first landing point
+					pts = [
+						[s.geo.lat,s.geo.lon], // hop1
+						[
+							s.infrastructure.landings[0].geometry.coordinates[1],
+							s.infrastructure.landings[0].geometry.coordinates[0]
+						] // land1
+					]
+					L.polyline(pts, style).addTo(map);
+
+
+					// draw the cable ( all of the parts... fuck it )					
+					var cableFeature = s.infrastructure.cable;
+					cableFeature.geometry.geometries.forEach(function(cable){
+						var pts = [];
+						cable.coordinates.forEach(function(coord){
+							pts.push([coord[1],coord[0]]);
+						});
+						L.polyline(pts, style).addTo(map);
+					});
+					
+
+					// draw line from last landing point to last hop
+					pts = [
+						[ // second landing point
+							s.infrastructure.landings[1].geometry.coordinates[1],
+							s.infrastructure.landings[1].geometry.coordinates[0]
+						],
+						[e.geo.lat,e.geo.lon] // hop2
+					];
 					pts.push([
 						s.infrastructure.landings[1].geometry.coordinates[1],
 						s.infrastructure.landings[1].geometry.coordinates[0]
 					]);
-					// add last point
-					pts.push( [e.geo.lat,e.geo.lon] );
-
-					// draw it...
-					var style = this.styles.path;
-						style["color"] = "#00ff00";
-					// L.polyline(pts, this.styles.path).addTo(map);
-					L.polyline(pts, style).addTo(map);
-
-					//TODO: animate path................................
-
-				},
+					L.polyline(pts, style).addTo(map);				
+				},				
 				drawExchanges: function( data ){
 					if(!this.exchangesGeoJson) this.exchangesGeoJson = data;
 					// draw exchanges
@@ -441,7 +483,9 @@
 					this.animInProgress = true;
 					// TODO: check if start has .infrastructure data
 					// if so, send down another path
-					this.drawPath( start, hop );
+					if( start.infrastructure && start.infrastructure.cable ) 
+						this.drawCablePathB(start, hop);
+					else this.drawPath( start, hop );
 					this.drawNode( hop );
 					var txt;
 					if( hop.kind=="*" ) txt = `hop #${this.queued} missing information`;
@@ -490,15 +534,15 @@
 					},8000);	
 					this.timers.push( t );
 
-					var t = setTimeout(function(){
-						self.reset();						
-					},10000);		
-					this.timers.push( t );			
+					// var t = setTimeout(function(){
+					// 	self.reset();						
+					// },10000);		
+					// this.timers.push( t );			
 				},				
 				// ---------------------------------
 				// --------------------------------------------------------- core -------------
 				// ---------------------------------------------------------------
-				addNode: function( geo, kind ){
+				addNode: function( geo, infra, kind ){
 					// TODO: need to add infrastructure parameter...
 					this.running = true;
 
@@ -510,7 +554,7 @@
 						isp: geo.isp,
 						org: geo.org,
 						geo: { lat: geo.lat, lon: geo.lon },
-						infrastructure: null
+						infrastructure: infra
 					};		
 
 					if( kind=="*" ) {
@@ -616,7 +660,7 @@
 
 
 			map.on('zoomend',function(){
-				tracer.redrawInternet();
+				tracer.redrawInternet(); // ie drawCables + draw Exchanges
 				tracer.redrawRoute();
 			});
 
@@ -647,13 +691,13 @@
  				if( tracer.running ) tracer.abort();
  			});
 
- 			var pair = [];
+ 			//var pair = [];
 
  			emitter.on("trace hop", function(hop){ 	
  				io.emit("browser hop", hop);
- 				if( hop.ip=="*") console.log('got one!',hop);
- 				if( hop.geo ) 			tracer.addNode( hop.geo, "hop" ); 				
- 				else if( hop.ip=="*" ) 	tracer.addNode( {}, "*" );
+ 				//if( hop.ip=="*") console.log('got one!',hop);
+ 				if( hop.geo ) 			tracer.addNode( hop.geo, hop.infrastructure, "hop" );	
+ 				else if( hop.ip=="*" ) 	tracer.addNode( {}, null, "*" );
 	 			
  				// if( pair.length==1 ){
  				// 	pair[1] = hop;
@@ -671,7 +715,9 @@
 
  			emitter.on("my ip", function(hop){
  				io.emit("browser hop", hop);
- 				tracer.addNode( hop.geo, "start" );
+ 				tracer.reset(); // reset, cause we got a whole new trace happening
+ 				tracer.redrawInternet();
+ 				tracer.addNode( hop.geo, hop.infrastructure, "start" );
  			});
 
  			emitter.on("trace complete", function(hop){ 
@@ -718,8 +764,6 @@
 
 			document.body.addEventListener('keydown',function(e){
 				switch(e.key){
-					case "h" : tracer.addNode( ranTest(), "hop" ); break;
-					case "s" : tracer.addNode( ranTest(),"start"); break;
 					case "e" : tracer.animateEnd(); break;
 					case "z" : map.zoomIn(1); break;
 					case "x" : map.zoomOut(1); break;
