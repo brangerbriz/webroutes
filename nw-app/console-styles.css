@@ -73,6 +73,12 @@ h3 {
 	background: rgba(255,255,255, 0.65); color: #000;
 	width:75%; padding:5px;
 }
+
+#error {
+	margin:20px 0px;
+	line-height: 22px;
+	display: none;
+}
  
  
  
