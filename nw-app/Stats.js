@@ -37,12 +37,14 @@ class Stats {
 					this.cables[this.cables.length - 1].name !== cableName) {
 					this.cables.push({
 						name: cableName,
-						length: hop.infrastructure.cable.properties.length
+						length: hop.infrastructure.cable.properties.length,
+						owners: hop.infrastructure.cable.properties.owners.split(',  ')
 					})
 				} else if (this.cables.length === 0) {
 					this.cables.push({
 						name: cableName,
-						length: hop.infrastructure.cable.properties.length
+						length: hop.infrastructure.cable.properties.length,
+						owners: hop.infrastructure.cable.properties.owners.split(',  ')
 					})
 				}
 			}
@@ -57,7 +59,7 @@ class Stats {
 
 	getFormattedText() {
 
-		let text = `Number of hops: ${this.hopCount - 1}\n`
+		let text = `Number of hops: ${this.hopCount}\n`
 		
 		if (this.countries.length > 1) 
 			text += `Number of country borders crossed: ${this.countries.length - 1}\n`
@@ -76,6 +78,17 @@ class Stats {
 
 		return text
 
+	}
+
+	getData() {
+		return {
+			hopCount: this.hopCount,
+			bordersCrossed: this.countries.length - 1,
+			asnCount: this.asns.size,
+			isps: Array.from(this.isps),
+			ixps: Array.from(this.ixps),
+			cables: this.cables
+		}
 	}
 }
 
