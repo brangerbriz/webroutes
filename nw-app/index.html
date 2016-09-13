@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title> WebRoutes </title>
+		<title> WebRoutes Map </title>
 		<meta charset="utf-8">
 		<link rel="stylesheet" href="libs/leaflet/leaflet.css" />
 		<link rel="stylesheet" href="styles.css">
@@ -28,6 +28,8 @@
 			var nw			= require('nw.gui');
 			var win 		= nw.Window.get();
 			//win.showDevTools();
+			window.open('console.html');
+
 
 
 			// LEAFLET JS OVERRIDES !!! -----------------------------------------------------------
@@ -379,7 +381,7 @@
 						L.polyline( line1, this.styles.cables ).addTo(map);
 						L.polyline( line2, this.styles.cables ).addTo(map);
 					}
-					// label svg <g> elements that are cables ( && thus not to be removed )
+					// label svg <g> elements that are exchanges ( && thus not to be removed )
 					var parent = map._panes.overlayPane.children[0]; // <svg>
 					for (var i = 0; i < parent.children.length; i++) {	
 						parent.children[i].setAttribute('name','internet'); // <g> 
@@ -446,11 +448,30 @@
 					// cut short due to new zoom level ( given the path length had been
 					// calculated at a different zoom level )
 				},
+				markerOndrawMarker: function( num ){
+					// // remove old markers 
+					// var parent = map._panes.overlayPane.children[0]; // <svg>
+					// var toRemove = [];
+					// for (var i = 0; i < parent.children.length; i++) {	
+					// 	if( parent.children[i].getAttribute('name') === "marker" )
+					// 		toRemove.push( parent.children[i] );
+					// }
+					// for (var j = 0; j < toRemove.length; j++) parent.removeChild( toRemove[j] );
+					// // draw marker
+					// var circ = [ coords[1], coords[0] ];
+					// L.circleMarker( circ, this.styles.cables ).addTo(map);
+					// // tag marker
+					// var parent = map._panes.overlayPane.children[0]; // <svg>
+					// parent.children[parent.children.length-1].setAttribute('name','internet'); // <g> 				
+				},
 				// ---------------------------------
 				// --------------------------------------------------------- animation logic --
 				// ---------------------------------------------------------------
 				animateStart: function( hop ){
 					var self = this;
+					stats.addHop( hop.hop ); // update stats object
+					io.emit('animate-start',{hop:hop.hop, num:self.queued, stats:stats.getData() }); // let console.html know
+					stats.reset();
 					//emitter.emit('browser hop', hop);//<<<<<<<<<<<<<<<<< w/timeout
 					this.animInProgress = true;
 					this.drawNode( hop, "pulse" );
@@ -479,7 +500,9 @@
 					this.timers.push( t );
 				},
 				animateHop: function( start, hop ){
-					var self = this;					
+					var self = this;		
+					stats.addHop( hop.hop );	// update stats object		
+					io.emit('animate-hop', {hop:hop.hop, num:self.queued, stats:stats.getData()}); // let console.html know
 					this.animInProgress = true;
 					// TODO: check if start has .infrastructure data
 					// if so, send down another path
@@ -502,6 +525,7 @@
 
 				},
 				animateEnd: function(){
+					io.emit('animate-end'); // let console.html know
 					var self = this;
 					this.animInProgress = true;
 					var start = this.hops[0];
@@ -529,7 +553,7 @@
 					},4000);	
 					this.timers.push( t );
 
-					var t = setTimeout(function(){
+					var t = setTimeout(function(){						
 						self.fadeIn( map._panes.tilePane );
 					},8000);	
 					this.timers.push( t );
@@ -538,13 +562,15 @@
 					// 	self.reset();						
 					// },10000);		
 					// this.timers.push( t );			
-				},				
+				},			
 				// ---------------------------------
 				// --------------------------------------------------------- core -------------
 				// ---------------------------------------------------------------
-				addNode: function( geo, infra, kind ){
+				addNode: function( geo, hopobj, kind ){
 					// TODO: need to add infrastructure parameter...
 					this.running = true;
+
+					console.log( )
 
 					var hop = {
 						kind: kind,
@@ -554,7 +580,8 @@
 						isp: geo.isp,
 						org: geo.org,
 						geo: { lat: geo.lat, lon: geo.lon },
-						infrastructure: infra
+						infrastructure: hopobj.infrastructure,
+						hop: hopobj
 					};		
 
 					if( kind=="*" ) {
@@ -570,9 +597,7 @@
 					} else if( kind=="start" ){
 						this.myip = true;
 						this.hops.push( hop );
-						for (var i = 0; i < this.holds.length; i++) {
-							this.hops.push( this.holds[i] );
-						}
+						for (var i = 0; i < this.holds.length; i++) this.hops.push( this.holds[i] );					
 					}		
 				},
 				handleTimeout: function(){
@@ -689,23 +714,19 @@
  			emitter.on("trace started", function(){
 				// if new trace starts but old one still animating	
  				if( tracer.running ) tracer.abort();
+ 				tracer.reset(); // reset, cause we got a whole new trace happening
+ 				tracer.redrawInternet(); 				
  			});
 
- 			//var pair = [];
 
  			emitter.on("ordered-hop", function(hop){ 	
- 				//io.emit("browser hop", hop);
- 				//if( hop.ip=="*") console.log('got one!',hop);
- 				if( hop.geo ) 			tracer.addNode( hop.geo, hop.infrastructure, "hop" );	
- 				else if( hop.ip=="*" ) 	tracer.addNode( {}, null, "*" );
-	 				
+ 				if( hop.geo ) 			tracer.addNode( hop.geo, hop, "hop" );	
+ 				else if( hop.ip=="*" ) 	tracer.addNode( {}, null, "*" );		
  			});
 
  			emitter.on("my-ip", function(hop){
  				//io.emit("browser hop", hop);
- 				tracer.reset(); // reset, cause we got a whole new trace happening
- 				tracer.redrawInternet();
- 				tracer.addNode( hop.geo, hop.infrastructure, "start" );
+ 				tracer.addNode( hop.geo, hop, "start" );
  			});
 
  			emitter.on("trace-finished", function(hop){ 
@@ -727,6 +748,11 @@
  			emitter.on("trace-error", function(){ 
  				console.log('trace error');
  				tracer.abort();
+ 			});
+
+ 			// from console.html .....
+ 			emitter.on('console-navigation',function(o){
+ 				tracer.drawMarker(o.hopnum);
  			});
 
 
@@ -762,7 +788,7 @@
 				// }
 
 				if( e.key=="+" || e.key=="-"){
-					e.preventDefalt();
+					e.preventDefault();
 					e.stopPropagation();
 				}
 

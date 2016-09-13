@@ -1,0 +1,331 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> WebRoutes Browser </title>
+		<link rel="stylesheet" href="console-styles.css">
+	</head>
+	<body>
+
+
+		<div class="container">
+
+			<div>
+				<div>
+					<h1>Web_Routes</h1>
+
+					<p>To "visit" a website is to request a copy of that website's source code files to be broken up into smaller packets and sent from a server (located somewhere in the world) to your browser where it is reconstructed and rendered. The routes these packets take are rarely a straight line from a server to your browser, and tracing these routes reveals a set of interests and influences based on the Internet's peculiar geopolitical situation.</p>
+					
+					<h3>[ instructions ]</h3>
+
+					<p>type a URL into the address bar below and press Enter to chart the path that website takes to get from it's server to your computer. <!-- when it is finished charting the path you can use the arrow keys (or the scroll bar) to explore the different "hops" the website took to get here --></p>
+			 		
+				</div>			
+				<div class="bar">
+					visit <input type="text" id="address-bar" placeholder="http://website.com">
+				</div>
+				<div>
+					<h3>[ route data summary ]</h3>
+					<pre id="status"></pre>
+				</div>				
+			</div>
+
+			<div>
+				<pre id="traceroute-info"></pre>    
+			</div>
+
+		</div>
+
+		<script src="http://localhost:3001/socket.io/socket.io.js"></script>
+		<script src="libs/tween.min.js"></script>
+		<script>				
+
+			// TODO: 
+			// highlight corresponding section in map while xploring cosole details
+			// http in url bar can bug out
+			// do 404 check via nw.Window.open
+
+			// utils -------------------------------------------
+
+			function gid( id ){ return document.getElementById(id); }		
+
+			// -------------------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+			// address bar -------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+
+			function traceHttpReq( e ){
+				if( e.key == "Enter"){
+					let host = this.value;
+					let location = host.split('://')[1];
+					let req = new XMLHttpRequest();
+					req.open("GET", "http://localhost:3001/traceroute?location="+location, true);
+					req.send(null);	
+				}
+			}			
+
+			function addHTTP(e){
+				if(this.value.indexOf("http://")!==0){
+					this.value = "http://" + this.value;
+				}
+			}	
+
+			var addressBar = gid('address-bar');
+				addressBar.onkeydown = traceHttpReq;
+				addressBar.onkeyup = addHTTP;
+
+
+			// -------------------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+			// hop details navigation --------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+
+			let hopnum = -1;
+			let curAt = -1;
+			let traceComplete = true;
+			let spot = {
+				all: [],
+				cur: 0
+			}
+
+			function preSetupSpot(){
+				spot.all = [];
+				spot.cur = 0;
+				hopnum = -1;
+				traceComplete = false;
+				gid('traceroute-info').innerHTML = "";
+			}
+
+			// function postSetupSpot(){
+			// 	// reset spot stuff
+			// 	curAt = -1;
+			// 	spot.all = [];
+			// 	spot.cur = 0;
+
+			// 	// scroll bax to top
+			// 	//new TWEEN.Tween( spot ).to({ cur:0 }, 2000 ).onComplete(()=>{
+
+			// 		traceComplete = true; // allows for nav controls
+			// 		gid('hop0').style.background = "rgba(255,255,255,0.3)";
+			// 		// fill .all array w/all the diff hop spots
+			// 		let hops = document.querySelectorAll('#traceroute-info > span');
+			// 		hops.forEach((h)=>{ spot.all.push( h.offsetTop-16 ); });				
+
+			// 	//}).start();		
+			// }
+
+			function slide( dir ){
+
+				curAt = (dir=="ArrowUp") ? 
+					(curAt<=0) ? 0 : curAt-1 : 
+					(curAt>=hopnum) ? hopnum : curAt+1;					
+
+
+				socket.emit('console-navigation',{
+					hopnum: curAt
+				});
+
+				let hops = document.querySelectorAll('#traceroute-info > span');
+				hops.forEach((h)=>{ h.style.background = "none"; });
+				
+				new TWEEN.Tween( spot ).to({ cur:spot.all[curAt] }, 500 ).onComplete(()=>{
+					gid('hop'+curAt).style.background = "rgba(255,255,255,0.3)";
+				}).start();					
+			}
+
+			function updateLoop(){
+				requestAnimationFrame(updateLoop);
+				TWEEN.update();
+				
+				if( gid('traceroute-info').style.marginTop !== "-"+spot.cur+"px")
+					gid('traceroute-info').style.marginTop = "-"+spot.cur+"px";
+
+			} updateLoop();
+
+
+			window.addEventListener("keydown",function(e){
+				if( e.key=="ArrowDown" || e.key=="ArrowUp" ){
+					e.preventDefault();
+					e.stopPropagation();
+					if( traceComplete ) slide( e.key );						
+				}
+			});
+					
+
+			// -------------------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+			// sockets -----------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~			
+
+			const socket = io.connect("http://localhost:3001");
+
+			socket.on('animate-start',function(hop){
+				preSetupSpot();	
+				onHopReceived(hop);
+			});
+
+			socket.on('animate-hop',function(hop){
+				onHopReceived(hop);
+			});
+
+			socket.on('animate-end',function(){
+				// postSetupSpot(); 
+				traceComplete = true; 
+			});
+
+			// socket utils ------------------------------------
+
+			function updateDataSummary( s ){
+				// clear current content
+				// while(gid('status').firstChild) gid('status').removeChild(div.firstChild);
+				gid('status').innerHTML="";
+				
+				// setup new stats
+				var kid;
+				var kids = [];
+				if( s.hopCount > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Number of hops: <span style="color:#ed2a65">'+s.hopCount+'</span>';
+					kid.style.marginBottom = "15px";
+					kids.push( kid );
+				}
+				if( s.bordersCrossed > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Number of borders crossed: <span style="color:#ed2a65">'+s.bordersCrossed+'</span>';
+					kid.style.marginBottom = "15px";
+					kids.push( kid );
+				}
+				if( s.asnCount > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Number of Networks traversed: <span style="color:#ed2a65">'+s.asnCount+'</span>';
+					kid.style.marginBottom = "15px";
+					kids.push( kid );
+				}
+				if( s.isps.length > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Networks run by the following Internet Service Providers (IXPs)s:<br><br>';
+					s.isps.forEach((isp)=>{
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+isp+'</span><br>';
+					});
+					kid.style.marginBottom = "15px";
+					kids.push( kid );
+				}
+				if( s.ixps.length > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Networks connected at the Internet eXchange Points (IXPs)s:<br><br>';
+					kid.style.marginBottom = "15px";
+					s.ixps.forEach((ixp)=>{
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+ixp+'</span><br>';
+					});					
+					kids.push( kid );					
+				}				
+				if( s.cables.length > 0 ){
+					kid = document.createElement('div');
+					kid.innerHTML = 'Submarine cables crossed:<br><br>';
+					kid.style.marginBottom = "15px";
+					s.cables.forEach((cable)=>{
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+cable.name +
+							' (owned by '+cable.owners.length+' entities)</span><br>';
+					});					
+					kids.push( kid );					
+				}	
+
+				// output new stats
+				kids.forEach((k)=>{
+					gid('status').appendChild(k);
+				});
+			}
+
+			function onHopReceived(h) {	
+				let hop = h.hop;
+					hop.hop = h.num; // so that number matches that of the map
+									 // && not actual hop number
+
+				// increase hopnum for spot nav
+				hopnum++;
+				curAt = hopnum;
+
+				// update global stats				
+				updateDataSummary( h.stats );
+
+				// output to console details stream 
+				let text = getHopDisplayText(hop);
+				gid('traceroute-info').innerHTML += text;
+
+				// handle placement of hop spans
+				let spans = document.querySelectorAll('#traceroute-info > span');
+				spans.forEach((h)=>{ h.style.background = "none"; });
+
+				// let target = spot.cur + gid('hop'+hopnum).offsetTop-16;
+				// new TWEEN.Tween( spot ).to({ cur:target }, 500 ).onComplete(()=>{
+				// 	gid('hop'+hopnum).style.background = "rgba(255,255,255,0.3)";
+				// }).start();		
+				if( gid('traceroute-info').offsetHeight > window.innerHeight ){
+					let target = gid('traceroute-info').offsetHeight - window.innerHeight+75; 
+					new TWEEN.Tween( spot ).to({ cur:target }, 500 ).onComplete(()=>{
+						gid('hop'+hopnum).style.background = "rgba(255,255,255,0.3)";
+						spot.all.push( target );
+					}).start();						
+				} else {
+					gid('hop'+hopnum).style.background = "rgba(255,255,255,0.3)";
+					spot.all.push( 0 );
+				}						
+			}
+
+			function getHopDisplayText(hop) {				
+				let text = '';
+				let ws = '         ';
+				let infra = hop.infrastructure;
+				
+				text += `<span id="hop${hopnum}">`;
+				
+				if (hop.geo) {
+					// maybe add this later
+					// LAT/LONG:            ${hop.geo.lat}, ${hop.geo.lon}
+					text += `[HOP #${hop.hop}] ${hop.geo.city + ', '}${hop.geo.regionName + ', '}${hop.geo.country}\n\n`;
+					
+					if (hop.geo.reverse) 
+						text += `${ws}HOSTNAME:            ${hop.geo.reverse}\n`;
+			        
+			        text += `${ws}IP ADDRESS:          ${hop.ip}\n`;
+			        text += `${ws}INTERNET SERV PROV:  ${hop.geo.isp}\n`;
+			 		
+			 		if (hop.geo.isp != hop.geo.org) 
+						text += `${ws}ORGANIZATION:        ${hop.geo.org}\n`
+				
+					text += `${ws}AUTONOMOUS SYSTEM #: ${hop.geo.as}\n\n\n`
+
+				}
+
+				if (infra &&
+					infra.exchanges.length > 0 && 
+					!infra.cable){
+					// assume this hit an exchange point
+					let exchange = infra.exchanges[0].feature.properties.exchanges[0];
+					text += `<span class="trrt-ix">[INTERNET EXCHANGE POINT]</span> ${exchange.address[0]}\n\n`;
+					exchange.address.shift();
+					text += `${ws}ADDRESS: ${exchange.address.join(' ')+ '\n'}`
+					text += `${ws}PHONE:   ${exchange.telephone}\n`
+					text += `${ws}EMAIL:   ${exchange.email}\n`
+					text += `${ws}URL:     ${exchange.url}\n\n\n`
+
+				}
+
+				if (infra && infra.cable) {
+					let cable = infra.cable.properties;
+					text += `[SUBMARINE CABLE] ${cable.name}\n\n`
+					text += `${ws}FROM:   ${infra.landings[0].properties.name}\n`
+					text += `${ws}TO:     ${infra.landings[1].properties.name}\n`
+					if (cable.length != 'n.a.') text += `${ws}LENGTH: ${cable.length}\n`
+					text += `${ws}OWNERS: ${cable.owners.split(', ').join('\n' + ws + '       ')}\n\n`
+
+				}
+				text += `</span>`;
+
+				return text;
+			}						
+
+
+		</script>
+
+	</body>
+</html>
