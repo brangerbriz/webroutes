@@ -128,6 +128,10 @@ io.on('connection', function(socket){
 	socket.on('disconnect', function(){
 		console.log('[WebRoutes] A client disconnected.');
 	});
+	// pass info from console.html to index.html
+	socket.on('console-navigation',function(o){
+		emitter.emit('console-navigation', o);
+	});	
 });
 
 http.listen(3001, () => console.log('[WebRoutes] Server listening on http://localhost:3001'));
