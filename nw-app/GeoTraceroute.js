@@ -100,7 +100,12 @@ class GeoTraceroute {
 
 	            	this._fireCachedHops();
 
-	            	if (hop.hop == 30) this._emitter.emit('trace-timeout');
+	            	if (hop.hop == 30) {
+	            		this._emitter.emit('trace-timeout');
+	            		this._tracerouteInProgress = false;
+	            		this._finish()
+	            	}
+
 		        }
 		    });
 
@@ -136,17 +141,21 @@ class GeoTraceroute {
 	_onGeoLookup(err, hop) {
 	    if (!this._tracerouteInProgress && 
 	    	this._numHopsProcessed == this._numHopsExpected) {
-	        this._emitter.emit('trace-finished', this._hops);
-	        this._lookupInProgress = false;
-	        this._hops = [];
-	        this._orderedHopsCache = {};
-	        this._orderedHopCounter = 0;
-	        this._numHopsExpected = 0;
+	       this._finish()
 	    } else if (!err){
 	        this._hops.push(hop);
 	    } else {
 	    	this._emitter.emit('trace-error', err);
 	    }
+	}
+
+	_finish() {
+		this._emitter.emit('trace-finished', this._hops);
+        this._lookupInProgress = false;
+        this._hops = [];
+        this._orderedHopsCache = {};
+        this._orderedHopCounter = 0;
+        this._numHopsExpected = 0;
 	}
 
 	_fireCachedHops() {

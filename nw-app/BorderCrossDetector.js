@@ -37,8 +37,7 @@ class BorderCrossDetector {
 			}
 			return null
 		}).filter(v => !!v)
-		countries = _.uniq(countries)
-		console.log(countries)
+		return _.uniq(countries)
 	}
 }
 
