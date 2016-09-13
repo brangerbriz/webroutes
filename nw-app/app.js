@@ -1,6 +1,13 @@
 const GeoTraceroute = require('./GeoTraceroute');
 const InfrastructureAugmenter  = require('./InfrastructureAugmenter');
 const BorderCrossDetector = require('./BorderCrossDetector')
+const Stats = require('./Stats')
+
+let stats = new Stats()
+function printAndResetStats() {
+	console.log(stats.getFormattedText())
+	stats.reset()
+}
 
 let geoTracer = null;
 let infraAug = new InfrastructureAugmenter(function(err) {
@@ -58,22 +65,28 @@ app.get('/traceroute', (req, res) => {
 		geoTracer.on('ordered-hop', hop => {
 			
 			if (hop.ip != '*') {
-
+				
 				if (lastHop != null) {
 
 					printHop(lastHop);
 					infraAug.addInfrastructureData(lastHop, hop)
 					// don't check a border crossing if this is a 
 					// submarine cable hop
-					if (!lastHop.infrastructure.cable)
+					if (!lastHop.infrastructure.cable) {
 						borderCross.addBorderCrossData(lastHop, hop)
+					}
 					else lastHop.countries = []
+					// console.log(hop)
+					stats.addHop(lastHop)
 
 					// let addon worker know of hop
 					io.emit('trace hop', lastHop ); 
 					// let index.html know
 					emitter.emit("trace hop", lastHop );
+				} else {
+					stats.addHop(hop)
 				}
+				
 				
 				lastHop = hop;
 			} else {
@@ -86,6 +99,7 @@ app.get('/traceroute', (req, res) => {
 			
 			infraAug.addInfrastructureData(lastHop, null);
 			borderCross.addBorderCrossData(lastHop, null)
+			stats.addHop(lastHop)
 			printHop(lastHop);
 			io.emit('trace hop', lastHop ); 
 			emitter.emit("trace hop", lastHop );
@@ -99,24 +113,29 @@ app.get('/traceroute', (req, res) => {
 			emitter.emit('trace complete', hops );
 			//hops.forEach(({ip}) => console.log(ip + ','))
 			geoTracer = null;
+
+			printAndResetStats()
 		});
 
 		geoTracer.on('trace-canceled', () => {
 			console.log('[WebRoutes] Trace canceled')
 			io.emit('trace canceled')
 			emitter.emit('trace canceled');
+			printAndResetStats()
 		});
 
 		geoTracer.on('trace-timeout', () => {
 			console.log('[WebRoutes] Trace Timeout')
 			io.emit('trace timeout')
 			emitter.emit('trace timeout');
+			// printAndResetStats()
 		});
 		
 		geoTracer.on('error', err => { 	
 			console.log('[WebRoutes] Trace error')
 			io.emit('trace error', err);	
 			emitter.emit('trace error', err);	
+			printAndResetStats()
 		});
 
 		geoTracer.trace(req.query.location);
