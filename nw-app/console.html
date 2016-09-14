@@ -42,18 +42,9 @@
 		<script src="libs/tween.min.js"></script>
 		<script>				
 
-			// TODO: 
-			// highlight corresponding section in map while xploring cosole details
-			// http in url bar can bug out
-			// do 404 check via nw.Window.open
-			// detect windows, based on setup auto display differently ;)
-
-
 			const win 		= nw.Window.get();
 			const request = require("request");
-			win.showDevTools();
-
-
+			//win.showDevTools();
 
 			// utils -------------------------------------------
 
@@ -93,6 +84,10 @@
 			}		
 
 			function makeTraceHttpReq(){
+				// clear console stuffs...
+				preSetupSpot();
+
+				// make request to server
 				let host = addressBar.value;
 				let location = host.split('://')[1];
 				let req = new XMLHttpRequest();
@@ -129,6 +124,7 @@
 				spot.cur = 0;
 				hopnum = -1;
 				traceComplete = false;
+				gid('status').innerHTML="";
 				gid('traceroute-info').innerHTML = "";
 			}
 
@@ -178,7 +174,7 @@
 			const socket = io.connect("http://localhost:3001");
 
 			socket.on('animate-start',function(hop){
-				preSetupSpot();	
+				// preSetupSpot();	// in request function instead now
 				onHopReceived(hop);
 			});
 

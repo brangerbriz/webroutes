@@ -27,7 +27,7 @@
 
 			var nw			= require('nw.gui');
 			var win 		= nw.Window.get();
-			//win.showDevTools();
+			win.showDevTools();
 			nw.Window.open('console.html');
 
 
@@ -139,6 +139,14 @@
 						"fillColor": '#fff',
 						"fillOpacity": 1,
 					},
+					mark: {
+						"radius": 20,
+						"color": '#dad06f',
+						"opacity":1,
+						"weight" : 5,
+						"fillColor": '#2f4261',
+						"fillOpacity": 0.75,
+					},					
 					path: {
 						"color": '#fff',
 						"opacity":1.0,
@@ -448,21 +456,49 @@
 					// cut short due to new zoom level ( given the path length had been
 					// calculated at a different zoom level )
 				},
-				markerOndrawMarker: function( num ){
-					// // remove old markers 
-					// var parent = map._panes.overlayPane.children[0]; // <svg>
-					// var toRemove = [];
-					// for (var i = 0; i < parent.children.length; i++) {	
-					// 	if( parent.children[i].getAttribute('name') === "marker" )
-					// 		toRemove.push( parent.children[i] );
-					// }
-					// for (var j = 0; j < toRemove.length; j++) parent.removeChild( toRemove[j] );
-					// // draw marker
-					// var circ = [ coords[1], coords[0] ];
-					// L.circleMarker( circ, this.styles.cables ).addTo(map);
-					// // tag marker
-					// var parent = map._panes.overlayPane.children[0]; // <svg>
-					// parent.children[parent.children.length-1].setAttribute('name','internet'); // <g> 				
+				drawMarker: function( num ){ // for when using console.html to explore post-completion
+					var self = this;
+					// remove old markers 
+					var parent = map._panes.overlayPane.children[0]; // <svg>
+					var toRemove = [];
+					for (var i = 0; i < parent.children.length; i++) {	
+						if( parent.children[i].getAttribute('name') === "marker" )
+							toRemove.push( parent.children[i] );
+					}
+					for (var j = 0; j < toRemove.length; j++) parent.removeChild( toRemove[j] );
+					
+					// draw marker
+					var circ = [ this.hops[num].geo.lat, this.hops[num].geo.lon ];
+					console.log(this.hops[num]);
+					L.circleMarker( circ, this.styles.mark ).addTo(map);
+					// tag marker
+					var parent = map._panes.overlayPane.children[0]; // <svg>
+					parent.children[parent.children.length-1].setAttribute('name','marker'); // <g> 	
+					
+					// draw netwok marker
+					// var path = [ [s.geo.lat,s.geo.lon], [e.geo.lat,e.geo.lon] ];
+					var thisNet = this.hops[num].isp;
+					var path = [];
+					this.hops.forEach(function(h,i){
+						if( h.isp == thisNet ) path.push( [h.geo.lat,h.geo.lon] );
+						else if(num==i+1 && h.infrastructure 
+							&& h.infrastructure.exchanges.length>0 && !h.infrastructure.cable)
+							path.push( [h.geo.lat,h.geo.lon] );
+					});
+					if( this.hops[num].infrastructure && this.hops[num].infrastructure.cable ){
+						path = [];
+						path.push( [this.hops[num].geo.lat,this.hops[num].geo.lon] );
+						var geos = this.hops[num].infrastructure.cable.geometry.geometries;
+						geos.forEach(function(g){
+							g.coordinates.forEach(function(c){ path.push( [ c[1], c[0] ] ); });
+						});
+					}
+					if( path.length > 1){
+						L.polyline(path, this.styles.mark).addTo(map);		
+						// tag path
+						var parent = map._panes.overlayPane.children[0]; // <svg>
+						parent.children[parent.children.length-1].setAttribute('name','marker'); // <g> 
+					}	
 				},
 				// ---------------------------------
 				// --------------------------------------------------------- animation logic --
