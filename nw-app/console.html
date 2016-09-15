@@ -96,14 +96,13 @@
 			}	
 
 			function addHTTP(e){
-				if(this.value.indexOf("http://")!==0){
-					this.value = "http://" + this.value;
-				}
+				if(this.value.length<7) this.value = "http://";
 			}	
 
 			var addressBar = gid('address-bar');
 				addressBar.onkeydown = confirmHttpReq;
 				addressBar.onkeyup = addHTTP;
+				addressBar.value = "http://";
 
 
 			// -------------------------------------------------
