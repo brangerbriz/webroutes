@@ -505,9 +505,9 @@
 				// ---------------------------------------------------------------
 				animateStart: function( hop ){
 					var self = this;
-					stats.addHop( hop.hop ); // update stats object
-					io.emit('animate-start',{hop:hop.hop, num:self.queued, stats:stats.getData() }); // let console.html know
 					stats.reset();
+					stats.addHop( hop.hop ); // update stats object					
+					io.emit('animate-start',{hop:hop.hop, num:self.queued, stats:stats.getData() }); // let console.html know					
 					//emitter.emit('browser hop', hop);//<<<<<<<<<<<<<<<<< w/timeout
 					this.animInProgress = true;
 					this.drawNode( hop, "pulse" );
