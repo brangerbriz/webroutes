@@ -74,6 +74,11 @@ h3 {
 	width:75%; padding:5px;
 }
 
+#status {
+	font-family: 'inconsolata';
+	overflow-wrap: break-word;
+}
+
 #error {
 	margin:20px 0px;
 	line-height: 22px;

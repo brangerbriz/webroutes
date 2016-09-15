@@ -17,18 +17,18 @@
 					
 					<h3>[ instructions ]</h3>
 
-					<p> <b>type a URL into the address bar below and press Enter</b> to chart the path that website takes to get from it's server to your computer.</p>
+					<p> <b class="instruct">type a URL into the address bar below and press Enter</b> to chart the path that website takes to get from it's server to your computer.</p>
 
 					<p>when it is finished charting the path you can <b>use the arrow keys to explore</b> the different "hops" the website took to get here</p>
 			 		
 				</div>			
-				<div class="bar">
+				<div class="bar instruct">
 					visit <input type="text" id="address-bar" placeholder="http://website.com">
 					<div id="error"></div>
 				</div>
 				<div>
 					<h3>[ route data summary ]</h3>
-					<pre id="status"></pre>
+					<div id="status"></div>
 				</div>				
 			</div>
 
@@ -44,11 +44,13 @@
 
 			const win 		= nw.Window.get();
 			const request = require("request");
-			//win.showDevTools();
+			win.showDevTools();
 
 			// utils -------------------------------------------
 
 			function gid( id ){ return document.getElementById(id); }		
+			function qsa( str ){ return document.querySelectorAll(str); }
+			function toArr( list  ){var arr=[]; for (var i = 0; i < list.length; i++) arr.push( list[i] ); return arr; }
 
 			// -------------------------------------------------
 			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
@@ -95,14 +97,62 @@
 				req.send(null);	
 			}	
 
-			function addHTTP(e){
+			function addHttp(e){
 				if(this.value.length<7) this.value = "http://";
 			}	
 
 			var addressBar = gid('address-bar');
 				addressBar.onkeydown = confirmHttpReq;
-				addressBar.onkeyup = addHTTP;
+				addressBar.onkeyup = addHttp;
 				addressBar.value = "http://";
+
+			addressBar.focus();
+
+			// -------------------------------------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
+			// idle mode (for inactivity)-----------------------
+			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~			
+			
+			var sleep = {
+				idle: false,
+				wait: 1000*60*3,
+				timer: null,
+				white: { r:255, g:255, b:255, a:1.0 },
+				pink: { r:237, g:43, b:101, a:1.0 },
+				goodNight: function(){
+					console.log('good night')
+					var self = this;
+					new TWEEN.Tween( self.white ).to({ a:0.1 }, 500 ).onUpdate(()=>{
+						toArr(qsa('.container')).forEach((e)=>{	e.style.color = 'rgba(255,255,255,'+self.white.a+')'; });
+						toArr(qsa('.container > div:nth-child(2)')).forEach((e)=>{e.style.opacity = self.white.a; });
+					}).start();	
+					new TWEEN.Tween( self.pink ).to({ a:0.1 }, 500 ).onUpdate(()=>{
+						toArr(qsa('span[class="pink"]')).forEach((e)=>{ e.style.color = 'rgba(237,42,101,'+self.pink.a+')'; });
+					}).start();	
+					toArr(qsa('.instruct')).forEach((e)=>{ e.style.color = 'rgba(255,255,255,1)'; });
+				},
+				goodMorning: function(){
+					console.log('good morning')
+					var self = this;
+					new TWEEN.Tween( self.white ).to({ a:1.0 }, 500 ).onUpdate(()=>{
+						toArr(qsa('.container')).forEach((e)=>{ e.style.color = 'rgba(255,255,255,'+self.white.a+')'; });
+						toArr(qsa('.container > div:nth-child(2)')).forEach((e)=>{e.style.opacity = self.white.a; });
+					}).start();	
+					new TWEEN.Tween( self.pink ).to({ a:1.0 }, 500 ).onUpdate(()=>{
+						toArr(qsa('span[class="pink"]')).forEach((e)=>{ e.style.color = 'rgba(237,42,101,'+self.pink.a+')'; });
+					}).start();										
+				},
+				rustle: function(){
+					var self = this;
+					if( this.idle ) this.goodMorning();
+					this.idle = false;
+					clearTimeout( self.timer );
+					this.timer = setTimeout(function(){
+						self.idle = true;
+						self.goodNight();
+					},self.wait);
+				}
+			}
 
 
 			// -------------------------------------------------
@@ -146,27 +196,32 @@
 				}).start();					
 			}
 
-			// update loop ---------------------------------------------------------------
+			// -----------------------------------------------/ UPDATE LOOP \
 
 			function updateLoop(){
 				requestAnimationFrame(updateLoop);
 				TWEEN.update();
 				
+				// nav stuff
 				if( gid('traceroute-info').style.marginTop !== "-"+spot.cur+"px")
 					gid('traceroute-info').style.marginTop = "-"+spot.cur+"px";
 
 			} updateLoop();
 
+			// ---------------------------------------------/ EVENTS \
 
 			window.addEventListener("keydown",function(e){
+				// handle idle mode
+				sleep.rustle();
+
 				if( e.key=="ArrowDown" || e.key=="ArrowUp" ){
 					e.preventDefault();
 					e.stopPropagation();
 					if( traceComplete ) slide( e.key );						
 				}
 			});
-					
 
+			
 			// -------------------------------------------------
 			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
 			// sockets -----------------------------------------
@@ -200,37 +255,37 @@
 				var kids = [];
 				if( s.hopCount > 0 ){
 					kid = document.createElement('div');
-					kid.innerHTML = 'Number of hops: <span style="color:#ed2a65">'+s.hopCount+'</span>';
+					kid.innerHTML = 'Number of hops: <span style="color:#ed2a65" class="pink">'+s.hopCount+'</span>';
 					kid.style.marginBottom = "15px";
 					kids.push( kid );
 				}
 				if( s.bordersCrossed > 0 ){
 					kid = document.createElement('div');
-					kid.innerHTML = 'Number of borders crossed: <span style="color:#ed2a65">'+s.bordersCrossed+'</span>';
+					kid.innerHTML = 'Number of borders crossed: <span style="color:#ed2a65" class="pink">'+s.bordersCrossed+'</span>';
 					kid.style.marginBottom = "15px";
 					kids.push( kid );
 				}
 				if( s.asnCount > 0 ){
 					kid = document.createElement('div');
-					kid.innerHTML = 'Number of Networks traversed: <span style="color:#ed2a65">'+s.asnCount+'</span>';
+					kid.innerHTML = 'Number of Networks traversed: <span style="color:#ed2a65" class="pink">'+s.asnCount+'</span>';
 					kid.style.marginBottom = "15px";
 					kids.push( kid );
 				}
 				if( s.isps.length > 0 ){
 					kid = document.createElement('div');
-					kid.innerHTML = 'Networks run by the following Internet Service Providers (ISPs)s:<br><br>';
+					kid.innerHTML = 'Networks run by the following Internet Service Providers (ISPs):<br><br>';
 					s.isps.forEach((isp)=>{
-						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+isp+'</span><br>';
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px" class="pink">'+isp+'</span><br>';
 					});
 					kid.style.marginBottom = "15px";
 					kids.push( kid );
 				}
 				if( s.ixps.length > 0 ){
 					kid = document.createElement('div');
-					kid.innerHTML = 'Networks connected at the Internet eXchange Points (IXPs)s:<br><br>';
+					kid.innerHTML = 'Networks connected at the Internet eXchange Points (IXPs):<br><br>';
 					kid.style.marginBottom = "15px";
 					s.ixps.forEach((ixp)=>{
-						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+ixp+'</span><br>';
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px" class="pink">'+ixp+'</span><br>';
 					});					
 					kids.push( kid );					
 				}				
@@ -239,7 +294,7 @@
 					kid.innerHTML = 'Submarine cables crossed:<br><br>';
 					kid.style.marginBottom = "15px";
 					s.cables.forEach((cable)=>{
-						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px">'+cable.name +
+						kid.innerHTML += '<span style="color:#ed2a65;padding-left:15px" class="pink">'+cable.name +
 							' (owned by '+cable.owners.length+' entities)</span><br>';
 					});					
 					kids.push( kid );					
