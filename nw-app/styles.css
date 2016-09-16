@@ -28,7 +28,8 @@
 	
 
 	/* LEAFLET CSS OVERRIDES !!! */
-	.leaflet-container { background: #000; } /*background color*/
+
+	.leaflet-container { background: #000;  } /*background color*/
 	.leaflet-zoom-anim .leaflet-zoom-animated { /*zoom animation time && easing*/
 		-webkit-transition: -webkit-transform 1.5s cubic-bezier(.38,.42,.23,.98);
 		   -moz-transition:    -moz-transform 1.5s cubic-bezier(.38,.42,.23,.98);

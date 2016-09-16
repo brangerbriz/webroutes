@@ -44,7 +44,25 @@
 
 			const win 		= nw.Window.get();
 			const request = require("request");
-			win.showDevTools();
+			//win.showDevTools();
+
+			// window placement .....
+			var screens = nw.Screen.screens;
+			if( screens.length > 1 ){
+				var w = 1000;
+				var l = screens[0].work_area.x;
+				var r = screens[0].work_area.width;
+				win.width = w;
+				win.height = 600;
+				win.y = screens[0].work_area.height/2 - win.height/2;
+				win.x = (l+(r/2)) - w/2;
+			} else {
+				win.y = screens[0].work_area.height/2;
+				win.x = 0;			
+				win.width = screens[0].work_area.width;
+				win.height = screens[0].work_area.height/2;
+			}		
+
 
 			// utils -------------------------------------------
 
@@ -101,12 +119,15 @@
 				if(this.value.length<7) this.value = "http://";
 			}	
 
+			function focusBar(){ addressBar.focus() };
+
 			var addressBar = gid('address-bar');
 				addressBar.onkeydown = confirmHttpReq;
 				addressBar.onkeyup = addHttp;
+				addressBar.onblur = focusBar;
 				addressBar.value = "http://";
 
-			addressBar.focus();
+			focusBar();
 
 			// -------------------------------------------------
 			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
@@ -210,16 +231,57 @@
 
 			// ---------------------------------------------/ EVENTS \
 
+			var activemouse = true;
+
+			function ignore(e){
+				if( !activemouse ){
+					e.preventDefault();
+					e.stopPropagation();			
+				}	
+			}
+
+			window.addEventListener("click",ignore);
+			window.addEventListener("dblclick",ignore);
+			window.addEventListener("mousedown",ignore);
+			window.addEventListener("mouseup",ignore);
+
 			window.addEventListener("keydown",function(e){
 				// handle idle mode
 				sleep.rustle();
 
+				// kiosk mode
+				if(e.key=="K"||e.key=="k"){
+					if(e.ctrlKey && e.shiftKey){
+						win.toggleKioskMode();
+						if( win.isKioskMode ){
+							activemouse = false;
+							win.on('blur',()=>{ win.focus(); });
+							document.body.style.cursor = "none";
+						} else {
+							activemouse = true;
+							win.removeAllListeners('blur');
+							document.body.style.cursor = "auto";
+						}
+						socket.emit('console-kioskmode', win.isKioskMode );
+					}
+				}
+
+				// quit 
+				if(e.key=="Q"||e.key=="q"){
+					if(e.ctrlKey){
+						win.close();
+						socket.emit('console-quit');
+					}
+				}					
+
+				// nav
 				if( e.key=="ArrowDown" || e.key=="ArrowUp" ){
 					e.preventDefault();
 					e.stopPropagation();
 					if( traceComplete ) slide( e.key );						
 				}
 			});
+		
 
 			
 			// -------------------------------------------------
@@ -242,6 +304,10 @@
 				// postSetupSpot(); 
 				traceComplete = true; 
 			});
+
+			socket.on('map-quit',function(){
+				win.close();
+			});			
 
 			// socket utils ------------------------------------
 
