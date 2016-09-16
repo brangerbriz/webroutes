@@ -148,6 +148,14 @@ io.on('connection', function(socket){
 	socket.on('console-navigation',function(o){
 		emitter.emit('console-navigation', o);
 	});	
+	// pass info from console.html to index.html
+	socket.on('console-kioskmode',function(bool){
+		emitter.emit('console-kioskmode', bool);
+	});		
+	// pass info from console.html to index.html
+	socket.on('console-quit',function(){
+		emitter.emit('console-quit');
+	});		
 });
 
 http.listen(3001, () => console.log('[WebRoutes] Server listening on http://localhost:3001'));
