@@ -16,7 +16,7 @@ the Internet.
 
 ## Accuracy
 
-_WebRoutes_ is a digital litearcy artware project and should not be used as a network diagnostic tool. Tracking a 
+_WebRoutes_ is a digital literacy artware project and should not be used as a network diagnostic tool. Tracking a 
 network packet's journey across the Internet is a very difficult task. The protocols that network packets use to 
 traverse the Internet do not provide sufficient information to accurately model their route topology, yet alone 
 convert IP addresses to geolocations. Tools like `traceroute`, `tracert`, and `mtr` subvert elements of network 
@@ -43,7 +43,7 @@ _WebRoutes_ is built with Node.js and bundled/distributed with [NW.js](http://nw
 `[traceroute](https://en.wikipedia.org/wiki/Traceroute)` command underneath. 
 
 See "dependencies" in `[nw-app/package.json](nw-app/package.json)` for a list
-of all dependecies.
+of all dependencies.
 
 #### Data
 
@@ -55,13 +55,13 @@ projects. Ocean and country border map data are provided by [Natural Earth](http
 
 ### Geolocation from IP Address
 
-We've found free IP Address to Geolocation services to be wildly innacurate. Ip-api.com does not provide information about its sources, and we've found results for the same IP Addresses to vary greatly between paid services like [IP2Location](http://www.ip2location.com/), [ipinfo.io](http://ipinfo.io/), [EurekAPI](eurekapi.com), [DB-IP](https://www.db-ip.com), and [MaxMind](https://www.maxmind.com/). We use ip-api as our main IP->Geo service, however, we also cross reference MaxMind's free GeoipLite2 IP->Country database to ensure that there is at least rough consensus that IP addresses are coming from the correct country. If we receive contradicting results from those two services we choose to ignore the IP address completely and not show the hop to the user.
+We've found free IP Address to Geolocation services to be wildly inaccurate. Ip-api.com does not provide information about its sources, and we've found results for the same IP Addresses to vary greatly between paid services like [IP2Location](http://www.ip2location.com/), [ipinfo.io](http://ipinfo.io/), [EurekAPI](eurekapi.com), [DB-IP](https://www.db-ip.com), and [MaxMind](https://www.maxmind.com/). We use ip-api as our main IP->Geo service, however, we also cross reference MaxMind's free GeoipLite2 IP->Country database to ensure that there is at least rough consensus that IP addresses are coming from the correct country. If we receive contradicting results from those two services we choose to ignore the IP address completely and not show the hop to the user.
 
 ### IXP crossing detection
 
-Detecting where exactly packets are handed off from one network to another is tricky. It should be assumed that whenever a hop's autonomous network differs from a previous hop, that network exchange likely occured at an Internet eXchange Point. However, identifying exactly which IXP the exchange occured at is nearly impossible. A new tool/paper on the subject called [TraIXroute](https://github.com/gnomikos/traIXroute) has made significant progress in augmenting traceroute with IXP cross detection information. Unfortunately, our experience found that it had very poor results in the United States, where we have been writing and testing _WebRoutes_.
+Detecting where exactly packets are handed off from one network to another is tricky. It should be assumed that whenever a hop's autonomous network differs from a previous hop, that network exchange likely occurred at an Internet eXchange Point. However, identifying exactly which IXP the exchange occurred at is nearly impossible. A new tool/paper on the subject called [TraIXroute](https://github.com/gnomikos/traIXroute) has made significant progress in augmenting traceroute with IXP cross detection information. Unfortunately, our experience found that it had very poor results in the United States, where we have been writing and testing _WebRoutes_.
 
-Instead we chose to use an approach that favors detecting IXPs with a low confidence as to their accuracy over not showing IXP crossings at all. Each time two hops ASN (Autonomous System Number) differ we assume that an IXP was crossed, and identify that crossing to have occurred at the nearest IXP to the earlier hop. Because an ASN change between two hops provides no information as to which hop (from or to) actually facilitated the network exchange, our method should be considered very naive. A better approach would be to use publicly available data about IXP traffic (IXPs very greatly in their traffic throughput/activity, and while there are a great many IXPs around the world, only a handful of them exchange the majority of the world's Internet traffic) to preference IXPs with high daily activiy.
+Instead we chose to use an approach that favors detecting IXPs with a low confidence as to their accuracy over not showing IXP crossings at all. Each time two hops ASN (Autonomous System Number) differ we assume that an IXP was crossed, and identify that crossing to have occurred at the nearest IXP to the earlier hop. Because an ASN change between two hops provides no information as to which hop (from or to) actually facilitated the network exchange, our method should be considered very naive. A better approach would be to use publicly available data about IXP traffic (IXPs very greatly in their traffic throughput/activity, and while there are a great many IXPs around the world, only a handful of them exchange the majority of the world's Internet traffic) to preference IXPs with high daily activity.
 
 <!--
 ### Submarine Cable detection
