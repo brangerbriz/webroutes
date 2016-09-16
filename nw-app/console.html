@@ -50,11 +50,11 @@
 			var screens = nw.Screen.screens;
 			if( screens.length > 1 ){
 				var w = 1000;
-				var l = screens[1].work_area.x;
-				var r = screens[1].work_area.width;
+				var l = screens[0].work_area.x;
+				var r = screens[0].work_area.width;
 				win.width = w;
 				win.height = 600;
-				win.y = screens[1].work_area.height/2 - win.height/2;
+				win.y = screens[0].work_area.height/2 - win.height/2;
 				win.x = (l+(r/2)) - w/2;
 			} else {
 				win.y = screens[0].work_area.height/2;
