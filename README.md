@@ -40,9 +40,9 @@ _WebRoutes_ is released under the [GPL](LICENSE) and is free to use, edit, copy,
 #### Code
 
 _WebRoutes_ is built with Node.js and bundled/distributed with [NW.js](http://nwjs.io/). It uses the
-`[traceroute](https://en.wikipedia.org/wiki/Traceroute)` command underneath. 
+[`traceroute`](https://en.wikipedia.org/wiki/Traceroute) command underneath. 
 
-See "dependencies" in `[nw-app/package.json](nw-app/package.json)` for a list
+See "dependencies" in [`nw-app/package.json`](nw-app/package.json) for a list
 of all dependencies.
 
 #### Data
