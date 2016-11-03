@@ -42,8 +42,8 @@ h3 {
 	}
 
 	.container > div:nth-child(1){
-		flex-grow: 1;
-		width:25%;
+		/*flex-grow: 1;*/
+		/*width:25%;*/
 		background:rgba(0,0,0,0.3);
 		overflow: auto;
 	}	
@@ -59,8 +59,9 @@ h3 {
 		}
 
 	.container > div:nth-child(2){
-		flex-grow: 2;
+		/*flex-grow: 2;*/
 		/*overflow-y:scroll;*/
+		/*width:45%;*/
 	}
 
 
@@ -68,6 +69,7 @@ h3 {
 	display: block;
 	padding: 10px;
 	margin: 20px;	
+	word-wrap: break-word;
 }
 
 #address-bar {
