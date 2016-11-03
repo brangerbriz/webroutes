@@ -45,6 +45,7 @@ h3 {
 		flex-grow: 1;
 		width:25%;
 		background:rgba(0,0,0,0.3);
+		overflow: auto;
 	}	
 		.container > div > div {
 			margin-bottom: 20px;
