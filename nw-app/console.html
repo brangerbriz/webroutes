@@ -152,7 +152,8 @@
 				white: { r:255, g:255, b:255, a:1.0 },
 				pink: { r:237, g:43, b:101, a:1.0 },
 				goodNight: function(){
-					console.log('good night')
+					console.log('good night');
+					setTimeout(function(){ addressBar.value = "http://"; },500);					
 					var self = this;
 					new TWEEN.Tween( self.white ).to({ a:0.1 }, 500 ).onUpdate(()=>{
 						toArr(qsa('.container')).forEach((e)=>{	e.style.color = 'rgba(255,255,255,'+self.white.a+')'; });
@@ -251,6 +252,23 @@
 				}	
 			}
 
+			function doKiosk( fromIndex ){
+				win.toggleKioskMode();
+				if( win.isKioskMode ){
+					activemouse = false;
+					win.on('blur',()=>{ win.focus(); });
+					document.body.style.cursor = "none";
+				} else {
+					activemouse = true;
+					win.removeAllListeners('blur');
+					document.body.style.cursor = "auto";
+				}
+
+				if( !fromIndex )
+					socket.emit('console-kioskmode', win.isKioskMode );
+			}
+
+
 			window.addEventListener("click",ignore);
 			window.addEventListener("dblclick",ignore);
 			window.addEventListener("mousedown",ignore);
@@ -263,17 +281,7 @@
 				// kiosk mode
 				if(e.key=="K"||e.key=="k"){
 					if(e.ctrlKey && e.shiftKey){
-						win.toggleKioskMode();
-						if( win.isKioskMode ){
-							activemouse = false;
-							win.on('blur',()=>{ win.focus(); });
-							document.body.style.cursor = "none";
-						} else {
-							activemouse = true;
-							win.removeAllListeners('blur');
-							document.body.style.cursor = "auto";
-						}
-						socket.emit('console-kioskmode', win.isKioskMode );
+						doKiosk(false);
 					}
 				}
 
@@ -291,6 +299,14 @@
 					e.stopPropagation();
 					if( traceComplete ) slide( e.key );						
 				}
+
+				// // single window mode ( IN PROGRESS 
+				// if(e.key=="S"||e.key=="s"){
+				// 	if(e.ctrlKey && e.shiftKey){
+				//		win.close();
+				// 		socket.emit('do-single-win');
+				// 	}
+				// }	
 			});
 		
 
@@ -318,7 +334,16 @@
 
 			socket.on('map-quit',function(){
 				win.close();
-			});			
+			});	
+
+			socket.on('browser-kioskmode',function(){
+				doKiosk(true);
+			});		
+
+			// // single window mode ( IN PROGRESS 
+			// socket.on('single-window-mode',function(){
+			// 	win.close();
+			// });
 
 			// socket utils ------------------------------------
 
@@ -385,7 +410,7 @@
 
 			function onHopReceived(h) {	
 				gid('error').style.display = "none";
-				
+
 				let hop = h.hop;
 					hop.hop = h.num; // so that number matches that of the map
 									 // && not actual hop number
