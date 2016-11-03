@@ -50,10 +50,11 @@ h3 {
 			margin-bottom: 20px;
 		}	
 		.container > div:nth-child(1) > div:nth-child(2) {
-			background: rgba(255,255,255,0.3);
+			background-color: rgba(255,255,255,0.3);
 			padding: 10px;
 			/*margin-bottom: 30px;*/
 			text-align:center;
+			transition: background-color 500ms ease;
 		}
 
 	.container > div:nth-child(2){

@@ -22,7 +22,7 @@
 					<p>when it is finished charting the path you can <b>use the arrow keys to explore</b> the different "hops" the website took to get here</p>
 			 		
 				</div>			
-				<div class="bar instruct">
+				<div class="bar instruct" id="bar-bg">
 					visit <input type="text" id="address-bar" placeholder="http://website.com">
 					<div id="error"></div>
 				</div>
@@ -75,33 +75,42 @@
 			// address bar -------------------------------------
 			// ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~ . ~
 
-			function confirmHttpReq( e ){
+			function addressBarMessage( type, message ){
+				var color = (type=="error") ? "#800" : "#fff";
+				gid('error').innerHTML = message;
+				gid('error').style.color = color;
+				gid('error').style.display = "block";
+			}
+
+			function confirmHttpReq( e ){				
 				gid('error').style.display = "none";
 				if( e.key == "Enter"){
+					addressBarMessage('info',"URL Received...");
 					request(this.value, function(err, res, body) {
 						if( err ){
-							gid('error').innerHTML = "[ request error ]:<br> "+
-								'the request did not return a response, make sure you typed in a legitimate URL';
-							gid('error').style.display = "block";
+							addressBarMessage('error',"[ request error ]:<br> the request did not return a response, make sure you typed in a legitimate URL");
 						} else {
 							if( res.statusCode == 200 ){
 								if( res.headers['content-type'].indexOf('html') >= 0 ){
 									// total success!!
 									makeTraceHttpReq();
 								} else {
-									gid('error').innerHTML = "[ request error ]:<br> that page isn't an html file"+
-										', it returned a content-type of '+res.headers['content-type'];
-									gid('error').style.display = "block";										
+									addressBarMessage('error','[ request error ]:<br> that page isn\'t an html file, it returned a content-type of '+res.headers['content-type']);									
 								}
 							} else {
-								gid('error').innerHTML = "[ request error ]:<br> that page returned status-code "+
-									res.statusCode;
-								gid('error').style.display = "block";								
+								addressBarMessage('error',"[ request error ]:<br> that page returned status-code "+ res.statusCode);
 							}
 						}
 					});
 				}
 			}		
+
+			function flashBarBG(){
+				gid('bar-bg').style.backgroundColor = "rgba(255,255,255,0.8)";
+				setTimeout(function(){
+					gid('bar-bg').style.backgroundColor = "rgba(255,255,255,0.3)";
+				},500);
+			}
 
 			function makeTraceHttpReq(){
 				// clear console stuffs...
@@ -112,6 +121,8 @@
 				let location = host.split('://')[1];
 				let req = new XMLHttpRequest();
 				req.open("GET", "http://localhost:3001/traceroute?location="+location, true);
+				flashBarBG();
+				addressBarMessage('info',"...making request");								
 				req.send(null);	
 			}	
 
@@ -373,6 +384,8 @@
 			}
 
 			function onHopReceived(h) {	
+				gid('error').style.display = "none";
+				
 				let hop = h.hop;
 					hop.hop = h.num; // so that number matches that of the map
 									 // && not actual hop number
