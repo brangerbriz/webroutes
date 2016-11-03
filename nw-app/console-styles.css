@@ -38,7 +38,7 @@ h3 {
 }
 
 	.container > div {
-		padding: 30px 80px;
+		padding: 30px 50px;
 	}
 
 	.container > div:nth-child(1){
@@ -68,8 +68,10 @@ h3 {
 #traceroute-info > span {
 	display: block;
 	padding: 10px;
-	margin: 20px;	
-	word-wrap: break-word;
+	margin: 15px 0px;	
+	max-width: 650px;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 #address-bar {
