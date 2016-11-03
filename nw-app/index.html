@@ -214,6 +214,34 @@
 					}
 					return turf.feature(geometry); 
 				},
+				splitPaths: function( arr ){
+					// for transOceanic cables that cross pacific
+					// so that while selecting/highlighting cablse we don't get weird jumps
+					// see issue: https://github.com/brangerbriz/webroutes/issues/34
+					var units = "miles";
+					var maxDistance = 4000;
+					var multiPaths = [];
+					var path = [];
+					var dists = [];
+					var foundTransPacific = false;
+
+					for (var i = 0; i < arr.length-1; i++) {
+						path.push( arr[i] );
+						var from = this.geoPoint( arr[i][1], arr[i][0] );
+						var to = this.geoPoint( arr[i+1][1], arr[i+1][0] );
+						var dist = turf.distance(from, to, units);		
+						dists.push( dist );				
+						if( dist >= maxDistance ){
+							foundTransPacific = true;
+							multiPaths.push( path );
+							path = [];
+						} else if( i==arr.length-2){
+							path.push( arr[i+1] );
+							multiPaths.push( path );
+						}
+					}
+					return { split:foundTransPacific, paths: multiPaths, distances: dists };
+				},
 				// getRightCableIndex: function( landing, cableFeature ){
 				// 	var cableShapes = cableFeature.geometry.geometries;
 				// 	var closests = [];
@@ -490,12 +518,16 @@
 					// var path = [ [s.geo.lat,s.geo.lon], [e.geo.lat,e.geo.lon] ];
 					var thisNet = this.hops[num].isp;
 					var path = [];
+
+					var transPacific = { split: false };
+
 					this.hops.forEach(function(h,i){
 						if( h.isp == thisNet ) path.push( [h.geo.lat,h.geo.lon] );
 						else if(num==i+1 && h.infrastructure 
 							&& h.infrastructure.exchanges.length>0 && !h.infrastructure.cable)
 							path.push( [h.geo.lat,h.geo.lon] );
 					});
+
 					if( this.hops[num].infrastructure && this.hops[num].infrastructure.cable ){
 						path = [];
 						path.push( [this.hops[num].geo.lat,this.hops[num].geo.lon] );
@@ -503,8 +535,20 @@
 						geos.forEach(function(g){
 							g.coordinates.forEach(function(c){ path.push( [ c[1], c[0] ] ); });
 						});
+
+						transPacific = this.splitPaths( path );
+						// console.log( transPacific );
 					}
-					if( path.length > 1){
+
+					if( path.length > 1 && transPacific.split ){
+						for (var i = 0; i < transPacific.paths.length; i++) {							
+							L.polyline( transPacific.paths[i], this.styles.mark).addTo(map);		
+							// tag path
+							var parent = map._panes.overlayPane.children[0]; // <svg>
+							parent.children[parent.children.length-1].setAttribute('name','marker'); // <g> 
+						}
+					}
+					else if( path.length > 1){
 						L.polyline(path, this.styles.mark).addTo(map);		
 						// tag path
 						var parent = map._panes.overlayPane.children[0]; // <svg>
@@ -838,6 +882,33 @@
 			    iconAnchor: [22, 94]
 			});
 
+			function calculateDistBtwPointsArr( arr ){
+				function toGeoPnt(lon,lat){
+					// returns a geojson feature point
+					var geometry = {
+						"type": "Point",
+						"coordinates": [ lon, lat ]
+					}
+					return turf.feature(geometry); 					
+				}
+
+				var units = "miles";
+				var multiPaths = [];
+				var path = [];
+
+				for (var i = 0; i < arr.length-1; i++) {
+					var from = toGeoPnt( arr[i][1], arr[i][0] );
+					var to = toGeoPnt( arr[i+1][1], arr[i+1][0] );
+					var points = {
+						"type": "FeatureCollection",
+						"features": [from, to]
+					};
+					var d = turf.distance(from, to, units);
+					distances.push( d );
+				}
+				return distances;
+			}
+
 
 			document.body.addEventListener('keydown',function(e){
 				console.log(e);
@@ -876,19 +947,10 @@
 
 			// NOTES:::::
 			/*
-				https://github.com/brannondorsey/ProbeKit/blob/master/public/habitat/map-iframe.html
 				http://leafletjs.com/examples/quick-start.html
-				
 				https://github.com/telegeography/www.submarinecablemap.com
 				http://www.internetexchangemap.com/
 				http://submarinecablemap.com/
-				
-				http://jsfiddle.net/mihaibirsan/Wzvre/
-
-				TODO ::::::
-				look into why some pan's don't pan still && lines to nowhere 
-				( re-render CSS paths on zoom event )
-
 			*/	
 
 		</script>
